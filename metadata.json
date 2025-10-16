@@ -1,0 +1,7 @@
+{
+  "name": " SmartWaste AI - Intelligent Waste Management number 2",
+  "description": "An AI-powered platform for intelligent, on-demand waste analysis, collection, and management. Building the sustainable cities of tomorrow.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
