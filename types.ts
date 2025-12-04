@@ -187,6 +187,15 @@ export interface Grant {
   geography?: string;
   deadline?: string;
   notes?: string;
+  // Additional fields for Special Grants (Dashboard)
+  grantNumber?: string;
+  fundingAvailable?: string;
+  status?: string;
+  programOverview?: string;
+  keyFeatures?: string[];
+  whyThisFits?: string;
+  contactInformation?: string;
+  applicationMaterials?: string[];
 }
 
 export interface GrantSummary {
