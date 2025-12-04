@@ -13,6 +13,8 @@ const SiteFooter: React.FC<SiteFooterProps> = ({ setPage }) => {
     const links: { page: Page, text: string }[] = [
         { page: 'home', text: t('header.home') },
         { page: 'smart_dashboard', text: t('header.smartDashboard') },
+        { page: 'dashboard_lesson', text: t('header.dashboardLesson') },
+        { page: 'wordpress_dashboard', text: t('header.wpDashboard') },
         { page: 'waste_collection', text: t('header.requestWastePickup') },
         { page: 'recycling_calculator', text: t('header.recyclingCalculator') },
         { page: 'ai_assistant', text: t('header.aiAssistant') },

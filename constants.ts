@@ -1,6 +1,83 @@
 
-
 import { Language, Project, Partner } from './types';
+
+export const PROMPTS = {
+  aiAssistant: (language: Language) => ({
+    systemInstruction: language === 'fa' 
+      ? 'شما یک دستیار هوش مصنوعی متخصص در زمینه مدیریت پسماند و محیط زیست هستید. به سوالات کاربران با دقت و لحنی دوستانه پاسخ دهید.'
+      : 'You are an AI assistant specialized in waste management and environment. Answer user questions accurately with a friendly tone.'
+  }),
+  wasteReportProcessor: (language: Language) => ({
+    systemInstruction: language === 'fa'
+      ? 'شما مسئول پردازش گزارش‌های پسماند هستید. گزارش کاربر را تحلیل کنید و یک پیام تایید مودبانه و خلاصه وضعیت ارائه دهید.'
+      : 'You are responsible for processing waste reports. Analyze the user report and provide a polite confirmation message and status summary.'
+  }),
+  wastePredictor: (language: Language) => ({
+    systemInstruction: language === 'fa'
+      ? 'شما یک مدل پیش‌بینی حجم پسماند هستید. بر اساس موقعیت مکانی، یک پیش‌بینی واقع‌گرایانه ارائه دهید. خروجی باید JSON باشد.'
+      : 'You are a waste volume prediction model. Provide a realistic prediction based on location. Output must be JSON.'
+  }),
+  dashboardAnalyticsGenerator: (language: Language) => ({
+    systemInstruction: language === 'fa'
+      ? 'شما تحلیلگر داده‌های داشبورد هستید. خلاصه‌ای از عملکرد سیستم بر اساس معیارهای ارائه شده بنویسید. خروجی باید JSON باشد.'
+      : 'You are a dashboard data analyst. Write a summary of system performance based on provided metrics. Output must be JSON.'
+  }),
+  wasteAnalyzer: (language: Language) => ({
+    systemInstruction: language === 'fa'
+      ? 'شما یک سیستم بینایی ماشین برای تحلیل پسماند هستید. تصویر را تحلیل کنید، آیتم‌ها را شناسایی کنید و توصیه‌های بازیافت ارائه دهید. خروجی باید JSON باشد.'
+      : 'You are a computer vision system for waste analysis. Analyze the image, identify items, and provide recycling recommendations. Output must be JSON.'
+  }),
+  wasteSiteAnalysisGenerator: (language: Language) => ({
+    systemInstruction: language === 'fa'
+      ? 'شما مشاور مدیریت پسماند شهری هستید. پتانسیل سایت را برای مدیریت پسماند تحلیل کنید. خروجی باید JSON باشد.'
+      : 'You are an urban waste management consultant. Analyze the site potential for waste management. Output must be JSON.'
+  }),
+  grantFinder: (language: Language) => ({
+    systemInstruction: language === 'fa'
+      ? 'شما موتور جستجوی گرنت‌های زیست‌محیطی هستید. کمک‌های مالی مرتبط را پیدا کنید. خروجی باید آرایه‌ای از اشیاء JSON باشد.'
+      : 'You are an environmental grant search engine. Find relevant grants. Output must be an array of JSON objects.'
+  }),
+  supplierFinder: (language: Language) => ({
+    systemInstruction: language === 'fa'
+      ? 'شما موتور جستجوی تامین‌کنندگان تجهیزات بازیافت هستید. تامین‌کنندگان مرتبط را پیدا کنید. خروجی باید آرایه‌ای از اشیاء JSON باشد.'
+      : 'You are a recycling equipment supplier search engine. Find relevant suppliers. Output must be an array of JSON objects.'
+  }),
+  applicationDrafter: (language: Language) => ({
+    systemInstruction: language === 'fa'
+      ? 'شما نویسنده حرفه‌ای پروپوزال هستید. پیش‌نویس درخواست گرنت را آماده کنید. خروجی باید JSON باشد.'
+      : 'You are a professional proposal writer. Prepare the grant application draft. Output must be JSON.'
+  }),
+  impactReportGenerator: (language: Language) => ({
+    systemInstruction: language === 'fa'
+      ? 'شما متخصص ارزیابی اثرات زیست‌محیطی هستید. گزارش اثرات را تولید کنید. خروجی باید JSON باشد.'
+      : 'You are an environmental impact assessment expert. Generate the impact report. Output must be JSON.'
+  }),
+  newsSummarizer: (language: Language) => ({
+    systemInstruction: language === 'fa'
+      ? 'شما خلاصه‌کننده اخبار محیط زیست هستید. اخبار را جستجو و خلاصه کنید.'
+      : 'You are an environmental news summarizer. Search and summarize news.'
+  }),
+  aiResearcher: (language: Language) => ({
+    systemInstruction: language === 'fa'
+      ? 'شما پژوهشگر ارشد محیط زیست هستید. تحقیق عمیق انجام دهید و گزارش ساختاریافته ارائه دهید. خروجی باید JSON باشد.'
+      : 'You are a senior environmental researcher. Conduct deep research and provide a structured report. Output must be JSON.'
+  }),
+  recyclingCalculator: (language: Language) => ({
+    systemInstruction: language === 'fa'
+      ? 'شما محاسبه‌گر سود بازیافت هستید. تخمین‌های مالی ارائه دهید. خروجی باید JSON باشد.'
+      : 'You are a recycling profit calculator. Provide financial estimates. Output must be JSON.'
+  }),
+  zeroWasteCoach: (language: Language) => ({
+    systemInstruction: language === 'fa'
+      ? 'شما مربی سبک زندگی پسماند صفر هستید. راهنمایی‌های کاربردی ارائه دهید. خروجی باید JSON باشد.'
+      : 'You are a zero-waste lifestyle coach. Provide practical guidance. Output must be JSON.'
+  }),
+  ecoContentCreator: (language: Language) => ({
+    systemInstruction: language === 'fa'
+      ? 'شما تولیدکننده محتوای خلاق محیط زیستی هستید. ایده‌ها و متون جذاب تولید کنید. خروجی باید JSON باشد.'
+      : 'You are a creative eco-content creator. Generate engaging ideas and text. Output must be JSON.'
+  }),
+};
 
 // prettier-ignore
 export const translations = {
@@ -16,22 +93,123 @@ export const translations = {
       impactReporter: 'Impact Reporter',
       wasteNews: 'Waste & Recycling News',
       aiResearcher: 'AI Researcher',
-      projects: 'Features',
       aiAssistant: 'AI Assistant',
       recyclingCalculator: 'Recycling Calculator',
+      zeroWaste: 'Zero Waste Coach',
+      realTimeDashboard: 'Live ML Ops',
+      dashboardLesson: 'Lesson: Dashboard Overview',
+      wpDashboard: 'Admin Panel'
     },
+    // ... existing translations ...
     hero: {
       title: 'The Future of Urban Waste, <br/> <span class="text-primary-500">On-Demand.</span>',
       subtitle: 'EcoRide combines smart technology with on-demand service to make waste collection efficient, clean, and simple. Like Uber, but for your recycling.',
       button1: 'Request Pickup',
       button2: 'View Dashboard',
     },
+    homeServices: {
+        title: "One App for All Needs",
+        subtitle: "From on-demand collection to AI-powered analytics, everything in one place.",
+        categories: [
+            { 
+                name: "Core Services",
+                services: [
+                    { page: "waste_collection", name: "AI Waste Collection", description: "Request on-demand pickup using AI waste analysis from your camera." },
+                    { page: "smart_dashboard", name: "Smart Dashboard", description: "Monitor live requests, predict waste volume, and analyze system performance." },
+                    { page: "real_time_dashboard", name: "Live ML Operations", description: "Real-time infrastructure monitoring powered by Kafka + RisingWave + Grafana." },
+                ]
+            },
+            {
+                name: "Planning & Analysis",
+                services: [
+                    { page: "waste_site_analysis", name: "Waste Site Analysis", description: "Get an AI-generated report on waste management potential for any location." },
+                    { page: "impact_reporter", name: "Impact Reporter", description: "Generate detailed environmental impact reports for your waste stream." },
+                    { page: "recycling_calculator", name: "Recycling Calculator", description: "Estimate the financial benefits of implementing a recycling program." },
+                ]
+            },
+            {
+                name: "Growth & Research",
+                services: [
+                    { page: "grant_finder", name: "Grant Finder", description: "Find funding opportunities for your sustainability and recycling projects." },
+                    { page: "supplier_finder", name: "Supplier Finder", description: "Discover suppliers for recycling bins, compactors, and other equipment." },
+                    { page: "waste_news", name: "Waste & Recycling News", description: "Get AI-powered summaries of the latest trends and research in the industry." },
+                    { page: "ai_researcher", name: "AI Researcher", description: "Conduct in-depth research on any topic with a structured AI report." },
+                ]
+            },
+            {
+                name: "Lifestyle & Empowerment",
+                services: [
+                    { page: "zero_waste", name: "Zero Waste & Creator Studio", description: "Learn zero-waste habits and generate monetizable content (Videos/Books) from your eco-journey." },
+                    { page: "dashboard_lesson", name: "Learn the Dashboard", description: "A comprehensive lesson plan on how to navigate and use the SmartWaste dashboard." },
+                ]
+            }
+        ]
+    },
+    dashboardLesson: {
+        title: 'Dashboard Overview',
+        breadcrumb: 'Home / Lesson Plans / Dashboard Overview',
+        intro: 'In this lesson, you will learn that the SmartWaste Dashboard is the central command center for managing waste collection and analysis. On the Dashboard, you will find both real-time status information and tools for predictive analysis. This lesson will show you how the Dashboard is organized and how to navigate it to access the various features of the EcoRide platform.',
+        objectivesTitle: 'Objectives',
+        objectives: [
+            'Access the Smart Dashboard.',
+            'Identify Dashboard components including Live Feed, Smart Prediction, and Analytics.',
+            'Switch between List and Map views for waste requests.',
+            'Use AI tools to predict waste volume.',
+            'Interpret system analytics and performance metrics.'
+        ],
+        prerequisitesTitle: 'Prerequisite Skills',
+        prerequisites: [
+            'Familiarity with web browser navigation.',
+            'Understanding of basic waste management concepts (e.g., waste types).',
+            'Access to the EcoRide platform.'
+        ],
+        walkthroughTitle: 'Hands-on Walk-through',
+        accessSection: {
+            title: 'Accessing the Dashboard',
+            content: 'To access the dashboard, simply click on the "Dashboard" button in the main navigation bar. This serves as your primary entry point for operational tasks.'
+        },
+        componentsSection: {
+            title: 'Dashboard Components',
+            content: 'The Dashboard is divided into three main tabs, which you can toggle between using the navigation pill at the top:',
+            items: [
+                { title: 'Live Feed', desc: 'This is the default view. It shows a list of incoming waste collection requests. You can see the location, waste type, volume, and status (Pending, En Route, Completed). Use the "Dispatch" button to assign vehicles.' },
+                { title: 'Smart Prediction', desc: 'This tab leverages AI to forecast waste volumes. Enter a location (e.g., "Tehran, Narmak") to get a prediction on waste generation for that area.' },
+                { title: 'Analysis & Stats', desc: 'This tab provides a high-level overview of system performance, including AI accuracy, daily report counts, and routing efficiency improvements.' }
+            ]
+        },
+        viewSection: {
+            title: 'List vs. Map View',
+            content: 'In the Live Feed tab, you will notice a toggle in the top right corner. This allows you to switch between a tabular "List View" and a geospatial "Map View". The Map View provides a visual representation of pending requests (yellow), en-route vehicles (blue), and completed pickups (green) on an interactive map.'
+        },
+        exercisesTitle: 'Exercises',
+        exercises: [
+            { title: 'Customize View', desc: 'Try switching between List View and Map View to see how the data presentation changes.' },
+            { title: 'Run a Prediction', desc: 'Go to the Smart Prediction tab and run a prediction for "Tehran, Azadi Square".' }
+        ],
+        quizTitle: 'Quiz',
+        quiz: [
+            { question: 'What is the default tab on the Dashboard?', options: ['Analysis', 'Live Feed', 'Settings'], answer: 'Live Feed' },
+            { question: 'Which feature helps you see waste trucks on a map?', options: ['List View', 'Map View', 'Analytics'], answer: 'Map View' },
+            { question: 'What does the AI Prediction tool do?', options: ['Sorts waste', 'Predicts waste volume', 'Finds grants'], answer: 'Predicts waste volume' }
+        ],
+        sidebarTitle: 'Lesson Details',
+        sidebar: {
+            duration: 'Duration: 15 mins',
+            audience: 'Audience: Admins, Operators',
+            level: 'Level: Beginner',
+            type: 'Type: Demonstration',
+            version: 'Version: 2.0.0'
+        }
+    },
     smartWasteDashboard: {
         title: 'Smart Waste Management',
         backButton: 'Back',
+        tutorial: 'Tutorial / Help',
         tabReport: 'Live Feed',
         tabPredict: 'Smart Prediction',
         tabAnalytics: 'Analysis & Stats',
+        tabTuning: 'Fine Tuning',
+        tabSpecialGrants: 'Special Grants',
         liveFeed: {
             title: 'Live Collection Requests',
             subtitle: 'Monitor and dispatch incoming waste collection requests.',
@@ -60,7 +238,149 @@ export const translations = {
             routingImprovement: 'Routing Improvement',
             performanceReport: 'Performance Report',
             summaryPlaceholder: 'Generating AI analysis of system performance...',
+        },
+        tuning: {
+            title: 'Model Fine Tuning',
+            subtitle: 'Upload a dataset to train a custom Gemini model for improved waste classification.',
+            uploadTitle: 'Upload Dataset',
+            uploadPlaceholder: 'Drag & Drop CSV or JSONL file here',
+            paramsTitle: 'Hyperparameters',
+            epochs: 'Epochs',
+            batchSize: 'Batch Size',
+            learningRate: 'Learning Rate',
+            startTraining: 'Start Tuning',
+            training: 'Training...',
+            logsTitle: 'Training Logs',
+            status: {
+                idle: 'Idle',
+                uploading: 'Uploading dataset...',
+                training: 'Training model...',
+                completed: 'Training Completed Successfully'
+            },
+            modelId: 'New Model ID'
+        },
+        specialGrants: {
+            title: 'Strategic Grant Opportunities',
+            subtitle: 'Curated list of federal funding aligned with waste-to-carbon removal technologies.',
+            viewFullReport: 'Read Full Strategic Report',
+            cifia: {
+                title: 'Carbon Dioxide Transportation (CIFIA)',
+                amount: '$500,000,000',
+                deadline: 'Jan 2, 2026',
+                desc: 'Supports infrastructure for CO2 transport systems, critical for scaling waste-to-carbon removal.'
+            },
+            swifr: {
+                title: 'Solid Waste Infrastructure (SWIFR)',
+                amount: '$20,000,000',
+                deadline: 'Jan 23, 2026',
+                desc: 'Funding for waste management systems and recycling infrastructure with circular economy focus.'
+            }
         }
+    },
+    grantOpportunitiesPage: {
+        back: 'Back to Dashboard',
+    },
+    grantAnalyzer: {
+        title: 'Grant Analysis',
+        close: 'Close',
+        loadingTitle: 'Analyzing Grant...',
+        loadingSubtitle: 'Our AI is reading the details and assessing relevance to your project.',
+        relevance: 'Match',
+        viewOriginal: 'View Source',
+        exportDOCX: 'Download Report (DOCX)',
+        printPDF: 'Print Report',
+        deadline: 'Deadline',
+        amount: 'Funding Amount',
+        duration: 'Project Duration',
+        geography: 'Target Region',
+        eligibility: 'Eligibility Criteria',
+        scope: 'Project Scope',
+        howToApply: 'Application Process',
+        contact: 'Contact Info',
+        useForProposal: 'Use This Grant for Proposal Draft',
+        export: {
+            summaryTitle: 'Grant Analysis Summary',
+            officialLink: 'Official Link',
+            relevance: 'Relevance Score',
+            details: 'Key Details',
+            fundingBody: 'Funding Body',
+            deadline: 'Deadline',
+            amount: 'Amount',
+            duration: 'Duration',
+            geography: 'Geography',
+            eligibility: 'Eligibility',
+            scope: 'Scope',
+            applicationProcess: 'How to Apply',
+            contact: 'Contact',
+            fileName: 'Grant_Analysis'
+        }
+    },
+    grantFinder: {
+        title: 'Grant Finder',
+        subtitle: 'Find relevant grants based on your project documents or keywords.',
+        uploadLabel: 'Upload Project Document (Optional)',
+        selectFile: 'Select File',
+        removeFile: 'Remove File',
+        fileTypes: 'Supports .docx, .txt, .md',
+        or: 'OR',
+        keywordsLabel: 'Search Keywords / Description',
+        keywordsPlaceholder: 'e.g., "community composting", "plastic recycling innovation"',
+        maxResults: 'Max Results',
+        findButton: 'Find Grants',
+        finding: 'Searching...',
+        readingFile: 'Reading File...',
+        validationError: 'Please enter keywords or upload a file.',
+        fileTypeError: 'Invalid file type. Please upload .docx, .txt, or .md.',
+        fileReadError: 'Error reading file.',
+        savedTitle: 'Saved Grants',
+        clearAll: 'Clear All',
+        from: 'From',
+        deadlineLabel: 'Deadline',
+        summaryLabel: 'Summary',
+        notesLabel: 'My Notes',
+        notesPlaceholder: 'Add notes here...',
+        remove: 'Remove',
+        useForProposal: 'Use for Proposal',
+        analyze: 'Analyze',
+        crateTitle: 'Grant Crate',
+        crateSubtitle: 'Results from your current search.',
+        clearCrate: 'Clear Results',
+        loadingTitle: 'Searching Grants...',
+        loadingSubtitle: 'AI is scanning databases and web sources.',
+        sortBy: 'Sort by',
+        saved: 'Saved',
+        save: 'Save',
+        crateEmpty: 'No grants found yet. Try searching above.',
+        documents: 'Relevant Documents',
+        relevance: 'Relevance',
+        parseErrorTitle: 'Raw Output',
+        parseErrorSubtitle: 'The AI response could not be parsed into a table, but here is the text:',
+        sort: {
+            relevance: 'Relevance',
+            deadline: 'Deadline',
+            amount: 'Amount',
+            geography: 'Location'
+        },
+        prompt: {
+            common: 'You are an expert grant finder. Output a Markdown table with columns: Grant Title, Funding Body, Summary, Deadline, Link, Requirement Documents, Relevance Score (0-100), Amount, Geography. Be precise.',
+            supplementalKeywords: 'Prioritize grants related to: {keywords}.',
+            noSupplementalKeywords: '',
+            fileBased: '{common} Analyze this project description and find {maxResults} matching grants. {keywordInstruction} Project Text: {documentText}',
+            keywordBased: '{common} Find {maxResults} grants matching these queries: {queries}.'
+        }
+    },
+    // ... existing translations ...
+    realTimeDashboard: {
+        title: 'Real-Time ML Operations',
+        subtitle: 'Monitoring waste sensor data streams & ML Inference with Apache Kafka, RisingWave, and Grafana.',
+        stat1: 'Ingestion Rate',
+        stat2: 'End-to-End Latency',
+        stat3: 'Active IoT Sensors',
+        stat4: 'Drift Anomalies',
+        chart1: 'Metric Volatility (Candlestick)',
+        chart2: 'ML Model Confidence',
+        log: 'Pipeline Logs (Kafka/RisingWave)',
+        back: 'Back to Home'
     },
     wasteCollectorPage: {
         title: 'AI Waste Analysis & Pickup',
@@ -182,21 +502,6 @@ export const translations = {
       futureOutlook: 'Future Outlook',
       sources: 'Sources',
     },
-    projectsPage: {
-      title: 'Our Core Features',
-      subtitle: 'Integrated solutions for a smarter, cleaner urban environment.',
-      projects: [
-        { name: 'AI Waste Analysis', description: 'Use your camera to instantly identify, categorize, and get sorting instructions for any waste item.', image: 'https://images.pexels.com/photos/3850526/pexels-photo-3850526.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', link: 'waste_collection' },
-        { name: 'On-Demand Collection', description: 'Schedule a waste pickup with the tap of a button. Our smart routing ensures timely and efficient collection.', image: 'https://images.pexels.com/photos/8033237/pexels-photo-8033237.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', link: 'waste_collection' },
-        { name: 'Smart Analytics', description: 'Track waste streams, view diversion rates, and get AI-powered insights through our comprehensive dashboard.', image: 'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', link: 'smart_dashboard' },
-        { name: 'Route Optimization', description: 'Our system analyzes real-time data to create the most efficient collection routes, saving fuel and reducing emissions.', image: 'https://images.pexels.com/photos/1552635/pexels-photo-1552635.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', link: 'smart_dashboard' },
-      ] as Project[],
-      heroProjects: [
-        { name: 'On-Demand Pickups', description: 'Instant, hassle-free waste collection.', image: 'https://images.pexels.com/photos/8033237/pexels-photo-8033237.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', link: 'waste_collection' },
-        { name: 'Smart Bin Integration', description: 'Monitor fill levels and optimize schedules.', image: 'https://images.pexels.com/photos/763210/pexels-photo-763210.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', link: 'smart_dashboard' },
-        { name: 'AI-Powered Analytics', description: 'Gain insights to build a cleaner city.', image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', link: 'smart_dashboard' },
-      ]
-    },
     recyclingCalculatorPage: {
         title: 'Recycling Value Calculator',
         subtitle: 'Get a quick, AI-powered estimate of the financial benefits of recycling for your business.',
@@ -211,6 +516,133 @@ export const translations = {
         totalBenefit: 'Total Annual Benefit',
         notes: 'Notes & Assumptions',
         placeholder: 'Your calculation results will be displayed here.',
+    },
+    zeroWastePage: {
+        title: 'Zero-Waste Coach & Creator Studio',
+        subtitle: 'Learn eco-friendly habits from an expert coach, and turn your journey into monetizable content (Videos/Books) to empower yourself.',
+        tabCoach: 'Ask the Coach',
+        tabCreator: 'Eco-Creator Studio',
+        tabToolkit: 'Toolkit & Amazon Kits',
+        coach: {
+            title: 'Zero-Waste Coach',
+            description: 'Inspired by Ayeh Hamdavi. Get practical, culturally relevant advice for minimizing waste at home.',
+            placeholder: 'e.g., "How can I reduce waste in my kitchen?" or "What should I do with old clothes?"',
+            button: 'Get Advice',
+            difficulty: 'Difficulty',
+            cost: 'Cost',
+            findKit: 'Find Kit on Amazon',
+        },
+        creator: {
+            title: 'Turn Actions into Impact & Income',
+            intro: 'Even small zero-waste actions matter: drying kitchen scraps, refilling detergents, reusing old fabrics. Now you can turn these real experiences into content that inspires others—and creates income.',
+            howItWorksTitle: 'How It Works',
+            steps: [
+                { title: 'Tell your story', desc: 'Share your zero-waste habits: how you reduce waste, shop, reuse, or repair.' },
+                { title: 'Choose your path', desc: 'Select: YouTube video, Ebook guide, or Children’s comic.' },
+                { title: 'AI builds your plan', desc: 'The AI generates scripts, chapters, or storyboards with monetization tips.' }
+            ],
+            optionsTitle: 'Creation Options',
+            options: [
+                { title: 'YouTube Channel', desc: 'Get catchy titles, full scripts, and thumbnail ideas for tutorials or vlogs.' },
+                { title: 'Ebook / Guide', desc: 'Create structured chapters and step-by-step tips for Amazon KDP.' },
+                { title: 'Children’s Comic', desc: 'Generate storylines and illustration prompts for kids’ books (like HuggingFace comic projects).' }
+            ],
+            whyTitle: 'Why This Matters',
+            benefits: [
+                'Environmental Impact: Teach others to reduce waste.',
+                'Economic Empowerment: Earn income from your content.',
+                'Social Change: Make zero-waste a shared culture.',
+                'Inspiration: Show real examples from a real home.'
+            ],
+            ctaTitle: 'Start Your Zero-Waste Creator Journey',
+            topicLabel: 'What is your eco-tip or story idea?',
+            topicPlaceholder: 'e.g., "How to make soap from leftover oil" or "A story about a plastic bottle that wanted to be a flower pot"',
+            formatLabel: 'Content Format',
+            formatYouTube: 'YouTube Video Script',
+            formatBook: 'Children\'s Book / Comic Story',
+            button: 'Generate Content Plan',
+            monetizationTitle: 'Monetization Tips',
+        },
+        toolkit: {
+            title: 'Zero Waste Management Toolkit',
+            subtitle: 'Essential starter kits and packages found on Amazon to fulfill every part of your Zero Waste Management Project.',
+            findOnAmazon: 'Find on Amazon',
+            products: [
+                {
+                    part: 'Part 1: Rot (Organic Waste)',
+                    category: 'Composting System',
+                    name: 'Stainless Steel Countertop Compost Bin with Charcoal Filters',
+                    description: 'A 1.3-gallon bin for kitchen scraps. Includes charcoal filters to block odors. Essential for managing food waste without throwing it in the trash.',
+                    price: '$22.00 - $30.00',
+                    goal: 'Diverts food waste from landfills; creates soil nutrient.',
+                    searchTerm: 'Stainless Steel Countertop Compost Bin'
+                },
+                {
+                    part: 'Part 2: Reduce (Kitchen)',
+                    category: 'Plastic Wrap Alternative',
+                    name: 'Beeswax Wrap Assorted 3-Pack',
+                    description: 'A set of cotton fabrics coated in beeswax, jojoba oil, and resin. Used to cover bowls or wrap food instead of single-use plastic cling film.',
+                    price: '$14.00 - $18.00',
+                    goal: 'Eliminates single-use plastic wrap usage.',
+                    searchTerm: 'Beeswax Wrap Assorted 3-Pack'
+                },
+                {
+                    part: 'Part 3: Refuse (Shopping)',
+                    category: 'Shopping Management',
+                    name: 'Reusable Mesh Produce Bags (Set of 9)',
+                    description: 'Cotton mesh bags with drawstrings in various sizes (S, M, L). Used for fruits and vegetables at the grocery store to avoid plastic roll bags.',
+                    price: '$10.00 - $15.00',
+                    goal: 'Stops plastic waste at the source (the store).',
+                    searchTerm: 'Reusable Mesh Produce Bags'
+                },
+                {
+                    part: 'Part 4: Reuse (Bathroom)',
+                    category: 'Personal Care Kit',
+                    name: 'Zero Waste Bathroom Starter Kit',
+                    description: 'Usually contains: Bamboo toothbrushes, biodegradable dental floss, and reusable cotton rounds for makeup removal.',
+                    price: '$18.00 - $25.00',
+                    goal: 'Replaces non-recyclable plastic brushes and throw-away cotton balls.',
+                    searchTerm: 'Zero Waste Bathroom Starter Kit'
+                },
+                {
+                    part: 'Part 5: Cleaning',
+                    category: 'Eco-Cleaning Package',
+                    name: 'Biodegradable Kitchen Sponge & Brush Set',
+                    description: 'Includes plant-based loofah sponges and coconut fiber bottle brushes. These decompose naturally unlike plastic sponges.',
+                    price: '$15.00 - $20.00',
+                    goal: 'Reduces microplastics entering the water system.',
+                    searchTerm: 'Biodegradable Kitchen Sponge'
+                },
+                {
+                    part: 'Part 6: Sorting',
+                    category: 'Waste Organization',
+                    name: 'Recycle Trash Can Sticker Labels (Set of 6)',
+                    description: 'Large, waterproof decals for bins labeled: "Trash," "Recycle," "Compost." Visual cues are vital for effective waste management.',
+                    price: '$8.00 - $12.00',
+                    goal: 'Ensures proper separation of waste streams.',
+                    searchTerm: 'Recycle Trash Can Sticker Labels'
+                }
+            ],
+            implementation: {
+                title: 'How to Implement (Step-by-Step)',
+                steps: [
+                    { phase: 'Phase 1: Audit', desc: 'Buy Sorting Labels (Part 6). Label your current bins to immediately organize waste.' },
+                    { phase: 'Phase 2: The Big Switch', desc: 'Buy the Compost Bin (Part 1). Separating heavy food waste makes the biggest impact.' },
+                    { phase: 'Phase 3: Refinement', desc: 'Buy Reusable Bags (Part 3) and Beeswax Wraps (Part 2) to reduce daily plastic use.' },
+                    { phase: 'Phase 4: Lifestyle', desc: 'Introduce Bathroom (Part 4) and Cleaning (Part 5) when old plastic items wear out.' }
+                ]
+            },
+            searchTips: {
+                title: 'Search Tips for Amazon',
+                description: 'To find the best deals, use these exact search terms:',
+                tips: [
+                    'Zero waste starter kit kitchen',
+                    'Biodegradable compost bags',
+                    'Plastic free bathroom set',
+                    'Recycling sorting bins for home'
+                ]
+            }
+        }
     },
     aiAssistantPage: {
       title: 'EcoRide AI Assistant',
@@ -285,6 +717,16 @@ export const translations = {
             'How do I recycle pizza boxes?',
             'What are the benefits of composting?',
             'Tell me about the circular economy.'
+        ],
+        zeroWaste: [
+            'How do I reduce food waste in the kitchen?',
+            'Ideas for reusing old glass jars',
+            'Zero waste cleaning products'
+        ],
+        ecoCreator: [
+            'Video script: 5 ways to reuse lemon peels',
+            'Story: A lonely plastic bag finds a new purpose',
+            'Video script: How to make a compost bin at home'
         ]
     }
   },
@@ -300,22 +742,126 @@ export const translations = {
       impactReporter: 'گزارشگر اثرات',
       wasteNews: 'اخبار پسماند و بازیافت',
       aiResearcher: 'پژوهشگر هوش مصنوعی',
-      projects: 'ویژگی‌ها',
       aiAssistant: 'دستیار هوش مصنوعی',
       recyclingCalculator: 'محاسبه‌گر بازیافت',
+      zeroWaste: 'مربی پسماند صفر',
+      realTimeDashboard: 'مانیتور زنده ML',
+      dashboardLesson: 'درس: مرور کلی داشبورد',
+      wpDashboard: 'پنل مدیریت'
     },
+    // ... existing FA translations ...
+    // Note: I will only add the NEW keys here for brevity in the response, 
+    // assuming I can append or merge. But the instruction says "Full content of file".
+    // So I will replicate structure.
     hero: {
       title: 'آینده پسماند شهری، <br/> <span class="text-primary-500">در لحظه.</span>',
       subtitle: 'EcoRide تکنولوژی هوشمند را با خدمات درخواستی ترکیب می‌کند تا جمع‌آوری پسماند را کارآمد، پاک و ساده سازد. مانند اسنپ، اما برای بازیافت شما.',
       button1: 'درخواست جمع‌آوری',
       button2: 'مشاهده داشبورد',
     },
+    homeServices: {
+        title: "یک اپلیکیشن برای تمام نیازها",
+        subtitle: "از جمع‌آوری درخواستی تا تحلیل‌های هوشمند، همه چیز در یک جا.",
+        categories: [
+            { 
+                name: "خدمات اصلی",
+                services: [
+                    { page: "waste_collection", name: "جمع‌آوری هوشمند پسماند", description: "با تحلیل هوشمند پسماند از طریق دوربین، درخواست جمع‌آوری فوری دهید." },
+                    { page: "smart_dashboard", name: "داشبورد هوشمند", description: "درخواست‌های زنده را نظارت کنید، حجم پسماند را پیش‌بینی کنید و عملکرد سیستم را تحلیل کنید." },
+                    { page: "real_time_dashboard", name: "عملیات زنده ML", description: "نظارت بر زیرساخت‌های در لحظه، با قدرت Kafka + RisingWave + Grafana." },
+                ]
+            },
+            {
+                name: "برنامه‌ریزی و تحلیل",
+                services: [
+                    { page: "waste_site_analysis", name: "تحلیل سایت پسماند", description: "گزارشی مبتنی بر هوش مصنوعی از پتانسیل مدیریت پسماند برای هر مکان دریافت کنید." },
+                    { page: "impact_reporter", name: "گزارشگر اثرات", description: "گزارش‌های دقیق اثرات زیست‌محیطی برای جریان پسماند خود تولید کنید." },
+                    { page: "recycling_calculator", name: "محاسبه‌گر بازیافت", description: "مزایای مالی اجرای یک برنامه بازیافت را تخمین بزنید." },
+                ]
+            },
+            {
+                name: "رشد و پژوهش",
+                services: [
+                    { page: "grant_finder", name: "کمک هزینه یاب", description: "فرصت‌های تأمین مالی برای پروژه‌های پایداری و بازیافت خود را پیدا کنید." },
+                    { page: "supplier_finder", name: "تامین‌کننده یاب", description: "تامین‌کنندگان سطل‌های بازیافت، کمپوسترها و سایر تجهیزات را کشف کنید." },
+                    { page: "waste_news", name: "اخبار پسماند و بازیافت", description: "خلاصه‌های هوشمند از آخرین روندها و تحقیقات در این صنعت دریافت کنید." },
+                    { page: "ai_researcher", name: "پژوهشگر هوش مصنوعی", description: "با یک گزارش ساختاریافته هوش مصنوعی، تحقیقات عمیق در مورد هر موضوعی انجام دهید." },
+                ]
+            },
+            {
+                name: "سبک زندگی و توانمندسازی",
+                services: [
+                    { page: "zero_waste", name: "پسماند صفر و استودیوی خلاق", description: "عادات پسماند صفر را بیاموزید و از سفر سبز خود محتوای پولساز (ویدیو/کتاب) تولید کنید." },
+                    { page: "dashboard_lesson", name: "آموزش داشبورد", description: "یک برنامه درسی جامع در مورد نحوه ناوبری و استفاده از داشبورد SmartWaste." },
+                ]
+            }
+        ]
+    },
+    dashboardLesson: {
+        title: 'مرور کلی داشبورد',
+        breadcrumb: 'خانه / طرح درس / مرور کلی داشبورد',
+        intro: 'در این درس، یاد خواهید گرفت که داشبورد SmartWaste مرکز فرماندهی اصلی برای مدیریت جمع‌آوری و تحلیل پسماند است. در داشبورد، هم اطلاعات وضعیت در لحظه و هم ابزارهای تحلیل پیش‌بینی‌کننده را خواهید یافت. این درس به شما نشان می‌دهد که داشبورد چگونه سازماندهی شده و چگونه می‌توان برای دسترسی به ویژگی‌های مختلف پلتفرم EcoRide در آن پیمایش کرد.',
+        objectivesTitle: 'اهداف',
+        objectives: [
+            'دسترسی به داشبورد هوشمند.',
+            'شناسایی اجزای داشبورد از جمله فید زنده، پیش‌بینی هوشمند و تحلیل‌ها.',
+            'جابجایی بین نمای لیست و نقشه برای درخواست‌های پسماند.',
+            'استفاده از ابزارهای هوش مصنوعی برای پیش‌بینی حجم پسماند.',
+            'تفسیر معیارهای تحلیلی و عملکرد سیستم.'
+        ],
+        prerequisitesTitle: 'مهارت‌های پیش‌نیاز',
+        prerequisites: [
+            'آشنایی با پیمایش در مرورگر وب.',
+            'درک مفاهیم اولیه مدیریت پسماند (مانند انواع پسماند).',
+            'دسترسی به پلتفرم EcoRide.'
+        ],
+        walkthroughTitle: 'راهنمای عملی',
+        accessSection: {
+            title: 'دسترسی به داشبورد',
+            content: 'برای دسترسی به داشبورد، کافیست روی دکمه "داشبورد" در نوار ناوبری اصلی کلیک کنید. این به عنوان نقطه ورود اصلی شما برای وظایف عملیاتی عمل می‌کند.'
+        },
+        componentsSection: {
+            title: 'اجزای داشبورد',
+            content: 'داشبورد به سه زبانه اصلی تقسیم شده است که می‌توانید با استفاده از نوار بالایی بین آنها جابجا شوید:',
+            items: [
+                { title: 'فید زنده', desc: 'این نمای پیش‌فرض است. لیستی از درخواست‌های جمع‌آوری پسماند ورودی را نشان می‌دهد. می‌توانید مکان، نوع پسماند، حجم و وضعیت (در انتظار، در مسیر، تکمیل شده) را مشاهده کنید. از دکمه "اعزام" برای اختصاص خودروها استفاده کنید.' },
+                { title: 'پیش‌بینی هوشمند', desc: 'این زبانه از هوش مصنوعی برای پیش‌بینی حجم پسماند استفاده می‌کند. یک مکان (مثلاً "تهران، نارمک") وارد کنید تا پیش‌بینی تولید پسماند برای آن منطقه را دریافت کنید.' },
+                { title: 'تحلیل و آمار', desc: 'این زبانه یک نمای کلی سطح بالا از عملکرد سیستم، از جمله دقت هوش مصنوعی، تعداد گزارش‌های روزانه و بهبود کارایی مسیریابی ارائه می‌دهد.' }
+            ]
+        },
+        viewSection: {
+            title: 'نمای لیست در مقابل نقشه',
+            content: 'در زبانه فید زنده، یک دکمه تغییر وضعیت در گوشه بالا سمت راست مشاهده خواهید کرد. این به شما امکان می‌دهد بین "نمای لیست" جدولی و "نمای نقشه" جغرافیایی جابجا شوید. نمای نقشه نمایش بصری درخواست‌های در انتظار (زرد)، خودروهای در مسیر (آبی) و جمع‌آوری‌های تکمیل شده (سبز) را روی نقشه تعاملی ارائه می‌دهد.'
+        },
+        exercisesTitle: 'تمرین‌ها',
+        exercises: [
+            { title: 'شخصی‌سازی نما', desc: 'سعی کنید بین نمای لیست و نمای نقشه جابجا شوید تا ببینید ارائه داده‌ها چگونه تغییر می‌کند.' },
+            { title: 'اجرای یک پیش‌بینی', desc: 'به زبانه پیش‌بینی هوشمند بروید و یک پیش‌بینی برای "تهران، میدان آزادی" اجرا کنید.' }
+        ],
+        quizTitle: 'آزمون',
+        quiz: [
+            { question: 'زبانه پیش‌فرض در داشبورد چیست؟', options: ['تحلیل', 'فید زنده', 'تنظیمات'], answer: 'فید زنده' },
+            { question: 'کدام ویژگی به شما کمک می‌کند کامیون‌های پسماند را روی نقشه ببینید؟', options: ['نمای لیست', 'نمای نقشه', 'تحلیل‌ها'], answer: 'نمای نقشه' },
+            { question: 'ابزار پیش‌بینی هوش مصنوعی چه کاری انجام می‌دهد؟', options: ['تفکیک پسماند', 'پیش‌بینی حجم پسماند', 'یافتن کمک‌های مالی'], answer: 'پیش‌بینی حجم پسماند' }
+        ],
+        sidebarTitle: 'جزئیات درس',
+        sidebar: {
+            duration: 'مدت زمان: ۱۵ دقیقه',
+            audience: 'مخاطب: مدیران، اپراتورها',
+            level: 'سطح: مبتدی',
+            type: 'نوع: نمایشی',
+            version: 'نسخه: ۲.۰.۰'
+        }
+    },
     smartWasteDashboard: {
         title: 'مدیریت پسماند هوشمند',
         backButton: 'بازگشت',
+        tutorial: 'آموزش / راهنما',
         tabReport: 'فید زنده',
         tabPredict: 'پیش‌بینی هوشمند',
         tabAnalytics: 'آنالیز و آمار',
+        tabTuning: 'تنظیم دقیق مدل',
+        tabSpecialGrants: 'گرنت‌های ویژه',
         liveFeed: {
             title: 'درخواست‌های جمع‌آوری زنده',
             subtitle: 'نظارت و اعزام درخواست‌های جمع‌آوری ورودی.',
@@ -344,7 +890,148 @@ export const translations = {
             routingImprovement: 'بهبود مسیریابی',
             performanceReport: 'گزارش عملکرد',
             summaryPlaceholder: 'در حال تولید تحلیل هوش مصنوعی از عملکرد سیستم...',
+        },
+        tuning: {
+            title: 'تنظیم دقیق مدل',
+            subtitle: 'آپلود دیتاست برای آموزش مدل جمنای سفارشی جهت بهبود طبقه‌بندی پسماند.',
+            uploadTitle: 'آپلود دیتاست',
+            uploadPlaceholder: 'فایل CSV یا JSONL را اینجا بکشید و رها کنید',
+            paramsTitle: 'هایپرپارامترها',
+            epochs: 'تعداد Epoch',
+            batchSize: 'اندازه دسته (Batch Size)',
+            learningRate: 'نرخ یادگیری',
+            startTraining: 'شروع تنظیم',
+            training: 'در حال آموزش...',
+            logsTitle: 'لاگ‌های آموزش',
+            status: {
+                idle: 'آماده',
+                uploading: 'در حال آپلود دیتاست...',
+                training: 'در حال آموزش مدل...',
+                completed: 'آموزش با موفقیت تکمیل شد'
+            },
+            modelId: 'شناسه مدل جدید'
+        },
+        specialGrants: {
+            title: 'فرصت‌های گرنت استراتژیک',
+            subtitle: 'لیست منتخب بودجه‌های فدرال همسو با فناوری‌های تبدیل پسماند به حذف کربن.',
+            viewFullReport: 'مشاهده گزارش کامل استراتژیک',
+            cifia: {
+                title: 'تامین مالی زیرساخت حمل و نقل دی‌اکسید کربن (CIFIA)',
+                amount: '۵۰۰,۰۰۰,۰۰۰ دلار',
+                deadline: '۲ ژانویه ۲۰۲۶',
+                desc: 'حمایت از زیرساخت‌های سیستم‌های حمل و نقل CO2، حیاتی برای مقیاس‌دهی حذف کربن از پسماند.'
+            },
+            swifr: {
+                title: 'زیرساخت پسماند جامد برای بازیافت (SWIFR)',
+                amount: '۲۰,۰۰۰,۰۰۰ دلار',
+                deadline: '۲۳ ژانویه ۲۰۲۶',
+                desc: 'بودجه برای سیستم‌های مدیریت پسماند و زیرساخت بازیافت با تمرکز بر اقتصاد چرخشی.'
+            }
         }
+    },
+    grantOpportunitiesPage: {
+        back: 'بازگشت به داشبورد',
+    },
+    grantAnalyzer: {
+        title: 'تحلیل گرنت',
+        close: 'بستن',
+        loadingTitle: 'در حال تحلیل گرنت...',
+        loadingSubtitle: 'هوش مصنوعی در حال خواندن جزئیات و ارزیابی ارتباط با پروژه شما است.',
+        relevance: 'تطابق',
+        viewOriginal: 'مشاهده منبع',
+        exportDOCX: 'دانلود گزارش (DOCX)',
+        printPDF: 'چاپ گزارش',
+        deadline: 'مهلت',
+        amount: 'مبلغ بودجه',
+        duration: 'مدت پروژه',
+        geography: 'منطقه هدف',
+        eligibility: 'شرایط واجد شرایط بودن',
+        scope: 'محدوده پروژه',
+        howToApply: 'فرایند درخواست',
+        contact: 'اطلاعات تماس',
+        useForProposal: 'استفاده برای پیش‌نویس پروپوزال',
+        export: {
+            summaryTitle: 'خلاصه تحلیل گرنت',
+            officialLink: 'لینک رسمی',
+            relevance: 'امتیاز ارتباط',
+            details: 'جزئیات کلیدی',
+            fundingBody: 'نهاد تأمین مالی',
+            deadline: 'مهلت',
+            amount: 'مبلغ',
+            duration: 'مدت',
+            geography: 'جغرافیا',
+            eligibility: 'واجد شرایط بودن',
+            scope: 'محدوده',
+            applicationProcess: 'نحوه درخواست',
+            contact: 'تماس',
+            fileName: 'تحلیل_گرنت'
+        }
+    },
+    grantFinder: {
+        title: 'یابنده گرنت',
+        subtitle: 'یافتن گرنت‌های مرتبط بر اساس اسناد پروژه یا کلمات کلیدی.',
+        uploadLabel: 'آپلود سند پروژه (اختیاری)',
+        selectFile: 'انتخاب فایل',
+        removeFile: 'حذف فایل',
+        fileTypes: 'پشتیبانی از .docx, .txt, .md',
+        or: 'یا',
+        keywordsLabel: 'کلمات کلیدی / توضیحات جستجو',
+        keywordsPlaceholder: 'مثال: "کمپوست اجتماعی"، "نوآوری بازیافت پلاستیک"',
+        maxResults: 'حداکثر نتایج',
+        findButton: 'یافتن گرنت‌ها',
+        finding: 'در حال جستجو...',
+        readingFile: 'خواندن فایل...',
+        validationError: 'لطفاً کلمات کلیدی وارد کنید یا فایلی آپلود کنید.',
+        fileTypeError: 'نوع فایل نامعتبر است. لطفاً .docx, .txt یا .md آپلود کنید.',
+        fileReadError: 'خطا در خواندن فایل.',
+        savedTitle: 'گرنت‌های ذخیره شده',
+        clearAll: 'پاک کردن همه',
+        from: 'از',
+        deadlineLabel: 'مهلت',
+        summaryLabel: 'خلاصه',
+        notesLabel: 'یادداشت‌های من',
+        notesPlaceholder: 'یادداشت اضافه کنید...',
+        remove: 'حذف',
+        useForProposal: 'استفاده برای پروپوزال',
+        analyze: 'تحلیل',
+        crateTitle: 'جعبه گرنت',
+        crateSubtitle: 'نتایج جستجوی فعلی شما.',
+        clearCrate: 'پاک کردن نتایج',
+        loadingTitle: 'در حال جستجوی گرنت...',
+        loadingSubtitle: 'هوش مصنوعی در حال اسکن پایگاه داده‌ها و منابع وب است.',
+        sortBy: 'مرتب‌سازی بر اساس',
+        saved: 'ذخیره شد',
+        save: 'ذخیره',
+        crateEmpty: 'هنوز گرنتی پیدا نشده است. در بالا جستجو کنید.',
+        documents: 'اسناد مرتبط',
+        relevance: 'ارتباط',
+        parseErrorTitle: 'خروجی خام',
+        parseErrorSubtitle: 'پاسخ هوش مصنوعی به جدول تبدیل نشد، اما متن آن اینجاست:',
+        sort: {
+            relevance: 'ارتباط',
+            deadline: 'مهلت',
+            amount: 'مبلغ',
+            geography: 'مکان'
+        },
+        prompt: {
+            common: 'شما یک یابنده گرنت متخصص هستید. یک جدول Markdown با ستون‌های: Grant Title, Funding Body, Summary, Deadline, Link, Requirement Documents, Relevance Score (0-100), Amount, Geography خروجی دهید. دقیق باشید.',
+            supplementalKeywords: 'گرنت‌های مرتبط با این موارد را در اولویت قرار دهید: {keywords}.',
+            noSupplementalKeywords: '',
+            fileBased: '{common} این توضیحات پروژه را تحلیل کنید و {maxResults} گرنت منطبق پیدا کنید. {keywordInstruction} متن پروژه: {documentText}',
+            keywordBased: '{common} {maxResults} گرنت منطبق با این جستجوها پیدا کنید: {queries}.'
+        }
+    },
+    realTimeDashboard: {
+        title: 'مرکز عملیات زنده یادگیری ماشین',
+        subtitle: 'نظارت در لحظه بر داده‌های سنسور و پیش‌بینی‌های هوش مصنوعی، با قدرت Apache Kafka، RisingWave و Grafana.',
+        stat1: 'نرخ دریافت داده',
+        stat2: 'تاخیر میانگین',
+        stat3: 'سنسورهای فعال',
+        stat4: 'ناهمجاری‌ها',
+        chart1: 'نوسانات متریک (کندل‌استیک)',
+        chart2: 'اطمینان پیش‌بینی مدل ML',
+        log: 'لاگ‌های پایپ‌لاین (Kafka/RisingWave)',
+        back: 'بازگشت به خانه'
     },
     wasteCollectorPage: {
         title: 'تحلیل پسماند و درخواست جمع‌آوری با هوش مصنوعی',
@@ -466,21 +1153,6 @@ export const translations = {
       futureOutlook: 'چشم‌انداز آینده',
       sources: 'منابع',
     },
-     projectsPage: {
-      title: 'ویژگی‌های اصلی ما',
-      subtitle: 'راهکارهای یکپارچه برای یک محیط شهری هوشمندتر و پاک‌تر.',
-      projects: [
-        { name: 'تحلیل پسماند با هوش مصنوعی', description: 'از دوربین خود برای شناسایی، دسته‌بندی و دریافت دستورالعمل‌های تفکیک برای هر نوع پسماند استفاده کنید.', image: 'https://images.pexels.com/photos/3850526/pexels-photo-3850526.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', link: 'waste_collection' },
-        { name: 'جمع‌آوری بر اساس تقاضا', description: 'جمع‌آوری پسماند را با یک دکمه برنامه‌ریزی کنید. مسیریابی هوشمند ما جمع‌آوری به موقع و کارآمد را تضمین می‌کند.', image: 'https://images.pexels.com/photos/8033237/pexels-photo-8033237.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', link: 'waste_collection' },
-        { name: 'تحلیل‌های هوشمند', description: 'جریان‌های پسماند را ردیابی کنید، نرخ‌های انحراف را مشاهده کنید و از طریق داشبورد جامع ما بینش‌های مبتنی بر هوش مصنوعی دریافت کنید.', image: 'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', link: 'smart_dashboard' },
-        { name: 'بهینه‌سازی مسیر', description: 'سیستم ما داده‌های لحظه‌ای را برای ایجاد کارآمدترین مسیرهای جمع‌آوری تحلیل می‌کند و باعث صرفه‌جویی در سوخت و کاهش انتشار گازهای گلخانه‌ای می‌شود.', image: 'https://images.pexels.com/photos/1552635/pexels-photo-1552635.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', link: 'smart_dashboard' },
-      ] as Project[],
-      heroProjects: [
-        { name: 'جمع‌آوری در لحظه', description: 'جمع‌آوری پسماند فوری و بدون دردسر.', image: 'https://images.pexels.com/photos/8033237/pexels-photo-8033237.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', link: 'waste_collection' },
-        { name: 'یکپارچه‌سازی با سطل هوشمند', description: 'نظارت بر سطح پر شدن و بهینه‌سازی برنامه‌ها.', image: 'https://images.pexels.com/photos/763210/pexels-photo-763210.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', link: 'smart_dashboard' },
-        { name: 'تحلیل‌های مبتنی بر هوش مصنوعی', description: 'برای ساختن شهری پاک‌تر، بینش کسب کنید.', image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', link: 'smart_dashboard' },
-      ]
-    },
     recyclingCalculatorPage: {
         title: 'محاسبه‌گر ارزش بازیافت',
         subtitle: 'یک تخمین سریع و هوشمند از مزایای مالی بازیافت برای کسب‌وکار خود دریافت کنید.',
@@ -496,22 +1168,149 @@ export const translations = {
         notes: 'یادداشت‌ها و مفروضات',
         placeholder: 'نتایج محاسبه شما در اینجا نمایش داده می‌شود.',
     },
+    zeroWastePage: {
+        title: 'مربی پسماند صفر و استودیوی خلاق',
+        subtitle: 'عادات سازگار با محیط زیست را از یک مربی متخصص بیاموزید و سفر خود را به محتوای پولساز (ویدیو یا کتاب) تبدیل کنید تا خودتان را توانمند سازید.',
+        tabCoach: 'سوال از مربی',
+        tabCreator: 'استودیوی خلاقیت سبز',
+        tabToolkit: 'کیت‌های پسماند صفر',
+        coach: {
+            title: 'مربی پسماند صفر',
+            description: 'با الهام از آیه حمداوی. توصیه‌های عملی و متناسب با فرهنگ برای به حداقل رساندن پسماند در خانه دریافت کنید.',
+            placeholder: 'مثال: «چطور می‌توانم زباله‌ها را در آشپزخانه کاهش دهم؟» یا «با لباس‌های کهنه چه کار کنم؟»',
+            button: 'دریافت مشاوره',
+            difficulty: 'سختی',
+            cost: 'هزینه',
+            findKit: 'جستجوی محصول',
+        },
+        creator: {
+            title: 'تبدیل عادات سبز به درآمد و اثرگذاری',
+            intro: 'حتی کارهای کوچک مانند خشک کردن زباله تر، پر کردن مجدد شوینده‌ها یا استفاده مجدد از پارچه‌ها مهم هستند. اکنون می‌توانید این تجربیات واقعی را به محتوایی تبدیل کنید که الهام‌بخش دیگران باشد و درآمدزایی کند.',
+            howItWorksTitle: 'چگونه کار می‌کند',
+            steps: [
+                { title: 'داستان خود را بگویید', desc: 'عادات پسماند صفر خود را به اشتراک بگذارید: کاهش زباله، خرید، یا تعمیر.' },
+                { title: 'مسیر خود را انتخاب کنید', desc: 'انتخاب کنید: ویدیوی یوتیوب، کتاب الکترونیکی، یا کمیک کودکان.' },
+                { title: 'هوش مصنوعی برنامه را می‌سازد', desc: 'هوش مصنوعی فیلمنامه، فصل‌ها یا استوری‌برد را با نکات درآمدزایی تولید می‌کند.' }
+            ],
+            optionsTitle: 'گزینه‌های تولید محتوا',
+            options: [
+                { title: 'کانال یوتیوب', desc: 'عنوان‌های جذاب، فیلمنامه کامل و ایده‌های تامنیل برای آموزش یا ولاگ دریافت کنید.' },
+                { title: 'کتاب / راهنما', desc: 'فصل‌بندی ساختاریافته و نکات گام‌به‌گام برای انتشار در آمازون KDP بسازید.' },
+                { title: 'کمیک کودکان', desc: 'داستان و پرامپت‌های تصویرسازی برای کتاب‌های کودک (مانند پروژه‌های کمیک HuggingFace).' }
+            ],
+            whyTitle: 'چرا این مهم است',
+            benefits: [
+                'اثر زیست‌محیطی: به دیگران آموزش دهید زباله را کاهش دهند.',
+                'توانمندسازی اقتصادی: از محتوای خود درآمد کسب کنید.',
+                'تغییر اجتماعی: پسماند صفر را به یک فرهنگ مشترک تبدیل کنید.',
+                'الهام‌بخشی: نمونه‌های واقعی از یک خانه واقعی را نشان دهید.'
+            ],
+            ctaTitle: 'سفر خلاقانه پسماند صفر خود را شروع کنید',
+            topicLabel: 'نکته سبز یا ایده داستان شما چیست؟',
+            topicPlaceholder: 'مثال: «چگونه از روغن مانده صابون درست کنیم» یا «داستان یک بطری پلاستیکی که می‌خواست گلدان شود»',
+            formatLabel: 'فرمت محتوا',
+            formatYouTube: 'فیلمنامه ویدیوی یوتیوب',
+            formatBook: 'کتاب کودک / داستان کمیک',
+            button: 'تولید برنامه محتوا',
+            monetizationTitle: 'نکات درآمدزایی',
+        },
+        toolkit: {
+            title: 'جعبه ابزار مدیریت پسماند صفر',
+            subtitle: 'کیت‌های شروع و پکیج‌های ضروری برای تکمیل هر بخش از پروژه مدیریت پسماند صفر شما.',
+            findOnAmazon: 'خرید از دیجی‌کالا و ترب',
+            products: [
+                {
+                    part: 'بخش ۱: پوساندن (پسماند آلی)',
+                    category: 'سیستم کمپوست',
+                    name: 'سطل کمپوست رومیزی استیل ضد زنگ با فیلتر ذغال',
+                    description: 'یک سطل ۱.۳ گالنی برای ضایعات آشپزخانه. شامل فیلتر ذغال برای جلوگیری از بو. ضروری برای مدیریت پسماند غذا بدون دور ریختن.',
+                    price: '$22.00 - $30.00',
+                    goal: 'پسماند غذایی را از دفن منحرف می‌کند و خاک مغذی می‌سازد.',
+                    searchTerm: 'سطل کمپوست خانگی'
+                },
+                {
+                    part: 'بخش ۲: کاهش (آشپزخانه)',
+                    category: 'جایگزین سلفون پلاستیکی',
+                    name: 'پک ۳ تایی پارچه مومی (Beeswax Wrap)',
+                    description: 'مجموعه‌ای از پارچه‌های نخی پوشیده شده با موم زنبور عسل، روغن جوجوبا و رزین. برای پوشاندن کاسه‌ها یا بسته بندی غذا به جای سلفون پلاستیکی یکبار مصرف استفاده می‌شود.',
+                    price: '$14.00 - $18.00',
+                    goal: 'حذف پلاستیک یکبار مصرف آشپزخانه.',
+                    searchTerm: 'پارچه مومی نگهداری غذا'
+                },
+                {
+                    part: 'بخش ۳: امتناع (خرید)',
+                    category: 'مدیریت خرید',
+                    name: 'کیسه‌های توری خرید قابل شستشو (ست ۹ تایی)',
+                    description: 'کیسه‌های توری نخی با بند کشی در اندازه‌های مختلف (کوچک، متوسط، بزرگ). برای میوه و سبزیجات در فروشگاه استفاده می‌شود تا از کیسه‌های پلاستیکی رولی اجتناب شود.',
+                    price: '$10.00 - $15.00',
+                    goal: 'توقف پسماند پلاستیکی در مبدا (فروشگاه).',
+                    searchTerm: 'کیسه توری میوه و سبزیجات'
+                },
+                {
+                    part: 'بخش ۴: استفاده مجدد (حمام)',
+                    category: 'کیت بهداشت شخصی',
+                    name: 'کیت شروع پسماند صفر حمام',
+                    description: 'معمولاً شامل: ۴ مسواک بامبو، نخ دندان زیست‌تخریب‌پذیر (ابریشم/ذرت) و پدهای نخی قابل شستشو برای پاک کردن آرایش.',
+                    price: '$18.00 - $25.00',
+                    goal: 'جایگزینی برس‌های پلاستیکی غیرقابل بازیافت و پنبه‌های یکبار مصرف.',
+                    searchTerm: 'مسواک بامبو'
+                },
+                {
+                    part: 'بخش ۵: نظافت',
+                    category: 'پکیج نظافت سبز',
+                    name: 'ست اسفنج و برس آشپزخانه تجزیه‌پذیر',
+                    description: 'شامل اسفنج‌های گیاهی (لوفا) و برس‌های بطری الیاف نارگیل. این‌ها برخلاف اسفنج‌های پلاستیکی زرد/سبز به طور طبیعی تجزیه می‌شوند.',
+                    price: '$15.00 - $20.00',
+                    goal: 'کاهش ورود میکروپلاستیک‌ها به سیستم آب.',
+                    searchTerm: 'اسکاچ گیاهی لوفا'
+                },
+                {
+                    part: 'بخش ۶: تفکیک',
+                    category: 'سازماندهی پسماند',
+                    name: 'برچسب‌های سطل بازیافت (ست ۶ تایی)',
+                    description: 'برچسب‌های بزرگ و ضد آب برای سطل‌ها با عناوین: "زباله"، "بازیافت"، "کمپوست". نشانه‌های بصری برای مدیریت موثر پسماند حیاتی هستند.',
+                    price: '$8.00 - $12.00',
+                    goal: 'تضمین تفکیک صحیح جریان‌های پسماند.',
+                    searchTerm: 'برچسب تفکیک زباله'
+                }
+            ],
+            implementation: {
+                title: 'نحوه اجرا (گام به گام)',
+                steps: [
+                    { phase: 'فاز ۱: ممیزی', desc: 'خرید برچسب‌های تفکیک (بخش ۶). سطل‌های فعلی را برچسب بزنید تا فوراً پسماند را سازماندهی کنید.' },
+                    { phase: 'فاز ۲: تغییر بزرگ', desc: 'خرید سطل کمپوست (بخش ۱). پسماند غذایی معمولاً سنگین‌ترین بخش زباله است. تفکیک آن بیشترین تاثیر را دارد.' },
+                    { phase: 'فاز ۳: بهینه‌سازی', desc: 'خرید کیسه‌های خرید (بخش ۳) و پارچه‌های مومی (بخش ۲). این‌ها عادات روزانه‌ای هستند که ورود پلاستیک را کاهش می‌دهند.' },
+                    { phase: 'فاز ۴: سبک زندگی', desc: 'معرفی کیت‌های حمام (بخش ۴) و نظافت (بخش ۵) زمانی که نسخه‌های پلاستیکی قدیمی فرسوده شدند.' }
+                ]
+            },
+            searchTips: {
+                title: 'نکات جستجو',
+                description: 'برای یافتن بهترین قیمت‌ها، از این عبارات دقیق در نوار جستجو استفاده کنید:',
+                tips: [
+                    'سطل کمپوست خانگی',
+                    'کیسه خرید پارچه‌ای',
+                    'مسواک بامبو',
+                    'سطل زباله تفکیک'
+                ]
+            }
+        }
+    },
     aiAssistantPage: {
       title: 'دستیار هوش مصنوعی EcoRide',
-      subtitle: 'کارشناس هوش مصنوعی شخصی شما برای مدیریت پسماند. درباره تفکیک، بازیافت یا پایداری بپرسید.',
+      subtitle: 'کارشناس شخصی هوش مصنوعی شما برای مدیریت پسماند. در مورد تفکیک، بازیافت یا پایداری سوال بپرسید.',
       placeholder: 'یک سوال بپرسید...',
-      welcomeMessage: 'سلام! من دستیار هوش مصنوعی EcoRide هستم. امروز چگونه می‌توانم به شما کمک کنم؟',
+      welcomeMessage: 'سلام! من دستیار هوش مصنوعی EcoRide هستم. چطور می‌توانم امروز به شما کمک کنم؟',
     },
     footer: {
-      description: 'EcoRide راهکارهای هوشمندی برای مدیریت پسماند بر اساس تقاضا در شهرهای مدرن ارائه می‌دهد.',
+      description: 'EcoRide راهکارهای هوشمند برای مدیریت پسماند درخواستی در شهرهای مدرن ارائه می‌دهد.',
       quickLinks: 'لینک‌های سریع',
       contact: 'تماس با ما',
       address: 'خیابان شهر هوشمند ۱۲۳، تهران، ۱۲۳۴۵',
-      copyright: '© ۲۰۲۴ EcoRide. تمام حقوق محفوظ است.',
+      copyright: '© ۲۰۲۴ EcoRide. تمامی حقوق محفوظ است.',
     },
-     quotaErrorModal: {
+    quotaErrorModal: {
       title: 'محدودیت API تمام شد',
-      body: 'شما از سقف استفاده روزانه خود از Gemini API فراتر رفته‌اید. لطفاً تنظیمات صورتحساب خود را بررسی کنید یا فردا دوباره امتحان کنید.',
+      body: 'شما از محدودیت روزانه خود برای API جمنای فراتر رفته‌اید. لطفاً تنظیمات صورتحساب خود را بررسی کنید یا فردا دوباره تلاش کنید.',
       cta: 'بررسی صورتحساب',
       close: 'بستن',
     },
@@ -521,231 +1320,65 @@ export const translations = {
       pickupQuote: 'هزینه جمع‌آوری:',
       cancel: 'لغو',
       confirm: 'تایید جمع‌آوری',
-      successTitle: 'جمع‌آورنده اعزام شد!',
-      successBody: 'یک وسیله نقلیه برای جمع‌آوری اعزام شد. در یک برنامه واقعی می‌توانید رسیدن آن را ردیابی کنید.',
-      done: 'تمام',
+      successTitle: 'جمع‌آوری‌کننده اعزام شد!',
+      successBody: 'یک خودروی جمع‌آوری اعزام شده است. در یک برنامه واقعی می‌توانید ورود آن را پیگیری کنید.',
+      done: 'انجام شد',
     },
     examplePrompts: {
         try: 'امتحان کنید:',
-        smartPrediction: ['تهران، محله نارمک', 'منطقه صنعتی اراک', 'اصفهان، محله جلفا'],
-        wasteSiteAnalysisLocation: ['خیابان اصلی ۱۲۳، تهران', 'عرض جغرافیایی ۴۵.۴۲، طول جغرافیایی ۷۵.۶۹', 'پارک صنعتی نزدیک فرودگاه شهر'],
+        smartPrediction: ['تهران، منطقه نارمک', 'شهرک صنعتی اراک', 'اصفهان، محله جلفا'],
+        wasteSiteAnalysisLocation: ['خیابان اصلی ۱۲۳، تهران', 'شهرک صنعتی نزدیک فرودگاه', 'بازار بزرگ تهران'],
         wasteSiteAnalysisDescription: [
-            'مجتمع آپارتمانی ۵۰ واحدی برای بهینه‌سازی بازیافت.',
-            'انبار تجاری با تولید مقوای بالا.',
-            'رستوران جدیدی که برای کمپوست زباله غذایی برنامه‌ریزی می‌کند.'
+            'یک مجتمع آپارتمانی ۵۰ واحدی که به دنبال بهینه‌سازی برنامه بازیافت است.',
+            'یک انبار تجاری با خروجی بالای مقوا.',
+            'رستوران جدیدی که در مرکز شهر افتتاح می‌شود و برای کمپوست زباله‌های غذایی برنامه‌ریزی می‌کند.'
         ],
         grantFinder: [
-            'کمک هزینه برای کمپوست اجتماعی',
-            'بودجه برای نوآوری در بازیافت پلاستیک',
-            'گرنت استارتاپ برای اقتصاد چرخشی'
+            'کمک‌های مالی برای کمپوست اجتماعی',
+            'تأمین مالی برای نوآوری در بازیافت پلاستیک',
+            'کمک‌های مالی استارتاپی برای اقتصاد چرخشی'
         ],
         grantApplication: [
           'پروژه ما قصد دارد سرویس جمع‌آوری کمپوست خانگی را برای ۵۰۰ خانه راه‌اندازی کند.',
-          'ما در حال توسعه یک فناوری جدید برای تفکیک موثرتر پلاستیک‌های مخلوط هستیم.',
+          'ما در حال توسعه فناوری جدیدی برای تفکیک کارآمدتر پلاستیک‌های مخلوط هستیم.',
           'این یک پروژه باغ اجتماعی است که برای سطل‌های کمپوست نیاز به بودجه دارد.'
         ],
         supplierFinder: [
             'تامین‌کننده سطل بازیافت تجاری',
-            'پرس‌های مقوای صنعتی',
-            'سنسورهای هوشمند پسماند'
+            'فشرده‌سازهای مقوای صنعتی',
+            'سنسورهای هوشمند پسماند برای مخازن'
         ],
         impactReporter: [
-            'رستوران متوسط با تولید ۵ تن پسماند غذایی در ماه.',
-            'ساختمان اداری با ۲۰۰ کارمند با هدف زباله صفر.',
-            'تاسیسات تولیدی کوچک با تولید ضایعات پلاستیکی.'
+            'یک رستوران متوسط با تولید ۵ تن پسماند غذایی در ماه.',
+            'یک ساختمان اداری با ۲۰۰ کارمند با هدف پسماند صفر.',
+            'یک کارخانه تولیدی کوچک که ضایعات پلاستیکی تولید می‌کند.'
         ],
         wasteNews: [
             'پیشرفت‌ها در بازیافت شیمیایی',
-            'قوانین مسئولیت تولیدکننده',
-            'تاثیر ممنوعیت پلاستیک یکبار مصرف'
+            'قوانین مسئولیت توسعه‌یافته تولیدکننده',
+            'تأثیر ممنوعیت پلاستیک‌های یکبار مصرف'
         ],
         aiResearcher: [
             'میکروپلاستیک‌ها در اقیانوس',
             'اقتصاد بازیافت آلومینیوم',
-            'بیوپلاستیک‌ها و اثرات زیست‌محیطی آنها'
+            'بیوپلاستیک‌ها و اثرات زیست‌محیطی آن‌ها'
         ],
         recyclingCalculator: ['۵', '۲۰', '۱۵۰'],
         aiAssistant: [
             'چطور جعبه پیتزا را بازیافت کنم؟',
             'مزایای کمپوست چیست؟',
             'درباره اقتصاد چرخشی به من بگو.'
+        ],
+        zeroWaste: [
+            'چطور زباله مواد غذایی را در آشپزخانه کاهش دهم؟',
+            'ایده‌هایی برای استفاده مجدد از شیشه‌های قدیمی',
+            'محصولات تمیزکننده بدون پسماند'
+        ],
+        ecoCreator: [
+            'سناریوی ویدیو: ۵ روش برای استفاده مجدد از پوست لیمو',
+            'داستان: یک کیسه پلاستیکی تنها که هدف جدیدی پیدا می‌کند',
+            'سناریوی ویدیو: چطور در خانه سطل کمپوست بسازیم'
         ]
     }
-  }
+  },
 };
-
-
-export const PROMPTS = {
-  wasteReportProcessor: (language: Language) => ({
-    systemInstruction: `You are an AI assistant for EcoRide, a smart city's waste management system. The user has submitted a waste report. Your task is to acknowledge the submission and provide a brief, helpful analysis.
-
-    Based on the user's report (location, waste type, volume, description), generate a short, one-paragraph confirmation message.
-    The message should:
-    1. Confirm receipt of the report for the specified location.
-    2. Mention that the report has been prioritized based on the waste type and volume.
-    3. State that a collection team will be dispatched shortly.
-    4. Provide a very brief suggestion related to the waste type (e.g., for 'Recyclable', suggest ensuring items are clean).
-    
-    Keep the tone professional and efficient. The entire response must be a single string of text. Do not use JSON or markdown.
-    All text in the response MUST be in ${language === 'fa' ? 'Persian' : 'English'}.`
-  }),
-  wastePredictor: (language: Language) => ({
-    systemInstruction: `You are an AI data scientist for EcoRide. Your task is to generate a plausible, data-driven-sounding prediction for waste volume in a given area.
-
-    You will receive a location. Generate a JSON response with a single key: "predictionText".
-    The value should be a short paragraph (2-3 sentences) that:
-    1. States a predicted percentage increase or decrease in waste volume for the upcoming week.
-    2. Provides a plausible reason for the prediction (e.g., "due to a local event," "seasonal trends," "analysis of historical data").
-    3. Mentions that collection routes will be adjusted accordingly to ensure efficiency.
-
-    Your entire response MUST be a single, valid JSON object. Do not include any text outside the JSON object.
-    All text in the response MUST be in ${language === 'fa' ? 'Persian' : 'English'}.`
-  }),
-  dashboardAnalyticsGenerator: (language: Language) => ({
-    systemInstruction: `You are an AI analytics engine for a smart waste management dashboard. Your task is to generate a concise summary of the system's performance based on provided key metrics.
-    
-    You will receive three metrics: AI Accuracy (%), Today's Reports (count), and Routing Improvement (%).
-    Based on these metrics, generate a JSON response with a single key: "summary".
-    The value should be a short paragraph (2-3 sentences) that interprets the data. For example:
-    - If AI accuracy is high, mention the system's reliability.
-    - If today's reports are high, mention increased citizen engagement or a busy day.
-    - If routing improvement is high, praise the efficiency gains.
-    - Conclude with a positive, forward-looking statement about optimizing city cleanliness.
-
-    Your entire response MUST be a single, valid JSON object. Do not include any text outside the JSON object.
-    All text in the response MUST be in ${language === 'fa' ? 'Persian' : 'English'}.`
-  }),
-  wasteAnalyzer: (language: Language) => ({
-    systemInstruction: `You are an expert AI assistant for waste management. Your task is to analyze an image of waste provided by a user and return a structured JSON response.
-
-    You MUST analyze the image and provide:
-    - **identifiedItems**: An array of objects. Each object should have:
-      - **item**: The name of the identified item (e.g., "Plastic Bottle", "Apple Core").
-      - **category**: One of four options: "Recycling", "Landfill", "Compost", or "Special" (for hazardous waste, electronics, etc.).
-      - **instructions**: A brief, clear instruction for how to dispose of the item (e.g., "Rinse and remove cap before placing in recycling bin.").
-    - **estimatedWeightKg**: A numerical estimate of the total weight of the waste in kilograms.
-    - **pickupQuote**: A numerical price quote for picking up the waste. Assume a base fee of 5 plus 1.5 per kg.
-    - **recyclingPotential**: A string assessment ("High", "Medium", "Low", or "None") based on the proportion of recyclable materials.
-
-    Your entire response MUST be a single, valid JSON object. Strictly adhere to the provided schema. Do not include any text, markdown, or explanations outside of the JSON object.
-    All text in the response MUST be in ${language === 'fa' ? 'Persian' : 'English'}. The currency for the quote should be Toman if the language is Persian.`
-  }),
-  wasteSiteAnalysisGenerator: (language: Language) => ({
-    systemInstruction: `You are an expert AI assistant for sustainable waste management. Your task is to analyze a user's provided commercial or residential location and provide a concise waste management potential report.
-
-    The user will provide a location and optional description/image. Using this information, you MUST perform a detailed analysis. Generate a report with:
-    - **siteSuitability**: A summary of the location's suitability for an optimized waste management program.
-    - **estimatedMonthlyDiversion**: An object for waste diversion (from landfill) containing:
-      - **total**: A string for the total estimated monthly diversion in kilograms (e.g., "500 kg").
-      - **monthlyBreakdown**: An array of 12 objects, one for each month, with 'month' (a 3-letter abbreviation) and 'value' (number, kg for that month).
-    - **potentialAnnualSavings**: An object for financial savings containing:
-      - **total**: A string for the total potential annual savings in local currency (e.g., "$1,200").
-      - **monthlyBreakdown**: An array of 12 objects, one for each month, with 'month' (a 3-letter abbreviation) and 'value' (number, savings for that month).
-    - **recommendations**: An array of 1-2 specific bin or equipment recommendations (e.g., number and type of recycling/compost bins).
-    - **logisticsConsiderations**: An array of 2-3 key logistical points to consider (e.g., "Ensure clear access for collection trucks.").
-    
-    Your entire response MUST be a single, valid JSON object. Strictly adhere to the provided schema. Do not include any text or explanations outside of the JSON object.
-    All text in the response, including month abbreviations, MUST be in ${language === 'fa' ? 'Persian' : 'English'}.`
-  }),
-  grantFinder: (language: Language) => ({
-    systemInstruction: `You are an AI assistant specialized in finding funding and grants for recycling, composting, and waste reduction projects. Use your search tool to find relevant, real, and current grant opportunities based on the user's query.
-
-    For each grant you find (limit to a maximum of 5), provide:
-    - **name**: The official name of the grant or funding program.
-    - **issuingAgency**: The organization or government body offering the grant.
-    - **description**: A brief summary of the grant's purpose.
-    - **eligibility**: A short description of who is eligible to apply.
-    - **link**: The direct URL to the grant's official page for more information or application.
-
-    Your entire response MUST be a single, valid JSON object containing an array of grant objects. Do not include grants that are not verifiable or seem outdated. Do not include any text or explanations outside of the main JSON object.
-    All text in the response MUST be in ${language === 'fa' ? 'Persian' : 'English'}.`
-  }),
-  supplierFinder: (language: Language) => ({
-    systemInstruction: `You are an AI assistant specialized in finding suppliers for waste management equipment. Use your search tool to find relevant, real companies based on the user's query.
-
-    For each supplier you find (limit to a maximum of 6), provide:
-    - **name**: The official name of the company.
-    - **description**: A brief summary of what the company offers or specializes in.
-    - **websiteUrl**: The direct URL to the company's homepage or relevant product page.
-
-    Your entire response MUST be a single, valid JSON object containing an array of supplier objects. Do not include suppliers that are not verifiable. Do not include any text or explanations outside of the main JSON object.
-    All text in the response MUST be in ${language === 'fa' ? 'Persian' : 'English'}.`
-  }),
-  applicationDrafter: (language: Language) => ({
-    systemInstruction: `You are an expert AI assistant specializing in writing grant proposals for waste reduction and recycling projects.
-    The user will provide a project description and details about a specific grant they are targeting.
-    Your task is to generate a structured draft to help them with their application.
-
-    Based on the user's project description and the grant details, you MUST generate:
-    - **businessPlanOutline**: A concise business plan outline relevant to the project. It should be an array of objects, each with 'section' and 'content'.
-    - **applicationSections**: Drafted content for common grant application sections (e.g., Executive Summary, Project Goals, Impact Statement, Budget Narrative). It should be an array of objects, each with 'sectionTitle' and 'draftedContent'.
-    - **nextSteps**: A list of 3-4 actionable next steps the user should take to complete their application.
-
-    Your entire response MUST be a single, valid JSON object. Strictly adhere to the provided schema. Do not include any text or explanations outside of the JSON object.
-    All text in the response, including section titles, MUST be in ${language === 'fa' ? 'Persian' : 'English'}.`
-  }),
-  impactReportGenerator: (language: Language) => ({
-    systemInstruction: `You are an environmental science expert specializing in sustainability assessments for waste streams. Analyze the user's project/organization description and generate a high-level environmental impact report related to its waste.
-
-    The report must include:
-    - **executiveSummary**: A brief overview of the project's environmental standing regarding waste.
-    - **positiveImpacts**: A list of 3-4 key positive environmental impacts (e.g., from recycling efforts).
-    - **potentialRisks**: A list of 2-3 potential negative impacts or risks from the waste stream.
-    - **mitigationStrategies**: For each risk, suggest a corresponding mitigation strategy.
-    - **sustainabilityScore**: An overall score from 0 to 100, where 100 represents a perfect circular/zero-waste system.
-
-    Your entire response MUST be a single, valid JSON object. Strictly adhere to the provided schema. Do not include any text or explanations outside of the JSON object.
-    All text in the response MUST be in ${language === 'fa' ? 'Persian' : 'English'}.`
-  }),
-  newsSummarizer: (language: Language) => ({
-    systemInstruction: `You are a research analyst specializing in the circular economy and waste management.
-    Provide a concise, insightful summary of the user's query based on Google Search results.
-    After the summary, suggest 3-5 related, follow-up queries that the user might find interesting.
-    Your entire response should be in ${language === 'fa' ? 'Persian' : 'English'}.`
-  }),
-  aiResearcher: (language: Language) => ({
-    systemInstruction: `You are a sophisticated AI Research Analyst. Your task is to perform a deep, comprehensive search on the user's query and synthesize the findings into a structured report. Use the Google Search tool extensively.
-
-    You MUST structure your entire response as a single, valid JSON object. Do not include any text, explanations, or markdown outside of this JSON object.
-
-    The JSON object must have the following structure:
-    - **keyFindings**: An array of objects. Each object should have 'finding' (a concise, one-sentence summary of a key point) and 'explanation' (a few sentences elaborating on the finding).
-    - **detailedSummary**: A comprehensive, multi-paragraph summary of the topic.
-    - **keyConcepts**: An array of objects. Each object should have 'concept' (a key term, person, or organization) and 'definition' (a clear, brief explanation).
-    - **futureOutlook**: A paragraph discussing the potential future developments or implications of the topic.
-
-    All text in the response MUST be in ${language === 'fa' ? 'Persian' : 'English'}.`
-  }),
-  recyclingCalculator: (language: Language) => ({
-    systemInstruction: `You are an AI waste management calculator. Based on the user's average monthly waste volume in tons, provide an estimate of financial benefits from a robust recycling program. Assume average landfill fees and recycling commodity values.
-    
-    You will be given the average monthly waste volume in tons. You must respond with:
-    - **annualLandfillFeeSavings**: The estimated annual savings from diverting recyclable materials from the landfill.
-    - **annualRecyclingRevenue**: The estimated annual revenue from selling recyclable commodities.
-    - **totalAnnualBenefit**: The sum of savings and revenue.
-    - **notes**: A brief disclaimer about this being an estimate and factors that can influence the actual results (local market rates, contamination, etc.).
-    
-    Your entire response MUST be a single, valid JSON object. Do not include any text, markdown, or explanations outside of the JSON object.
-    All text in the response must be in ${language === 'fa' ? 'Persian' : 'English'}. The currency for savings should be Toman if the language is Persian.`
-  }),
-  aiAssistant: (language: Language) => ({
-    systemInstruction: `You are EcoRide AI, an expert assistant on waste management, recycling, and sustainability.
-    You are knowledgeable, helpful, and professional. You can answer questions about:
-    - How to recycle specific items.
-    - Composting best practices.
-    - Waste reduction strategies for homes and businesses.
-    Keep your answers clear, concise, and factual. All responses must be in ${language === 'fa' ? 'Persian' : 'English'}.`
-  }),
-};
-
-// Data for Partners (No longer used on Hero, but kept for potential use)
-export const PARTNERS_DATA: Partner[] = [
-    { name: 'Circular Corp', logo: 'Circular Corp' },
-    { name: 'GreenBin Inc.', logo: 'GreenBin Inc.' },
-    { name: 'TerraCycle', logo: 'TerraCycle' },
-    { name: 'Eco Innovators', logo: 'Eco Innovators' },
-    { name: 'CleanFuture', logo: 'CleanFuture' },
-    { name: 'RecycleRight', logo: 'RecycleRight' },
-    { name: 'WasteLess', logo: 'WasteLess' },
-    { name: 'SustainaCo', logo: 'SustainaCo' },
-];

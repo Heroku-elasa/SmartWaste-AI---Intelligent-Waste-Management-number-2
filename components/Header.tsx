@@ -57,9 +57,12 @@ const SiteHeader: React.FC<SiteHeaderProps> = ({ currentPage, setPage }) => {
   const mainNavLinks = [
     { key: 'home', text: t('header.home'), action: () => handlePageChange('home') },
     { key: 'waste_collection', text: t('header.requestWastePickup'), action: () => handlePageChange('waste_collection') },
+    { key: 'real_time_dashboard', text: t('header.realTimeDashboard'), action: () => handlePageChange('real_time_dashboard') },
+    { key: 'wordpress_dashboard', text: t('header.wpDashboard'), action: () => handlePageChange('wordpress_dashboard') },
   ];
 
   const suiteNavLinks = [
+    { key: 'dashboard_lesson', text: t('header.dashboardLesson'), action: () => handlePageChange('dashboard_lesson') },
     { key: 'waste_site_analysis', text: t('header.wasteSiteAnalysis'), action: () => handlePageChange('waste_site_analysis') },
     { key: 'recycling_calculator', text: t('header.recyclingCalculator'), action: () => handlePageChange('recycling_calculator') },
     { key: 'grant_finder', text: t('header.grantFinder'), action: () => handlePageChange('grant_finder') },
@@ -67,7 +70,7 @@ const SiteHeader: React.FC<SiteHeaderProps> = ({ currentPage, setPage }) => {
     { key: 'impact_reporter', text: t('header.impactReporter'), action: () => handlePageChange('impact_reporter') },
     { key: 'waste_news', text: t('header.wasteNews'), action: () => handlePageChange('waste_news') },
     { key: 'ai_researcher', text: t('header.aiResearcher'), action: () => handlePageChange('ai_researcher') },
-    { key: 'projects_showcase', text: t('header.projects'), action: () => handlePageChange('projects_showcase') },
+    { key: 'zero_waste', text: t('header.zeroWaste'), action: () => handlePageChange('zero_waste') },
     { key: 'ai_assistant', text: t('header.aiAssistant'), action: () => handlePageChange('ai_assistant') },
   ];
 

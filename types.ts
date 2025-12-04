@@ -1,10 +1,9 @@
 
-// types.ts
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 import { translations } from './constants';
 
 export type Language = 'en' | 'fa';
-export type Page = 'home' | 'waste_collection' | 'smart_dashboard' | 'waste_site_analysis' | 'grant_finder' | 'impact_reporter' | 'waste_news' | 'projects_showcase' | 'ai_assistant' | 'recycling_calculator' | 'supplier_finder' | 'ai_researcher';
+export type Page = 'home' | 'waste_collection' | 'smart_dashboard' | 'waste_site_analysis' | 'grant_finder' | 'impact_reporter' | 'waste_news' | 'ai_assistant' | 'recycling_calculator' | 'supplier_finder' | 'ai_researcher' | 'zero_waste' | 'real_time_dashboard' | 'dashboard_lesson' | 'wordpress_dashboard' | 'grant_opportunities';
 
 
 export interface LanguageContextType {
@@ -70,6 +69,18 @@ export interface DashboardAnalytics {
     summary: string;
 }
 
+export interface TuningHyperparameters {
+  epochs: number;
+  batchSize: number;
+  learningRate: number;
+}
+
+export interface TuningLog {
+  timestamp: string;
+  message: string;
+  type: 'info' | 'success' | 'error';
+}
+
 
 // For Waste Collection Page
 export interface WasteItem {
@@ -128,13 +139,68 @@ export interface RecyclingCalculatorResult {
     notes: string;
 }
 
+// For Zero Waste Page
+export interface ZeroWasteTip {
+  title: string;
+  description: string;
+  difficulty: "very-easy" | "easy" | "medium" | "hard";
+  estimatedCost: "no-cost" | "low" | "medium" | "high";
+}
+
+export interface ZeroWasteAdviceOutput {
+  summary: string;
+  tips: ZeroWasteTip[];
+}
+
+export interface ContentGenerationResult {
+  title: string;
+  platform: 'YouTube' | 'Book';
+  content: string; // Markdown script or story
+  monetizationTips: string[];
+}
+
+export interface ZeroWasteProduct {
+  part: string;
+  category: string;
+  name: string;
+  description: string;
+  price: string;
+  goal: string;
+  searchTerm: string;
+}
+
 // Common Types
 export interface Grant {
-  name: string;
-  issuingAgency: string;
-  description: string;
+  grantTitle: string; 
+  name?: string; 
+  issuingAgency?: string; 
+  fundingBody?: string;
+  description?: string; 
+  summary?: string;
   eligibility: string;
   link: string;
+  // New fields for GrantFinder
+  linkTitle?: string;
+  requirementDocuments?: { title: string; url: string }[];
+  relevanceScore?: number;
+  amount?: string;
+  geography?: string;
+  deadline?: string;
+  notes?: string;
+}
+
+export interface GrantSummary {
+    grantTitle: string;
+    relevancePercentage: number;
+    fundingBody: string;
+    deadline: string;
+    amount: string;
+    duration: string;
+    geography: string;
+    eligibility: string;
+    scope: string;
+    howToApply: string;
+    contact: string;
 }
 
 export interface EnvironmentalReport {
@@ -150,6 +216,7 @@ export interface Project {
   image: string;
   description: string;
   link?: Page;
+  color?: string;
 }
 
 export interface Partner {

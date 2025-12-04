@@ -6,6 +6,7 @@ import {
   WasteSiteAnalysisInput,
   WasteSiteAnalysisResult,
   Grant,
+  GrantSummary,
   EnvironmentalReport,
   NewsSummaryResult,
   RecyclingCalculatorResult,
@@ -16,6 +17,8 @@ import {
   WasteReport,
   WastePrediction,
   DashboardAnalytics,
+  ZeroWasteAdviceOutput,
+  ContentGenerationResult
 } from '../types';
 
 let ai: GoogleGenAI | null = null;
@@ -269,13 +272,85 @@ export const findGrants = async (query: string, language: Language): Promise<Gra
         const jsonEnd = text.lastIndexOf(']');
          if (jsonStart !== -1 && jsonEnd !== -1) {
           const jsonString = text.substring(jsonStart, jsonEnd + 1);
-          return JSON.parse(jsonString);
+          // Standardize fields to match new Grant interface
+          const rawGrants = JSON.parse(jsonString);
+          return rawGrants.map((g: any) => ({
+              grantTitle: g.name, // Map name to grantTitle
+              fundingBody: g.issuingAgency, // Map issuingAgency to fundingBody
+              summary: g.description, // Map description to summary
+              link: g.link,
+              eligibility: g.eligibility,
+              ...g
+          }));
         }
         throw new Error("Could not find a valid JSON array in the response.");
     } catch (e) {
         console.error("Failed to parse JSON from findGrants:", response.text);
         return [];
     }
+};
+
+export interface GrantResult {
+    text: string;
+}
+
+export const findGrantsRaw = async (prompt: string): Promise<GrantResult> => {
+    const ai = getAI();
+    // This uses the prompt constructed by the component, which asks for a Markdown table.
+    // We do NOT set responseMimeType to JSON here.
+    const response = await ai.models.generateContent({
+        model: 'gemini-2.5-flash',
+        contents: { parts: [{ text: prompt }] },
+        config: {
+            tools: [{ googleSearch: {} }],
+        },
+    });
+
+    return { text: response.text || '' };
+};
+
+export const analyzeGrant = async (grant: Grant, context: string, language: Language): Promise<GrantSummary> => {
+    const ai = getAI();
+    const schema = {
+        type: Type.OBJECT,
+        properties: {
+            grantTitle: { type: Type.STRING },
+            relevancePercentage: { type: Type.NUMBER },
+            fundingBody: { type: Type.STRING },
+            deadline: { type: Type.STRING },
+            amount: { type: Type.STRING },
+            duration: { type: Type.STRING },
+            geography: { type: Type.STRING },
+            eligibility: { type: Type.STRING },
+            scope: { type: Type.STRING },
+            howToApply: { type: Type.STRING },
+            contact: { type: Type.STRING },
+        },
+        required: ['grantTitle', 'relevancePercentage', 'fundingBody', 'deadline', 'amount', 'eligibility', 'scope', 'howToApply']
+    };
+
+    const prompt = `Analyze this grant opportunity based on the following details and context.
+    
+    Grant Details:
+    Title: ${grant.grantTitle || grant.name}
+    URL: ${grant.link}
+    Summary: ${grant.summary || grant.description}
+    
+    User Context/Project: ${context || 'General waste management and recycling project.'}
+    
+    Provide a structured summary evaluating its relevance, key requirements, and details.`;
+
+    const response = await ai.models.generateContent({
+        model: 'gemini-2.5-flash',
+        contents: { parts: [{ text: prompt }] },
+        config: {
+            responseMimeType: 'application/json',
+            responseSchema: schema,
+            tools: [{ googleSearch: {} }], // Enable search to get more details about the grant from the link
+        },
+    });
+
+    return JSON.parse(response.text);
 };
 
 export const findSuppliers = async (query: string, language: Language): Promise<Supplier[]> => {
@@ -343,9 +418,9 @@ export const generateApplicationDraft = async (projectDescription: string, grant
         Project Description: "${projectDescription}"
         
         Target Grant Details:
-        - Name: ${grant.name}
-        - Agency: ${grant.issuingAgency}
-        - Description: ${grant.description}
+        - Name: ${grant.grantTitle || grant.name}
+        - Agency: ${grant.fundingBody || grant.issuingAgency}
+        - Description: ${grant.summary || grant.description}
         - Eligibility: ${grant.eligibility}
     `;
 
@@ -485,4 +560,79 @@ export const calculateRecyclingValue = async (monthlyWasteTonnes: number, langua
     });
 
     return JSON.parse(response.text);
+};
+
+
+// --- Zero Waste Page Functions ---
+
+export const getZeroWasteAdvice = async (
+  question: string,
+  language: Language
+): Promise<ZeroWasteAdviceOutput> => {
+  const ai = getAI();
+  const schema = {
+    type: Type.OBJECT,
+    properties: {
+      summary: { type: Type.STRING },
+      tips: {
+        type: Type.ARRAY,
+        items: {
+          type: Type.OBJECT,
+          properties: {
+            title: { type: Type.STRING },
+            description: { type: Type.STRING },
+            difficulty: { type: Type.STRING, enum: ["very-easy", "easy", "medium", "hard"] },
+            estimatedCost: { type: Type.STRING, enum: ["no-cost", "low", "medium", "high"] }
+          },
+          required: ["title", "description", "difficulty", "estimatedCost"]
+        }
+      }
+    },
+    required: ["summary", "tips"]
+  };
+
+  const response = await ai.models.generateContent({
+    model: 'gemini-2.5-flash',
+    contents: { parts: [{ text: question }] },
+    config: {
+      systemInstruction: PROMPTS.zeroWasteCoach(language).systemInstruction,
+      responseMimeType: 'application/json',
+      responseSchema: schema,
+    },
+  });
+
+  return JSON.parse(response.text);
+};
+
+
+export const generateEcoContent = async (
+  topic: string,
+  format: 'YouTube' | 'Book',
+  language: Language
+): Promise<ContentGenerationResult> => {
+  const ai = getAI();
+  const schema = {
+    type: Type.OBJECT,
+    properties: {
+      title: { type: Type.STRING },
+      platform: { type: Type.STRING, enum: ["YouTube", "Book"] },
+      content: { type: Type.STRING },
+      monetizationTips: { type: Type.ARRAY, items: { type: Type.STRING } },
+    },
+    required: ["title", "platform", "content", "monetizationTips"]
+  };
+
+  const prompt = `Topic: "${topic}". Desired Format: "${format}".`;
+
+  const response = await ai.models.generateContent({
+    model: 'gemini-2.5-flash',
+    contents: { parts: [{ text: prompt }] },
+    config: {
+      systemInstruction: PROMPTS.ecoContentCreator(language).systemInstruction,
+      responseMimeType: 'application/json',
+      responseSchema: schema,
+    },
+  });
+
+  return JSON.parse(response.text);
 };

@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect, useCallback } from 'react';
 import type { Chat } from '@google/genai';
 import SiteHeader from './components/Header';
@@ -9,17 +8,22 @@ import GrantFinderPage from './components/CafeFinderPage';
 import SupplierFinderPage from './components/LawyerFinder';
 import WasteNewsPage from './components/NewsSummarizer';
 import AIResearcherPage from './components/AIResearcherPage';
-import ProjectsPage from './components/StartupShowcase';
 import ImpactReporterPage from './components/ConceptAnalyzer';
 import RecyclingCalculatorPage from './components/StartupPlannerPage';
 import AIAssistantPage from './components/BaristaCoach';
 import WasteCollectorPage from './components/VideoGenerator';
 import SmartWasteDashboard from './components/SmartWasteDashboard';
+import RealTimeDashboard from './components/RealTimeDashboard';
+import WordPressDashboard from './components/WordPressDashboard';
+import DashboardLessonPage from './components/DashboardLessonPage';
+import ZeroWastePage from './components/ZeroWastePage';
+import GrantOpportunitiesPage from './components/GrantOpportunitiesPage';
 import SiteFooter from './components/Footer';
 import QuotaErrorModal from './components/QuotaErrorModal';
 import ConfirmationModal from './components/ConfirmationModal';
+import GrantAdopter from './components/GrantAdopter';
 
-import { useLanguage, Page, Message, WasteSiteAnalysisInput, WasteSiteAnalysisResult, Grant, EnvironmentalReport, RecyclingCalculatorResult, NewsSummaryResult, ApplicationDraft, Supplier, ResearchReport, WasteAnalysisResult, WasteReport, WastePrediction, DashboardAnalytics } from './types';
+import { useLanguage, Page, Message, WasteSiteAnalysisInput, WasteSiteAnalysisResult, Grant, GrantSummary, EnvironmentalReport, RecyclingCalculatorResult, NewsSummaryResult, ApplicationDraft, Supplier, ResearchReport, WasteAnalysisResult, WasteReport, WastePrediction, DashboardAnalytics, ZeroWasteAdviceOutput, ContentGenerationResult } from './types';
 import * as geminiService from './services/geminiService';
 
 const initialWasteSiteInputs: WasteSiteAnalysisInput = {
@@ -38,10 +42,12 @@ const App: React.FC = () => {
   const [isAnalyzingWasteSite, setIsAnalyzingWasteSite] = useState(false);
   const [wasteSiteAnalysisError, setWasteSiteAnalysisError] = useState<string | null>(null);
   
-  // State for Grant Finder
-  const [grantFinderResults, setGrantFinderResults] = useState<Grant[] | null>(null);
-  const [isFindingGrants, setIsFindingGrants] = useState(false);
-  const [grantFinderError, setGrantFinderError] = useState<string | null>(null);
+  // State for Grant Finder (Updated)
+  const [savedGrants, setSavedGrants] = useState<Grant[]>([]);
+  const [analyzingGrant, setAnalyzingGrant] = useState<Grant | null>(null);
+  const [grantAnalysisResult, setGrantAnalysisResult] = useState<GrantSummary | null>(null);
+  const [isAnalyzingGrant, setIsAnalyzingGrant] = useState(false);
+  const [grantAnalysisError, setGrantAnalysisError] = useState<string | null>(null);
 
   // State for Supplier Finder
   const [supplierFinderResults, setSupplierFinderResults] = useState<Supplier[] | null>(null);
@@ -96,9 +102,28 @@ const App: React.FC = () => {
   const [isFetchingAnalytics, setIsFetchingAnalytics] = useState(false);
   const [analyticsResult, setAnalyticsResult] = useState<DashboardAnalytics | null>(null);
   const [dashboardError, setDashboardError] = useState<string | null>(null);
+  
+  // State for Zero Waste Page
+  const [adviceResult, setAdviceResult] = useState<ZeroWasteAdviceOutput | null>(null);
+  const [isGettingAdvice, setIsGettingAdvice] = useState(false);
+  const [adviceError, setAdviceError] = useState<string | null>(null);
+  
+  const [contentResult, setContentResult] = useState<ContentGenerationResult | null>(null);
+  const [isGeneratingContent, setIsGeneratingContent] = useState(false);
+  const [contentError, setContentError] = useState<string | null>(null);
 
   // Global State
   const [isQuotaExhausted, setIsQuotaExhausted] = useState(false);
+
+  // Scroll to top whenever page changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+  }, [page]);
+
+  // Helper to change page
+  const handlePageChange = useCallback((newPage: Page) => {
+    setPage(newPage);
+  }, []);
 
   useEffect(() => {
     document.documentElement.lang = language;
@@ -223,19 +248,39 @@ const App: React.FC = () => {
   }, [wasteSiteAnalysisInputs, language]);
 
   // --- Grant Finder Logic ---
-  const handleFindGrants = async (query: string) => {
-    setIsFindingGrants(true);
-    setGrantFinderError(null);
-    setGrantFinderResults(null);
-    setApplicationDraft(null);
-    try {
-      const results = await geminiService.findGrants(query, language);
-      setGrantFinderResults(results);
-    } catch (err) {
-      setGrantFinderError(handleApiError(err));
-    } finally {
-      setIsFindingGrants(false);
-    }
+  // Note: Searching is now handled locally in the component state for found grants
+  
+  const handleSaveGrant = (grant: Grant) => {
+      if (!savedGrants.some(g => g.grantTitle === grant.grantTitle && g.link === grant.link)) {
+          setSavedGrants([...savedGrants, grant]);
+      }
+  };
+
+  const handleRemoveGrant = (grant: Grant) => {
+      setSavedGrants(savedGrants.filter(g => g.grantTitle !== grant.grantTitle || g.link !== grant.link));
+  };
+
+  const handleClearAllSaved = () => setSavedGrants([]);
+
+  const handleNoteChange = (index: number, note: string) => {
+      const updated = [...savedGrants];
+      updated[index].notes = note;
+      setSavedGrants(updated);
+  };
+
+  const handleAnalyzeGrant = async (grant: Grant) => {
+      setAnalyzingGrant(grant);
+      setIsAnalyzingGrant(true);
+      setGrantAnalysisError(null);
+      setGrantAnalysisResult(null);
+      try {
+          const result = await geminiService.analyzeGrant(grant, '', language);
+          setGrantAnalysisResult(result);
+      } catch (err) {
+          setGrantAnalysisError(handleApiError(err));
+      } finally {
+          setIsAnalyzingGrant(false);
+      }
   };
 
   // --- Supplier Finder Logic ---
@@ -258,6 +303,9 @@ const App: React.FC = () => {
     setIsGeneratingApplication(true);
     setApplicationError(null);
     setApplicationDraft(null);
+    // If analysis was open, close it to show the generator
+    if (analyzingGrant) setAnalyzingGrant(null); 
+    
     try {
       const result = await geminiService.generateApplicationDraft(projectDescription, grant, language);
       setApplicationDraft(result);
@@ -364,12 +412,41 @@ const App: React.FC = () => {
       setWasteAnalysisResult(null);
     }
   };
+  
+  // --- Zero Waste Page Logic ---
+  const handleGetZeroWasteAdvice = async (question: string) => {
+    setIsGettingAdvice(true);
+    setAdviceError(null);
+    setAdviceResult(null);
+    try {
+      const result = await geminiService.getZeroWasteAdvice(question, language);
+      setAdviceResult(result);
+    } catch (err) {
+      setAdviceError(handleApiError(err));
+    } finally {
+      setIsGettingAdvice(false);
+    }
+  };
+  
+  const handleGenerateEcoContent = async (topic: string, format: 'YouTube' | 'Book') => {
+    setIsGeneratingContent(true);
+    setContentError(null);
+    setContentResult(null);
+    try {
+      const result = await geminiService.generateEcoContent(topic, format, language);
+      setContentResult(result);
+    } catch (err) {
+      setContentError(handleApiError(err));
+    } finally {
+      setIsGeneratingContent(false);
+    }
+  };
 
   const renderPage = () => {
     switch (page) {
       case 'smart_dashboard':
         return <SmartWasteDashboard
-                  setPage={setPage}
+                  setPage={handlePageChange}
                   onReportSubmit={handleWasteReportSubmit}
                   isSubmittingReport={isSubmittingReport}
                   reportSubmissionResult={reportSubmissionResult}
@@ -381,6 +458,14 @@ const App: React.FC = () => {
                   analyticsResult={analyticsResult}
                   error={dashboardError}
                 />;
+      case 'real_time_dashboard':
+        return <RealTimeDashboard setPage={handlePageChange} />;
+      case 'wordpress_dashboard':
+        return <WordPressDashboard setPage={handlePageChange} />;
+      case 'dashboard_lesson':
+        return <DashboardLessonPage setPage={handlePageChange} />;
+      case 'grant_opportunities':
+        return <GrantOpportunitiesPage setPage={handlePageChange} />;
       case 'waste_collection':
         return <WasteCollectorPage
                   onAnalyze={handleAnalyzeWaste}
@@ -400,17 +485,46 @@ const App: React.FC = () => {
                   isQuotaExhausted={isQuotaExhausted}
                 />;
       case 'grant_finder':
-        return <GrantFinderPage
-                  onSearch={handleFindGrants}
-                  isLoading={isFindingGrants}
-                  error={grantFinderError}
-                  results={grantFinderResults}
-                  isQuotaExhausted={isQuotaExhausted}
-                  onGenerateApplication={handleGenerateApplication}
-                  isGeneratingApplication={isGeneratingApplication}
-                  applicationDraft={applicationDraft}
-                  applicationError={applicationError}
-                />;
+        return (
+            <>
+                <GrantFinderPage
+                    isQuotaExhausted={isQuotaExhausted}
+                    onGenerateApplication={handleGenerateApplication}
+                    isGeneratingApplication={isGeneratingApplication}
+                    applicationDraft={applicationDraft}
+                    applicationError={applicationError}
+                    onAnalyzeGrant={handleAnalyzeGrant}
+                    savedGrants={savedGrants}
+                    onSaveGrant={handleSaveGrant}
+                    onRemoveGrant={handleRemoveGrant}
+                    onClearAllSaved={handleClearAllSaved}
+                    onNoteChange={handleNoteChange}
+                />
+                {analyzingGrant && (
+                    <div className="fixed inset-0 bg-black/80 z-50 overflow-y-auto flex items-center justify-center p-4">
+                        <div className="w-full max-w-4xl relative">
+                            <GrantAdopter 
+                                grant={analyzingGrant}
+                                isAnalyzing={isAnalyzingGrant}
+                                result={grantAnalysisResult}
+                                error={grantAnalysisError}
+                                onClear={() => setAnalyzingGrant(null)}
+                                onPrepareProposal={(grant) => {
+                                    setAnalyzingGrant(null);
+                                    // Trigger preparation in GrantFinderPage via state/callback if needed, 
+                                    // but GrantFinderPage handles generation via internal state + props.
+                                    // We can just close this and let user click 'Prepare' there, or we can handle it.
+                                    // Since handleGenerateApplication requires project desc, we just close this.
+                                    // Ideally, we'd open the draft view with this grant pre-selected.
+                                    // For now, we'll just close it as the 'Use for Proposal' in Adopter 
+                                    // is primarily for triggering the next step which happens in the parent page context.
+                                }}
+                            />
+                        </div>
+                    </div>
+                )}
+            </>
+        );
       case 'supplier_finder':
         return <SupplierFinderPage
                   onSearch={handleFindSuppliers}
@@ -441,8 +555,18 @@ const App: React.FC = () => {
                   error={researchError}
                   report={researchReport}
                 />;
-      case 'projects_showcase':
-        return <ProjectsPage setPage={setPage} />;
+      case 'zero_waste':
+        return <ZeroWastePage 
+                  onGetAdvice={handleGetZeroWasteAdvice}
+                  isGettingAdvice={isGettingAdvice}
+                  adviceResult={adviceResult}
+                  adviceError={adviceError}
+                  onGenerateContent={handleGenerateEcoContent}
+                  isGeneratingContent={isGeneratingContent}
+                  contentResult={contentResult}
+                  contentError={contentError}
+                  isQuotaExhausted={isQuotaExhausted}
+               />;
       case 'ai_assistant':
         return <AIAssistantPage
                   chatHistory={chatHistory}
@@ -460,20 +584,21 @@ const App: React.FC = () => {
                 />;
       case 'home':
       default:
-        return <HomePage setPage={setPage} />;
+        return <HomePage setPage={handlePageChange} />;
     }
   };
 
   return (
     <div className="bg-light text-dark min-h-screen">
-      <SiteHeader 
-        currentPage={page} 
-        setPage={setPage}
-      />
+      {/* Hide standard header on specific dashboards for full screen experience if desired, or keep consistent */}
+      {page !== 'real_time_dashboard' && page !== 'wordpress_dashboard' && <SiteHeader currentPage={page} setPage={handlePageChange} />}
+      
       <main>
         {renderPage()}
       </main>
-      <SiteFooter setPage={setPage} />
+      
+      {page !== 'real_time_dashboard' && page !== 'wordpress_dashboard' && <SiteFooter setPage={handlePageChange} />}
+      
       <QuotaErrorModal 
         isOpen={isQuotaExhausted} 
         onClose={() => setIsQuotaExhausted(false)}
