@@ -216,7 +216,7 @@ const ZeroWastePage: React.FC<ZeroWastePageProps> = ({
                         </div>
                         
                         <div className="grid gap-4">
-                            {adviceResult.tips.map((tip, idx) => (
+                            {adviceResult.tips?.map((tip, idx) => (
                                 <div key={idx} className="bg-white border border-gray-200 p-6 rounded-2xl hover:border-primary/50 transition-all shadow-sm hover:shadow-md group">
                                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 gap-2">
                                         <h4 className="font-bold text-lg text-gray-900 group-hover:text-primary transition-colors">{idx + 1}. {tip.title}</h4>
@@ -267,7 +267,7 @@ const ZeroWastePage: React.FC<ZeroWastePageProps> = ({
                         <div className="absolute top-1/2 left-0 w-full h-px bg-gray-300 -z-0"></div>
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {t('zeroWastePage.creator.steps').map((step: any, i: number) => (
+                        {t('zeroWastePage.creator.steps')?.map((step: any, i: number) => (
                             <div key={i} className="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg relative group hover:-translate-y-1 transition-transform duration-300">
                                 <div className="absolute -top-5 -left-5 w-12 h-12 bg-primary text-white rounded-xl flex items-center justify-center font-bold text-xl shadow-lg rotate-3 group-hover:rotate-6 transition-transform">
                                     {i + 1}
@@ -288,18 +288,18 @@ const ZeroWastePage: React.FC<ZeroWastePageProps> = ({
                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="bg-white p-6 rounded-2xl border border-red-100 shadow-md hover:shadow-xl hover:border-red-200 transition-all group">
                              <div className="w-14 h-14 bg-red-50 rounded-full flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">📹</div>
-                             <h4 className="text-xl font-bold text-gray-900 mb-2">{t('zeroWastePage.creator.options')[0].title}</h4>
-                             <p className="text-sm text-gray-600 leading-relaxed">{t('zeroWastePage.creator.options')[0].desc}</p>
+                             <h4 className="text-xl font-bold text-gray-900 mb-2">{t('zeroWastePage.creator.options')?.[0]?.title}</h4>
+                             <p className="text-sm text-gray-600 leading-relaxed">{t('zeroWastePage.creator.options')?.[0]?.desc}</p>
                         </div>
                         <div className="bg-white p-6 rounded-2xl border border-blue-100 shadow-md hover:shadow-xl hover:border-blue-200 transition-all group">
                              <div className="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">📘</div>
-                             <h4 className="text-xl font-bold text-gray-900 mb-2">{t('zeroWastePage.creator.options')[1].title}</h4>
-                             <p className="text-sm text-gray-600 leading-relaxed">{t('zeroWastePage.creator.options')[1].desc}</p>
+                             <h4 className="text-xl font-bold text-gray-900 mb-2">{t('zeroWastePage.creator.options')?.[1]?.title}</h4>
+                             <p className="text-sm text-gray-600 leading-relaxed">{t('zeroWastePage.creator.options')?.[1]?.desc}</p>
                         </div>
                         <div className="bg-white p-6 rounded-2xl border border-yellow-100 shadow-md hover:shadow-xl hover:border-yellow-200 transition-all group">
                              <div className="w-14 h-14 bg-yellow-50 rounded-full flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🎨</div>
-                             <h4 className="text-xl font-bold text-gray-900 mb-2">{t('zeroWastePage.creator.options')[2].title}</h4>
-                             <p className="text-sm text-gray-600 leading-relaxed">{t('zeroWastePage.creator.options')[2].desc}</p>
+                             <h4 className="text-xl font-bold text-gray-900 mb-2">{t('zeroWastePage.creator.options')?.[2]?.title}</h4>
+                             <p className="text-sm text-gray-600 leading-relaxed">{t('zeroWastePage.creator.options')?.[2]?.desc}</p>
                         </div>
                      </div>
                 </div>
@@ -308,7 +308,7 @@ const ZeroWastePage: React.FC<ZeroWastePageProps> = ({
                 <div className="max-w-4xl mx-auto bg-primary-50 rounded-3xl p-8 sm:p-10 border border-primary-100">
                     <h3 className="text-2xl font-bold text-primary-900 text-center mb-8">{t('zeroWastePage.creator.whyTitle')}</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        {t('zeroWastePage.creator.benefits').map((benefit: string, i: number) => (
+                        {t('zeroWastePage.creator.benefits')?.map((benefit: string, i: number) => (
                             <div key={i} className="flex items-start gap-4">
                                 <div className="mt-1 w-6 h-6 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
@@ -416,7 +416,7 @@ const ZeroWastePage: React.FC<ZeroWastePageProps> = ({
                                     <span className="text-2xl">💰</span> {t('zeroWastePage.creator.monetizationTitle')}
                                 </h4>
                                 <ul className="space-y-3">
-                                    {contentResult.monetizationTips.map((tip, i) => (
+                                    {contentResult.monetizationTips?.map((tip, i) => (
                                         <li key={i} className="flex items-start gap-3 text-green-900 text-lg">
                                             <span className="mt-1.5 w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></span>
                                             <span>{tip}</span>
@@ -476,7 +476,7 @@ const ZeroWastePage: React.FC<ZeroWastePageProps> = ({
 
                 {/* Products Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {t('zeroWastePage.toolkit.products').map((product: ZeroWasteProduct, idx: number) => (
+                    {t('zeroWastePage.toolkit.products')?.map((product: ZeroWasteProduct, idx: number) => (
                         <div key={idx} className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
                             <div className="mb-4">
                                 <span className="inline-block px-3 py-1 bg-primary-50 text-primary-700 text-xs font-bold uppercase tracking-wider rounded-full mb-2">
@@ -540,7 +540,7 @@ const ZeroWastePage: React.FC<ZeroWastePageProps> = ({
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
                     <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('zeroWastePage.toolkit.implementation.title')}</h3>
                     <div className="relative border-l-2 border-primary-200 ml-3 space-y-8">
-                        {t('zeroWastePage.toolkit.implementation.steps').map((step: any, idx: number) => (
+                        {t('zeroWastePage.toolkit.implementation.steps')?.map((step: any, idx: number) => (
                             <div key={idx} className="relative pl-8">
                                 <span className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary border-4 border-white shadow-sm"></span>
                                 <h4 className="font-bold text-lg text-gray-900">{step.phase}</h4>
@@ -555,7 +555,7 @@ const ZeroWastePage: React.FC<ZeroWastePageProps> = ({
                     <h3 className="text-xl font-bold text-blue-900 mb-4">{t('zeroWastePage.toolkit.searchTips.title')}</h3>
                     <p className="text-blue-700 mb-4">{t('zeroWastePage.toolkit.searchTips.description')}</p>
                     <div className="flex flex-wrap gap-3">
-                        {t('zeroWastePage.toolkit.searchTips.tips').map((tip: string, idx: number) => (
+                        {t('zeroWastePage.toolkit.searchTips.tips')?.map((tip: string, idx: number) => (
                             <span key={idx} className="bg-white px-4 py-2 rounded-lg text-blue-800 text-sm font-mono border border-blue-200 shadow-sm">
                                 "{tip}"
                             </span>

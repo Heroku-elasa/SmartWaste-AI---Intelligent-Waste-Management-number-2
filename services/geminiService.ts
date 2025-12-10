@@ -274,6 +274,7 @@ export const findGrants = async (query: string, language: Language): Promise<Gra
           const jsonString = text.substring(jsonStart, jsonEnd + 1);
           // Standardize fields to match new Grant interface
           const rawGrants = JSON.parse(jsonString);
+          if (!Array.isArray(rawGrants)) return [];
           return rawGrants.map((g: any) => ({
               grantTitle: g.name, // Map name to grantTitle
               fundingBody: g.issuingAgency, // Map issuingAgency to fundingBody
@@ -283,7 +284,7 @@ export const findGrants = async (query: string, language: Language): Promise<Gra
               ...g
           }));
         }
-        throw new Error("Could not find a valid JSON array in the response.");
+        return [];
     } catch (e) {
         console.error("Failed to parse JSON from findGrants:", response.text);
         return [];
@@ -370,9 +371,11 @@ export const findSuppliers = async (query: string, language: Language): Promise<
         const jsonEnd = text.lastIndexOf(']');
          if (jsonStart !== -1 && jsonEnd !== -1) {
           const jsonString = text.substring(jsonStart, jsonEnd + 1);
-          return JSON.parse(jsonString);
+          const results = JSON.parse(jsonString);
+          if (!Array.isArray(results)) return [];
+          return results;
         }
-        throw new Error("Could not find a valid JSON array in the response.");
+        return [];
     } catch (e) {
         console.error("Failed to parse JSON from findSuppliers:", response.text);
         return [];

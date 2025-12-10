@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useLanguage, NewsSummaryResult } from '../types';
 
@@ -99,7 +100,7 @@ const WasteNewsPage: React.FC<WasteNewsPageProps> = ({ onSearch, isLoading, erro
                                 <p>{result.summary}</p>
                             </div>
                             
-                            {result.sources.length > 0 && (
+                            {result.sources && result.sources.length > 0 && (
                                 <div className="mt-10 pt-6 border-t border-secondary/20">
                                     <h3 className="text-lg font-semibold text-gray-200 mb-4">{t('wasteNewsPage.sources')}</h3>
                                     <ul className="space-y-2">
@@ -117,7 +118,7 @@ const WasteNewsPage: React.FC<WasteNewsPageProps> = ({ onSearch, isLoading, erro
                                 </div>
                             )}
                             
-                            {result.suggestedQueries.length > 0 && (
+                            {result.suggestedQueries && result.suggestedQueries.length > 0 && (
                                 <div className="mt-10 pt-6 border-t border-secondary/20">
                                     <h3 className="text-lg font-semibold text-gray-200 mb-4">{t('wasteNewsPage.relatedTopics')}</h3>
                                     <div className="flex flex-wrap gap-3">

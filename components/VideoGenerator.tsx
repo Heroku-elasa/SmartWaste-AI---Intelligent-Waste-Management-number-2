@@ -148,7 +148,7 @@ const WasteCollectorPage: React.FC<WasteCollectorPageProps> = ({ onAnalyze, isLo
                     <div>
                         <h3 className="font-semibold text-primary mb-2">{t('wasteCollectorPage.identifiedItems')}</h3>
                         <div className="space-y-3 max-h-48 overflow-y-auto pr-2">
-                           {result.identifiedItems.map((item, i) => (
+                           {result.identifiedItems?.map((item, i) => (
                                <div key={i} className={`p-3 bg-gray-50 border-l-4 rounded-r-lg text-sm ${getCategoryColor(item.category)}`}>
                                    <div className="flex justify-between items-center">
                                        <span className="font-bold text-dark">{item.item}</span>

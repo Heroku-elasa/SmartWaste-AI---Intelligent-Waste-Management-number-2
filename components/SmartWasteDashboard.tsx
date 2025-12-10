@@ -1,10 +1,12 @@
 
 import React, { useState, useEffect } from 'react';
-import { useLanguage, Page, WasteReport, WastePrediction, DashboardAnalytics, TuningHyperparameters, TuningLog, Grant } from '../types';
+import { useLanguage, Page, WasteReport, WastePrediction, DashboardAnalytics, TuningHyperparameters, TuningLog, Grant, Transaction, BlockchainState } from '../types';
+import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 
-type Tab = 'report' | 'predict' | 'analytics' | 'tuning' | 'special_grants';
+type Tab = 'report' | 'predict' | 'analytics' | 'tuning' | 'special_grants' | 'recycle_chain';
 type ReportStatus = 'Pending' | 'En Route' | 'Completed';
 type ViewMode = 'list' | 'map';
+type RCTab = 'dashboard' | 'wallet' | 'mining' | 'classification' | 'chat';
 
 interface MapCoordinate {
     x: number; // percentage 0-100
@@ -79,6 +81,22 @@ const SmartWasteDashboard: React.FC<SmartWasteDashboardProps> = (props) => {
   const [tuningStatus, setTuningStatus] = useState<'idle' | 'uploading' | 'training' | 'completed'>('idle');
   const [trainingProgress, setTrainingProgress] = useState(0);
   const [tuningLogs, setTuningLogs] = useState<TuningLog[]>([]);
+
+  // RecycleChain State
+  const [rcTab, setRcTab] = useState<RCTab>('dashboard');
+  const [walletState, setWalletState] = useState<BlockchainState>({
+      isConnected: false,
+      walletAddress: '0x32c5ce7aac2e4f929d82c29079248f20', // Pre-filled for demo
+      balance: 0.00,
+      networkStatus: 'Active'
+  });
+  // Using dummy transactions for dashboard
+  const transactions: Transaction[] = [
+      { hash: '0x3a...e1b', block: 1405923, from: 'Network', to: '0x71C...9A23', amount: '+50 ECO', timestamp: '2 mins ago', type: 'Reward' },
+      { hash: '0x8f...2c9', block: 1405920, from: '0x71C...9A23', to: '0x42B...1F2', amount: '-120 ECO', timestamp: '1 hr ago', type: 'Transfer' },
+      { hash: '0x1d...a44', block: 1405915, from: 'Network', to: '0x71C...9A23', amount: '+25 ECO', timestamp: '5 hrs ago', type: 'Reward' },
+      { hash: '0x9e...f77', block: 1405901, from: 'Network', to: '0x71C...9A23', amount: '+10 ECO', timestamp: '1 day ago', type: 'Reward' },
+  ];
 
   // Mock data for the live feed with coordinates
   const initialRequests: LiveWasteReport[] = [
@@ -322,6 +340,21 @@ const SmartWasteDashboard: React.FC<SmartWasteDashboardProps> = (props) => {
           ))}
       </div>
   );
+
+  // New Charts Data
+  const tokenDistributionData = [
+      { name: 'Miners', value: 45, color: '#4ade80' },
+      { name: 'Liquidity', value: 25, color: '#fbbf24' },
+      { name: 'Team', value: 15, color: '#60a5fa' },
+      { name: 'Burn', value: 10, color: '#f87171' },
+      { name: 'DAO', value: 5, color: '#a78bfa' },
+  ];
+
+  const nodeStatusData = [
+      { name: 'Mining', value: 85, fill: '#4ade80' },
+      { name: 'Syncing', value: 10, fill: '#fbbf24' },
+      { name: 'Offline', value: 5, fill: '#f87171' },
+  ];
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -649,7 +682,284 @@ const SmartWasteDashboard: React.FC<SmartWasteDashboardProps> = (props) => {
                     </button>
                 </div>
             </div>
-        )
+        );
+      case 'recycle_chain':
+        const rc = t('smartWasteDashboard.recycleChain.rcDashboard');
+        const tokenDistributionData = [
+            { name: rc.minersReward, value: 45, color: '#4ade80' },
+            { name: rc.liquidity, value: 25, color: '#60a5fa' },
+            { name: rc.team, value: 15, color: '#a78bfa' },
+            { name: rc.burn, value: 10, color: '#f87171' },
+            { name: rc.dao, value: 5, color: '#fbbf24' },
+        ];
+        const nodeStatusData = [
+            { name: rc.mining, value: 85, fill: '#4ade80' },
+            { name: rc.syncing, value: 10, fill: '#60a5fa' },
+            { name: rc.offline, value: 5, fill: '#f87171' },
+        ];
+
+        return (
+            <div className="flex bg-[#0f172a] text-white min-h-[700px] rounded-xl overflow-hidden font-sans border border-gray-800 shadow-2xl">
+                {/* Sidebar */}
+                <div className="w-16 md:w-64 bg-[#1e293b] border-r border-gray-700 flex flex-col flex-shrink-0">
+                    <div className="p-4 border-b border-gray-700">
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center font-black text-black text-xl shadow-[0_0_15px_rgba(74,222,128,0.5)]">RC</div>
+                            <div className="hidden md:block">
+                                <h4 className="font-bold text-sm text-green-400">RecycleChain</h4>
+                                <p className="text-[10px] text-gray-400 tracking-wider">Protocol v2.1.0</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <nav className="flex-1 py-4 space-y-1">
+                        <button onClick={() => setRcTab('dashboard')} className={`w-full flex items-center gap-4 px-4 py-3 text-sm font-medium transition-colors border-l-4 ${rcTab === 'dashboard' ? 'bg-[#334155] text-white border-green-500' : 'text-gray-400 hover:text-white border-transparent hover:bg-[#334155]'}`}>
+                            <span className="text-lg">📊</span>
+                            <span className="hidden md:block">{rc.sidebar.dashboard}</span>
+                        </button>
+                        <button onClick={() => setRcTab('wallet')} className={`w-full flex items-center gap-4 px-4 py-3 text-sm font-medium transition-colors border-l-4 ${rcTab === 'wallet' ? 'bg-[#334155] text-white border-green-500' : 'text-gray-400 hover:text-white border-transparent hover:bg-[#334155]'}`}>
+                            <span className="text-lg">💼</span>
+                            <span className="hidden md:block">{rc.sidebar.wallet}</span>
+                        </button>
+                        <button onClick={() => setRcTab('mining')} className={`w-full flex items-center gap-4 px-4 py-3 text-sm font-medium transition-colors border-l-4 ${rcTab === 'mining' ? 'bg-[#334155] text-white border-green-500' : 'text-gray-400 hover:text-white border-transparent hover:bg-[#334155]'}`}>
+                            <span className="text-lg">⛏️</span>
+                            <span className="hidden md:block">{rc.sidebar.mining}</span>
+                        </button>
+                        <button onClick={() => setRcTab('classification')} className={`w-full flex items-center gap-4 px-4 py-3 text-sm font-medium transition-colors border-l-4 ${rcTab === 'classification' ? 'bg-[#334155] text-white border-green-500' : 'text-gray-400 hover:text-white border-transparent hover:bg-[#334155]'}`}>
+                            <span className="text-lg">🗑️</span>
+                            <span className="hidden md:block">{rc.sidebar.classification}</span>
+                        </button>
+                        <button onClick={() => setRcTab('chat')} className={`w-full flex items-center gap-4 px-4 py-3 text-sm font-medium transition-colors border-l-4 ${rcTab === 'chat' ? 'bg-[#334155] text-white border-green-500' : 'text-gray-400 hover:text-white border-transparent hover:bg-[#334155]'}`}>
+                            <span className="text-lg">🤖</span>
+                            <span className="hidden md:block">{rc.sidebar.chat}</span>
+                        </button>
+                    </nav>
+
+                    <div className="p-4 border-t border-gray-700">
+                        <div className="text-center text-[10px] text-gray-500">
+                            Powered by <br/><span className="text-green-500 font-bold">Gaia Chain</span>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Main Content Area */}
+                <div className="flex-1 bg-[#0f172a] overflow-y-auto p-4 md:p-8">
+                    {rcTab === 'dashboard' && (
+                        <div className="space-y-6 animate-fade-in">
+                            <div className="flex justify-between items-center border-b border-gray-800 pb-4 mb-6">
+                                <h2 className="text-2xl font-bold text-green-400 font-mono tracking-tight">{rc.title}</h2>
+                                <span className="bg-green-500/10 text-green-400 px-3 py-1 rounded-full text-xs font-bold border border-green-500/30 flex items-center gap-2">
+                                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                                    {rc.networkStatus}
+                                </span>
+                            </div>
+
+                            {/* Metrics Grid */}
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div className="bg-[#1e293b] p-4 rounded-xl border border-gray-700 shadow-lg hover:border-gray-600 transition-colors">
+                                    <div className="text-gray-400 text-xs font-bold uppercase mb-1">{rc.blockHeight}</div>
+                                    <div className="text-2xl font-mono text-white flex items-center justify-between">
+                                        #0 
+                                        <span className="text-lg opacity-50">⛓</span>
+                                    </div>
+                                </div>
+                                <div className="bg-[#1e293b] p-4 rounded-xl border border-gray-700 shadow-lg hover:border-gray-600 transition-colors">
+                                    <div className="text-gray-400 text-xs font-bold uppercase mb-1">{rc.mempool}</div>
+                                    <div className="text-2xl font-mono text-orange-400 flex items-center justify-between">
+                                        1 
+                                        <span className="text-lg opacity-50">⏳</span>
+                                    </div>
+                                </div>
+                                <div className="bg-[#1e293b] p-4 rounded-xl border border-gray-700 shadow-lg hover:border-gray-600 transition-colors">
+                                    <div className="text-gray-400 text-xs font-bold uppercase mb-1">{rc.hashrate}</div>
+                                    <div className="text-2xl font-mono text-blue-400 flex items-center justify-between">
+                                        13.7 TH/s
+                                        <span className="text-lg opacity-50">⚡</span>
+                                    </div>
+                                </div>
+                                <div className="bg-[#1e293b] p-4 rounded-xl border border-gray-700 shadow-lg hover:border-gray-600 transition-colors">
+                                    <div className="text-gray-400 text-xs font-bold uppercase mb-1">{rc.price}</div>
+                                    <div className="text-2xl font-mono text-purple-400 flex items-center justify-between">
+                                        $2.47
+                                        <span className="text-lg opacity-50">🪙</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Charts Row */}
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                <div className="bg-[#1e293b] p-6 rounded-xl border border-gray-700 shadow-lg">
+                                    <h3 className="text-green-400 font-bold mb-4 font-mono">{rc.distribution}</h3>
+                                    <div className="h-64 w-full">
+                                        <ResponsiveContainer width="100%" height="100%">
+                                            <PieChart>
+                                                <Pie
+                                                    data={tokenDistributionData}
+                                                    cx="50%"
+                                                    cy="50%"
+                                                    innerRadius={60}
+                                                    outerRadius={80}
+                                                    paddingAngle={5}
+                                                    dataKey="value"
+                                                >
+                                                    {tokenDistributionData.map((entry, index) => (
+                                                        <Cell key={`cell-${index}`} fill={entry.color} stroke="none" />
+                                                    ))}
+                                                </Pie>
+                                                <Tooltip 
+                                                    contentStyle={{ backgroundColor: '#0f172a', borderColor: '#374151', color: '#fff', borderRadius: '8px' }}
+                                                    itemStyle={{ color: '#fff' }}
+                                                />
+                                            </PieChart>
+                                        </ResponsiveContainer>
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-2 text-xs mt-4">
+                                        {tokenDistributionData.map((d, i) => (
+                                            <div key={i} className="flex items-center gap-2">
+                                                <span className="w-2 h-2 rounded-full" style={{backgroundColor: d.color}}></span>
+                                                <span className="text-gray-300">{d.name}: {d.value}%</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="bg-[#1e293b] p-6 rounded-xl border border-gray-700 shadow-lg">
+                                    <h3 className="text-blue-400 font-bold mb-4 font-mono">{rc.nodeStatus}</h3>
+                                    <div className="h-64 w-full">
+                                        <ResponsiveContainer width="100%" height="100%">
+                                            <BarChart data={nodeStatusData} layout="vertical" margin={{ left: 40 }}>
+                                                <CartesianGrid strokeDasharray="3 3" stroke="#334155" horizontal={false} />
+                                                <XAxis type="number" stroke="#94a3b8" fontSize={10} domain={[0, 100]} />
+                                                <YAxis dataKey="name" type="category" stroke="#94a3b8" fontSize={10} width={10} tick={false} />
+                                                <Tooltip 
+                                                    cursor={{fill: 'transparent'}}
+                                                    contentStyle={{ backgroundColor: '#0f172a', borderColor: '#374151', color: '#fff', borderRadius: '8px' }}
+                                                />
+                                                <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={20} label={{ position: 'insideLeft', fill: '#0f172a', fontSize: 10, fontWeight: 'bold' }}>
+                                                    {nodeStatusData.map((entry, index) => (
+                                                        <Cell key={`cell-${index}`} fill={entry.fill} />
+                                                    ))}
+                                                </Bar>
+                                            </BarChart>
+                                        </ResponsiveContainer>
+                                    </div>
+                                    <div className="flex justify-between text-xs text-gray-400 mt-4 px-2">
+                                        {nodeStatusData.map((d, i) => (
+                                            <span key={i} style={{color: d.fill}}>{d.name}</span>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Recent Transactions */}
+                            <div className="bg-[#1e293b] border border-gray-700 rounded-xl overflow-hidden shadow-lg">
+                                <div className="px-6 py-4 border-b border-gray-700 bg-[#0f172a]/50">
+                                    <h4 className="font-bold text-gray-100 font-mono">{rc.recentTxs}</h4>
+                                </div>
+                                <div className="overflow-x-auto">
+                                    <table className="w-full text-sm text-left">
+                                        <thead className="text-xs text-gray-500 uppercase bg-[#0f172a] border-b border-gray-700">
+                                            <tr>
+                                                <th className="px-6 py-3">{rc.sender}</th>
+                                                <th className="px-6 py-3">{rc.receiver}</th>
+                                                <th className="px-6 py-3">{rc.amount}</th>
+                                                <th className="px-6 py-3 text-right">{rc.type}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-gray-700">
+                                            {transactions.map((tx, idx) => (
+                                                <tr key={idx} className="hover:bg-gray-700/30 transition-colors">
+                                                    <td className="px-6 py-4 font-mono text-blue-400">{tx.from}</td>
+                                                    <td className="px-6 py-4 font-mono text-gray-300">{tx.to}</td>
+                                                    <td className={`px-6 py-4 font-mono font-bold ${tx.amount.startsWith('+') ? 'text-green-400' : 'text-red-400'}`}>
+                                                        {tx.amount}
+                                                    </td>
+                                                    <td className="px-6 py-4 text-right">
+                                                        <span className={`px-2 py-1 rounded text-xs font-bold ${tx.type === 'Reward' ? 'bg-green-900/30 text-green-400 border border-green-500/30' : tx.type === 'Transfer' ? 'bg-blue-900/30 text-blue-400 border border-blue-500/30' : 'bg-red-900/30 text-red-400 border border-red-500/30'}`}>
+                                                            {tx.type}
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {rcTab === 'wallet' && (
+                        <div className="max-w-2xl mx-auto space-y-8 animate-fade-in">
+                            <h2 className="text-2xl font-bold text-white font-mono flex items-center gap-2">
+                                💼 {rc.walletTitle}
+                            </h2>
+
+                            {/* Balance Card */}
+                            <div className="bg-gradient-to-r from-green-900 to-emerald-900 rounded-2xl p-8 border border-green-700 shadow-[0_0_30px_rgba(16,185,129,0.2)] text-center relative overflow-hidden">
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mt-10 -mr-10 blur-2xl"></div>
+                                <p className="text-green-200 text-sm font-bold uppercase tracking-widest mb-2">{rc.yourBalance}</p>
+                                <h3 className="text-5xl font-mono font-bold text-white mb-6">
+                                    {walletState.balance.toFixed(2)} <span className="text-2xl text-green-400">PSC</span>
+                                </h3>
+                                <div className="bg-black/30 inline-flex items-center gap-3 px-4 py-2 rounded-lg border border-white/10">
+                                    <span className="text-xs text-gray-400">{rc.walletAddress}:</span>
+                                    <code className="text-sm font-mono text-green-300">{walletState.walletAddress}</code>
+                                    <button className="text-gray-400 hover:text-white transition-colors" onClick={() => navigator.clipboard.writeText(walletState.walletAddress || '')}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Send Form */}
+                            <div className="bg-[#1e293b] p-8 rounded-2xl border border-gray-700 shadow-lg">
+                                <h3 className="text-xl font-bold text-white mb-6 border-b border-gray-700 pb-4">{rc.sendTx}</h3>
+                                <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+                                    <div>
+                                        <label className="block text-xs font-bold text-gray-400 uppercase mb-2 ml-1">{rc.recipient}</label>
+                                        <input type="text" placeholder="0x..." className="w-full bg-[#0f172a] border border-gray-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 font-mono" />
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label className="block text-xs font-bold text-gray-400 uppercase mb-2 ml-1">{rc.amount}</label>
+                                            <input type="number" placeholder="0.00" className="w-full bg-[#0f172a] border border-gray-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 font-mono" />
+                                        </div>
+                                        <div>
+                                            <label className="block text-xs font-bold text-gray-400 uppercase mb-2 ml-1">{rc.wasteType}</label>
+                                            <select className="w-full bg-[#0f172a] border border-gray-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500">
+                                                <option>Plastic</option>
+                                                <option>Metal</option>
+                                                <option>Glass</option>
+                                                <option>Paper</option>
+                                                <option>Organic</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label className="block text-xs font-bold text-gray-400 uppercase mb-2 ml-1">{rc.weight}</label>
+                                        <input type="number" placeholder="0.0" className="w-full bg-[#0f172a] border border-gray-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 font-mono" />
+                                    </div>
+                                    <button className="w-full py-4 bg-green-600 hover:bg-green-500 text-white font-bold rounded-xl shadow-lg shadow-green-900/50 transition-all transform hover:-translate-y-1 mt-4">
+                                        {rc.sendBtn}
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    )}
+
+                    {(rcTab === 'mining' || rcTab === 'classification' || rcTab === 'chat') && (
+                        <div className="flex flex-col items-center justify-center h-full text-center space-y-6 opacity-50">
+                            <div className="w-24 h-24 bg-gray-800 rounded-full flex items-center justify-center border-2 border-gray-700 border-dashed">
+                                <span className="text-4xl">🚧</span>
+                            </div>
+                            <div>
+                                <h3 className="text-2xl font-bold text-gray-400">Coming Soon</h3>
+                                <p className="text-gray-500 mt-2">This module is under development for Protocol v2.2</p>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
+        );
       default:
         return null;
     }
@@ -680,12 +990,13 @@ const SmartWasteDashboard: React.FC<SmartWasteDashboardProps> = (props) => {
             </div>
         </header>
 
-        <div className="p-1 bg-gray-200/70 rounded-lg flex flex-wrap gap-1 sm:space-x-1 sm:flex-nowrap rtl:space-x-reverse mb-4">
+        <div className="p-1 bg-gray-200/70 rounded-lg flex flex-wrap gap-1 sm:space-x-1 sm:flex-nowrap rtl:space-x-reverse mb-4 overflow-x-auto">
           <TabButton tab="report" label={t('smartWasteDashboard.tabReport')} />
           <TabButton tab="predict" label={t('smartWasteDashboard.tabPredict')} />
           <TabButton tab="analytics" label={t('smartWasteDashboard.tabAnalytics')} />
           <TabButton tab="tuning" label={t('smartWasteDashboard.tabTuning')} />
           <TabButton tab="special_grants" label={t('smartWasteDashboard.tabSpecialGrants')} />
+          <TabButton tab="recycle_chain" label={t('smartWasteDashboard.tabRecycleChain')} />
         </div>
         
         {error && <div className="my-4 text-red-700 p-3 bg-red-100 border border-red-300 rounded-md text-sm">{error}</div>}

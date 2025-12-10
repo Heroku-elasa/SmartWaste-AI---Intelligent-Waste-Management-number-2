@@ -82,6 +82,7 @@ export const PROMPTS = {
 // prettier-ignore
 export const translations = {
   en: {
+    // ... existing translations ...
     header: {
       home: 'Home',
       requestWastePickup: 'Request Pickup',
@@ -98,14 +99,85 @@ export const translations = {
       zeroWaste: 'Zero Waste Coach',
       realTimeDashboard: 'Live ML Ops',
       dashboardLesson: 'Lesson: Dashboard Overview',
-      wpDashboard: 'Admin Panel'
+      wpDashboard: 'Admin Panel',
+      blockchain: 'RecycleChain Protocol'
     },
-    // ... existing translations ...
+    blockchainPage: {
+        title: 'RecycleChain Protocol',
+        subtitle: 'The "Dark Web" of Recycling - Unstoppable, Decentralized, Rewarding.',
+        heroBadge: 'Web3 Ecology',
+        paradigmTitle: 'A Paradigm Shift',
+        oldParadigm: {
+            year: '2015',
+            title: 'Centralized & Fragile',
+            desc: 'Requires: Large Teams, VC Capital, Physical Offices. Result: High Failure Rate.'
+        },
+        newParadigm: {
+            year: '2025',
+            title: 'Decentralized & Autonomous',
+            desc: 'Requires: 1 Idea + 1 Person + AI. Result: Code preserves itself forever.'
+        },
+        stats: {
+            users: { label: 'Active Users', value: '4' },
+            waste: { label: 'Waste Recycled', value: '14.0 kg' },
+            tokens: { label: 'ECO Tokens Issued', value: '182' },
+            transactions: { label: 'Transactions', value: '6' }
+        },
+        howItWorks: {
+            title: 'How It Works?',
+            steps: [
+                { title: '1. Scan', desc: 'Scan your waste with your phone to register type and weight.', icon: '📱' },
+                { title: '2. Deliver', desc: 'Deliver waste to a collection point.', icon: '♻️' },
+                { title: '3. Earn', desc: 'Automatically receive ECO Tokens!', icon: '🪙' }
+            ]
+        },
+        bitcoinInspiration: {
+            title: 'Inspired by Bitcoin 🪙',
+            desc: 'No central point of failure • Full transparency • Intrinsic economic incentives • Self-preserving code',
+            badges: [
+                { icon: '🔗', label: 'Decentralized' },
+                { icon: '🔒', label: 'Secure' },
+                { icon: '🌍', label: 'Global' },
+                { icon: '💎', label: 'Transparent' }
+            ]
+        },
+        footer: {
+            line1: '🌱 RecycleChain - Built with ❤️ for a sustainable future',
+            line2: 'New Solitude: 1 Person + AI + Open Source + Internet = Limitless'
+        },
+        architecture: {
+            title: 'Protocol Architecture',
+            collector: 'Collector',
+            processor: 'Processor',
+            buyer: 'Buyer',
+            smartContract: 'Smart Contract',
+            token: 'ECO Token'
+        },
+        roadmap: {
+            title: 'Roadmap to Decentralization',
+            steps: [
+                { phase: 'Now', title: 'Prototyping', desc: 'Building with AI, learning structures.' },
+                { phase: '6 Months', title: 'Testnet MVP', desc: 'Proof of concept with 10 beta testers.' },
+                { phase: 'Future', title: 'DAO Launch', desc: 'Open source release. Community governance.' }
+            ]
+        },
+        cta: 'Join the Network'
+    },
+    // ... rest of translations
     hero: {
       title: 'The Future of Urban Waste, <br/> <span class="text-primary-500">On-Demand.</span>',
       subtitle: 'EcoRide combines smart technology with on-demand service to make waste collection efficient, clean, and simple. Like Uber, but for your recycling.',
       button1: 'Request Pickup',
       button2: 'View Dashboard',
+    },
+    aiModules: {
+        title: "Powered by Advanced Gemini AI",
+        modules: [
+            { title: "Waste Vision", desc: "Identify waste types instantly with computer vision.", icon: "camera" },
+            { title: "Smart Prediction", desc: "Forecast waste volumes to optimize collection routes.", icon: "chart" },
+            { title: "Grant Agent", desc: "Autonomous agent finding funding opportunities.", icon: "search" },
+            { title: "RecycleChain", desc: "Immutable ledger for waste tracking & rewards.", icon: "cube" }
+        ]
     },
     homeServices: {
         title: "One App for All Needs",
@@ -141,65 +213,10 @@ export const translations = {
                 services: [
                     { page: "zero_waste", name: "Zero Waste & Creator Studio", description: "Learn zero-waste habits and generate monetizable content (Videos/Books) from your eco-journey." },
                     { page: "dashboard_lesson", name: "Learn the Dashboard", description: "A comprehensive lesson plan on how to navigate and use the SmartWaste dashboard." },
+                    { page: "blockchain", name: "RecycleChain Protocol", description: "Decentralized waste tracking and token rewards on the blockchain." },
                 ]
             }
         ]
-    },
-    dashboardLesson: {
-        title: 'Dashboard Overview',
-        breadcrumb: 'Home / Lesson Plans / Dashboard Overview',
-        intro: 'In this lesson, you will learn that the SmartWaste Dashboard is the central command center for managing waste collection and analysis. On the Dashboard, you will find both real-time status information and tools for predictive analysis. This lesson will show you how the Dashboard is organized and how to navigate it to access the various features of the EcoRide platform.',
-        objectivesTitle: 'Objectives',
-        objectives: [
-            'Access the Smart Dashboard.',
-            'Identify Dashboard components including Live Feed, Smart Prediction, and Analytics.',
-            'Switch between List and Map views for waste requests.',
-            'Use AI tools to predict waste volume.',
-            'Interpret system analytics and performance metrics.'
-        ],
-        prerequisitesTitle: 'Prerequisite Skills',
-        prerequisites: [
-            'Familiarity with web browser navigation.',
-            'Understanding of basic waste management concepts (e.g., waste types).',
-            'Access to the EcoRide platform.'
-        ],
-        walkthroughTitle: 'Hands-on Walk-through',
-        accessSection: {
-            title: 'Accessing the Dashboard',
-            content: 'To access the dashboard, simply click on the "Dashboard" button in the main navigation bar. This serves as your primary entry point for operational tasks.'
-        },
-        componentsSection: {
-            title: 'Dashboard Components',
-            content: 'The Dashboard is divided into three main tabs, which you can toggle between using the navigation pill at the top:',
-            items: [
-                { title: 'Live Feed', desc: 'This is the default view. It shows a list of incoming waste collection requests. You can see the location, waste type, volume, and status (Pending, En Route, Completed). Use the "Dispatch" button to assign vehicles.' },
-                { title: 'Smart Prediction', desc: 'This tab leverages AI to forecast waste volumes. Enter a location (e.g., "Tehran, Narmak") to get a prediction on waste generation for that area.' },
-                { title: 'Analysis & Stats', desc: 'This tab provides a high-level overview of system performance, including AI accuracy, daily report counts, and routing efficiency improvements.' }
-            ]
-        },
-        viewSection: {
-            title: 'List vs. Map View',
-            content: 'In the Live Feed tab, you will notice a toggle in the top right corner. This allows you to switch between a tabular "List View" and a geospatial "Map View". The Map View provides a visual representation of pending requests (yellow), en-route vehicles (blue), and completed pickups (green) on an interactive map.'
-        },
-        exercisesTitle: 'Exercises',
-        exercises: [
-            { title: 'Customize View', desc: 'Try switching between List View and Map View to see how the data presentation changes.' },
-            { title: 'Run a Prediction', desc: 'Go to the Smart Prediction tab and run a prediction for "Tehran, Azadi Square".' }
-        ],
-        quizTitle: 'Quiz',
-        quiz: [
-            { question: 'What is the default tab on the Dashboard?', options: ['Analysis', 'Live Feed', 'Settings'], answer: 'Live Feed' },
-            { question: 'Which feature helps you see waste trucks on a map?', options: ['List View', 'Map View', 'Analytics'], answer: 'Map View' },
-            { question: 'What does the AI Prediction tool do?', options: ['Sorts waste', 'Predicts waste volume', 'Finds grants'], answer: 'Predicts waste volume' }
-        ],
-        sidebarTitle: 'Lesson Details',
-        sidebar: {
-            duration: 'Duration: 15 mins',
-            audience: 'Audience: Admins, Operators',
-            level: 'Level: Beginner',
-            type: 'Type: Demonstration',
-            version: 'Version: 2.0.0'
-        }
     },
     smartWasteDashboard: {
         title: 'Smart Waste Management',
@@ -210,6 +227,7 @@ export const translations = {
         tabAnalytics: 'Analysis & Stats',
         tabTuning: 'Fine Tuning',
         tabSpecialGrants: 'Special Grants',
+        tabRecycleChain: 'RecycleChain',
         liveFeed: {
             title: 'Live Collection Requests',
             subtitle: 'Monitor and dispatch incoming waste collection requests.',
@@ -259,6 +277,57 @@ export const translations = {
             },
             modelId: 'New Model ID'
         },
+        recycleChain: {
+            title: 'RecycleChain Protocol',
+            subtitle: 'Decentralized Waste Management Ledger (Proof-of-Recycle)',
+            connectWallet: 'Connect Wallet',
+            walletConnected: 'Wallet Connected',
+            balance: 'ECO Balance',
+            stats: {
+                marketCap: 'Market Cap',
+                circulatingSupply: 'Circulating Supply',
+                blocks: 'Blocks Verified'
+            },
+            transactions: 'Recent Transactions',
+            headers: {
+                hash: 'Tx Hash',
+                block: 'Block',
+                type: 'Type',
+                amount: 'Amount'
+            },
+            rcDashboard: {
+                title: "RecycleChain Protocol | Dashboard",
+                networkStatus: "Network Status: Synced",
+                blockHeight: "Block Height",
+                mempool: "Mempool Txs",
+                hashrate: "Network Hashrate",
+                price: "PSC Price",
+                distribution: "PSC Token Distribution",
+                minersReward: "Miner Rewards",
+                liquidity: "Liquidity Pool",
+                team: "Dev Team",
+                burn: "Token Burn",
+                dao: "DAO Treasury",
+                nodeStatus: "Node Status",
+                mining: "Mining (Active)",
+                syncing: "Syncing",
+                offline: "Offline",
+                recentTxs: "Recent Transactions",
+                walletTitle: "PSC Wallet",
+                yourBalance: "Your Balance",
+                walletAddress: "Wallet Address",
+                sendTx: "Send Transaction",
+                recipient: "Recipient Address",
+                amount: "Amount (PSC)",
+                wasteType: "Waste Type (Optional)",
+                weight: "Weight (kg) (Optional)",
+                sendBtn: "Send Transaction",
+                sender: "Sender",
+                receiver: "Receiver",
+                type: "Type",
+                sidebar: { dashboard: "Dashboard", wallet: "Wallet", mining: "Mining", classification: "Classification", chat: "AI Chat" }
+            }
+        },
         specialGrants: {
             title: 'Strategic Grant Opportunities',
             subtitle: 'Curated list of federal funding aligned with waste-to-carbon removal technologies.',
@@ -274,9 +343,26 @@ export const translations = {
                 amount: '$20,000,000',
                 deadline: 'Jan 23, 2026',
                 desc: 'Funding for waste management systems and recycling infrastructure with circular economy focus.'
-            }
+            },
+            viewDetails: 'View Details'
         }
     },
+    grantDetailPage: {
+        title: 'Grant Details',
+        back: 'Back to Dashboard',
+        grantNumber: 'Grant Number',
+        agency: 'Agency',
+        funding: 'Funding Available',
+        deadline: 'Application Deadline',
+        status: 'Status',
+        overview: 'Program Overview',
+        features: 'Key Features',
+        eligibility: 'Eligibility',
+        whyThisFits: 'Why This Fits',
+        contact: 'Contact Information',
+        materials: 'Application Materials',
+    },
+    // ... existing ...
     grantOpportunitiesPage: {
         back: 'Back to Dashboard',
     },
@@ -369,7 +455,6 @@ export const translations = {
             keywordBased: '{common} Find {maxResults} grants matching these queries: {queries}.'
         }
     },
-    // ... existing translations ...
     realTimeDashboard: {
         title: 'Real-Time ML Operations',
         subtitle: 'Monitoring waste sensor data streams & ML Inference with Apache Kafka, RisingWave, and Grafana.',
@@ -747,17 +832,103 @@ export const translations = {
       zeroWaste: 'مربی پسماند صفر',
       realTimeDashboard: 'مانیتور زنده ML',
       dashboardLesson: 'درس: مرور کلی داشبورد',
-      wpDashboard: 'پنل مدیریت'
+      wpDashboard: 'پنل مدیریت',
+      blockchain: 'پروتکل ری‌سایکل‌چین'
     },
-    // ... existing FA translations ...
-    // Note: I will only add the NEW keys here for brevity in the response, 
-    // assuming I can append or merge. But the instruction says "Full content of file".
-    // So I will replicate structure.
+    blockchainPage: {
+        title: 'پروتکل ری‌سایکل‌چین',
+        subtitle: 'دارک وب بازیافت - غیرقابل توقف، غیرمتمرکز، سودآور.',
+        heroBadge: 'اکولوژی وب ۳',
+        paradigmTitle: 'تغییر پارادایم',
+        oldParadigm: {
+            year: '۲۰۱۵',
+            title: 'متمرکز و شکننده',
+            desc: 'نیاز به: تیم‌های بزرگ، سرمایه VC، دفاتر فیزیکی. نتیجه: نرخ شکست بالا.'
+        },
+        newParadigm: {
+            year: '۲۰۲۵',
+            title: 'غیرمتمرکز و خودمختار',
+            desc: 'نیاز به: ۱ ایده + ۱ نفر + هوش مصنوعی. نتیجه: کد خودش را حفظ می‌کند.'
+        },
+        stats: {
+            users: { label: 'کاربران فعال', value: '4' },
+            waste: { label: 'زباله بازیافت شده', value: '14.0 kg' },
+            tokens: { label: 'ECO Token صادر شده', value: '182' },
+            transactions: { label: 'تراکنش‌ها', value: '6' }
+        },
+        howItWorks: {
+            title: 'چگونه کار می‌کند؟',
+            steps: [
+                { title: '۱. اسکن کنید', desc: 'زباله خود را با گوشی اسکن کرده و نوع و وزن آن را ثبت کنید.', icon: '📱' },
+                { title: '۲. تحویل دهید', desc: 'زباله را به نقطه جمع‌آوری تحویل دهید.', icon: '♻️' },
+                { title: '۳. پاداش بگیرید', desc: 'به صورت خودکار ECO Token دریافت کنید!', icon: '🪙' }
+            ]
+        },
+        bitcoinInspiration: {
+            title: 'الهام‌گرفته از Bitcoin 🪙',
+            desc: 'بدون نقطه مرکزی شکست • شفافیت کامل • مشوق اقتصادی داخلی • خودش از خودش محافظت می‌کند',
+            badges: [
+                { icon: '🔗', label: 'غیرمتمرکز' },
+                { icon: '🔒', label: 'امن' },
+                { icon: '🌍', label: 'جهانی' },
+                { icon: '💎', label: 'شفاف' }
+            ]
+        },
+        footer: {
+            line1: '🌱 RecycleChain - ساخته شده با ❤️ برای آینده‌ای پایدار',
+            line2: 'تنهایی جدید: ۱ نفر + AI + Open Source + Internet = نامحدود'
+        },
+        whyDarkWeb: {
+            title: 'چرا مدل "دارک وب"؟',
+            desc: 'نه برای فعالیت غیرقانونی، بلکه برای پایداری.',
+            features: [
+                { title: 'بدون نقطه شکست مرکزی', desc: 'هیچ دولت یا شرکتی نمی‌تواند آن را متوقف کند.' },
+                { title: 'کد خود-نگهدار', desc: 'سیستم حتی اگر سازنده برود، به حیات خود ادامه می‌دهد.' },
+                { title: 'مشوق‌های درونی', desc: 'مردم مستقیماً از مشارکت سود می‌برند.' },
+                { title: 'شفافیت رادیکال', desc: 'همه می‌بینند منابع کجا می‌رود.' }
+            ]
+        },
+        architecture: {
+            title: 'معماری پروتکل',
+            collector: 'جمع‌کننده',
+            processor: 'پردازشگر',
+            buyer: 'خریدار',
+            smartContract: 'قرارداد هوشمند',
+            token: 'توکن ECO'
+        },
+        philosophy: {
+            title: 'فلسفه پول',
+            text: 'پول هدف نیست؛ ابزاری برای هماهنگی است. در این سیستم، سود محصول جانبی اثر زیست‌محیطی است.',
+            comparison: [
+                { label: 'سنتی', val: 'کمیابی و رقابت' },
+                { label: 'ری‌سایکل‌چین', val: 'فراوانی و همکاری' }
+            ]
+        },
+        roadmap: {
+            title: 'نقشه راه غیرمتمرکزسازی',
+            steps: [
+                { phase: 'الان', title: 'ساخت پروتوتایپ', desc: 'ساخت با هوش مصنوعی، یادگیری ساختارها.' },
+                { phase: '۶ ماه', title: 'تست‌نت MVP', desc: 'اثبات مفهوم با ۱۰ تست‌کننده بتا.' },
+                { phase: 'آینده', title: 'راه‌اندازی DAO', desc: 'انتشار متن‌باز. حاکمیت جامعه.' }
+            ]
+        },
+        cta: 'به شبکه بپیوندید'
+    },
+    // ... rest of translations
     hero: {
       title: 'آینده پسماند شهری، <br/> <span class="text-primary-500">در لحظه.</span>',
       subtitle: 'EcoRide تکنولوژی هوشمند را با خدمات درخواستی ترکیب می‌کند تا جمع‌آوری پسماند را کارآمد، پاک و ساده سازد. مانند اسنپ، اما برای بازیافت شما.',
       button1: 'درخواست جمع‌آوری',
       button2: 'مشاهده داشبورد',
+    },
+    aiModules: {
+        title: "قدرت گرفته از هوش مصنوعی پیشرفته جمنای",
+        modules: [
+            { title: "بینایی ماشین", desc: "شناسایی نوع پسماند به صورت آنی با دوربین.", icon: "camera" },
+            { title: "پیش‌بینی هوشمند", desc: "پیش‌بینی حجم پسماند برای بهینه‌سازی مسیرها.", icon: "chart" },
+            { title: "عامل گرنت‌یاب", desc: "عامل هوشمند برای یافتن فرصت‌های مالی.", icon: "search" },
+            { title: "ری‌سایکل‌چین", desc: "دفتر کل تغییرناپذیر برای ردیابی پسماند و پاداش.", icon: "cube" }
+        ]
     },
     homeServices: {
         title: "یک اپلیکیشن برای تمام نیازها",
@@ -766,92 +937,37 @@ export const translations = {
             { 
                 name: "خدمات اصلی",
                 services: [
-                    { page: "waste_collection", name: "جمع‌آوری هوشمند پسماند", description: "با تحلیل هوشمند پسماند از طریق دوربین، درخواست جمع‌آوری فوری دهید." },
-                    { page: "smart_dashboard", name: "داشبورد هوشمند", description: "درخواست‌های زنده را نظارت کنید، حجم پسماند را پیش‌بینی کنید و عملکرد سیستم را تحلیل کنید." },
-                    { page: "real_time_dashboard", name: "عملیات زنده ML", description: "نظارت بر زیرساخت‌های در لحظه، با قدرت Kafka + RisingWave + Grafana." },
+                    { page: "waste_collection", name: "جمع‌آوری هوشمند پسماند", description: "درخواست جمع‌آوری با تحلیل تصویر هوش مصنوعی." },
+                    { page: "smart_dashboard", name: "داشبورد هوشمند", description: "مانیتورینگ زنده، پیش‌بینی حجم و تحلیل عملکرد." },
+                    { page: "real_time_dashboard", name: "عملیات زنده ML", description: "مانیتورینگ زیرساخت با Kafka و Grafana." },
                 ]
             },
             {
                 name: "برنامه‌ریزی و تحلیل",
                 services: [
-                    { page: "waste_site_analysis", name: "تحلیل سایت پسماند", description: "گزارشی مبتنی بر هوش مصنوعی از پتانسیل مدیریت پسماند برای هر مکان دریافت کنید." },
-                    { page: "impact_reporter", name: "گزارشگر اثرات", description: "گزارش‌های دقیق اثرات زیست‌محیطی برای جریان پسماند خود تولید کنید." },
-                    { page: "recycling_calculator", name: "محاسبه‌گر بازیافت", description: "مزایای مالی اجرای یک برنامه بازیافت را تخمین بزنید." },
+                    { page: "waste_site_analysis", name: "تحلیل سایت پسماند", description: "گزارش پتانسیل مدیریت پسماند برای هر مکان." },
+                    { page: "impact_reporter", name: "گزارشگر اثرات", description: "تولید گزارش‌های دقیق اثرات زیست‌محیطی." },
+                    { page: "recycling_calculator", name: "محاسبه‌گر بازیافت", description: "تخمین سود مالی اجرای برنامه بازیافت." },
                 ]
             },
             {
-                name: "رشد و پژوهش",
+                name: "رشد و تحقیق",
                 services: [
-                    { page: "grant_finder", name: "کمک هزینه یاب", description: "فرصت‌های تأمین مالی برای پروژه‌های پایداری و بازیافت خود را پیدا کنید." },
-                    { page: "supplier_finder", name: "تامین‌کننده یاب", description: "تامین‌کنندگان سطل‌های بازیافت، کمپوسترها و سایر تجهیزات را کشف کنید." },
-                    { page: "waste_news", name: "اخبار پسماند و بازیافت", description: "خلاصه‌های هوشمند از آخرین روندها و تحقیقات در این صنعت دریافت کنید." },
-                    { page: "ai_researcher", name: "پژوهشگر هوش مصنوعی", description: "با یک گزارش ساختاریافته هوش مصنوعی، تحقیقات عمیق در مورد هر موضوعی انجام دهید." },
+                    { page: "grant_finder", name: "یابنده گرنت", description: "یافتن فرصت‌های مالی برای پروژه‌های بازیافت." },
+                    { page: "supplier_finder", name: "یابنده تامین‌کننده", description: "کشف تامین‌کنندگان تجهیزات بازیافت." },
+                    { page: "waste_news", name: "اخبار پسماند", description: "خلاصه هوشمند آخرین روندها و اخبار صنعت." },
+                    { page: "ai_researcher", name: "پژوهشگر هوش مصنوعی", description: "تحقیق عمیق در هر موضوع با گزارش ساختاریافته." },
                 ]
             },
             {
                 name: "سبک زندگی و توانمندسازی",
                 services: [
-                    { page: "zero_waste", name: "پسماند صفر و استودیوی خلاق", description: "عادات پسماند صفر را بیاموزید و از سفر سبز خود محتوای پولساز (ویدیو/کتاب) تولید کنید." },
-                    { page: "dashboard_lesson", name: "آموزش داشبورد", description: "یک برنامه درسی جامع در مورد نحوه ناوبری و استفاده از داشبورد SmartWaste." },
+                    { page: "zero_waste", name: "مربی پسماند صفر", description: "یادگیری عادات سبز و تولید محتوای درآمدزا." },
+                    { page: "dashboard_lesson", name: "آموزش داشبورد", description: "درس جامع نحوه استفاده از داشبورد SmartWaste." },
+                    { page: "blockchain", name: "پروتکل ری‌سایکل‌چین", description: "ردیابی پسماند غیرمتمرکز و پاداش توکن روی بلاکچین." },
                 ]
             }
         ]
-    },
-    dashboardLesson: {
-        title: 'مرور کلی داشبورد',
-        breadcrumb: 'خانه / طرح درس / مرور کلی داشبورد',
-        intro: 'در این درس، یاد خواهید گرفت که داشبورد SmartWaste مرکز فرماندهی اصلی برای مدیریت جمع‌آوری و تحلیل پسماند است. در داشبورد، هم اطلاعات وضعیت در لحظه و هم ابزارهای تحلیل پیش‌بینی‌کننده را خواهید یافت. این درس به شما نشان می‌دهد که داشبورد چگونه سازماندهی شده و چگونه می‌توان برای دسترسی به ویژگی‌های مختلف پلتفرم EcoRide در آن پیمایش کرد.',
-        objectivesTitle: 'اهداف',
-        objectives: [
-            'دسترسی به داشبورد هوشمند.',
-            'شناسایی اجزای داشبورد از جمله فید زنده، پیش‌بینی هوشمند و تحلیل‌ها.',
-            'جابجایی بین نمای لیست و نقشه برای درخواست‌های پسماند.',
-            'استفاده از ابزارهای هوش مصنوعی برای پیش‌بینی حجم پسماند.',
-            'تفسیر معیارهای تحلیلی و عملکرد سیستم.'
-        ],
-        prerequisitesTitle: 'مهارت‌های پیش‌نیاز',
-        prerequisites: [
-            'آشنایی با پیمایش در مرورگر وب.',
-            'درک مفاهیم اولیه مدیریت پسماند (مانند انواع پسماند).',
-            'دسترسی به پلتفرم EcoRide.'
-        ],
-        walkthroughTitle: 'راهنمای عملی',
-        accessSection: {
-            title: 'دسترسی به داشبورد',
-            content: 'برای دسترسی به داشبورد، کافیست روی دکمه "داشبورد" در نوار ناوبری اصلی کلیک کنید. این به عنوان نقطه ورود اصلی شما برای وظایف عملیاتی عمل می‌کند.'
-        },
-        componentsSection: {
-            title: 'اجزای داشبورد',
-            content: 'داشبورد به سه زبانه اصلی تقسیم شده است که می‌توانید با استفاده از نوار بالایی بین آنها جابجا شوید:',
-            items: [
-                { title: 'فید زنده', desc: 'این نمای پیش‌فرض است. لیستی از درخواست‌های جمع‌آوری پسماند ورودی را نشان می‌دهد. می‌توانید مکان، نوع پسماند، حجم و وضعیت (در انتظار، در مسیر، تکمیل شده) را مشاهده کنید. از دکمه "اعزام" برای اختصاص خودروها استفاده کنید.' },
-                { title: 'پیش‌بینی هوشمند', desc: 'این زبانه از هوش مصنوعی برای پیش‌بینی حجم پسماند استفاده می‌کند. یک مکان (مثلاً "تهران، نارمک") وارد کنید تا پیش‌بینی تولید پسماند برای آن منطقه را دریافت کنید.' },
-                { title: 'تحلیل و آمار', desc: 'این زبانه یک نمای کلی سطح بالا از عملکرد سیستم، از جمله دقت هوش مصنوعی، تعداد گزارش‌های روزانه و بهبود کارایی مسیریابی ارائه می‌دهد.' }
-            ]
-        },
-        viewSection: {
-            title: 'نمای لیست در مقابل نقشه',
-            content: 'در زبانه فید زنده، یک دکمه تغییر وضعیت در گوشه بالا سمت راست مشاهده خواهید کرد. این به شما امکان می‌دهد بین "نمای لیست" جدولی و "نمای نقشه" جغرافیایی جابجا شوید. نمای نقشه نمایش بصری درخواست‌های در انتظار (زرد)، خودروهای در مسیر (آبی) و جمع‌آوری‌های تکمیل شده (سبز) را روی نقشه تعاملی ارائه می‌دهد.'
-        },
-        exercisesTitle: 'تمرین‌ها',
-        exercises: [
-            { title: 'شخصی‌سازی نما', desc: 'سعی کنید بین نمای لیست و نمای نقشه جابجا شوید تا ببینید ارائه داده‌ها چگونه تغییر می‌کند.' },
-            { title: 'اجرای یک پیش‌بینی', desc: 'به زبانه پیش‌بینی هوشمند بروید و یک پیش‌بینی برای "تهران، میدان آزادی" اجرا کنید.' }
-        ],
-        quizTitle: 'آزمون',
-        quiz: [
-            { question: 'زبانه پیش‌فرض در داشبورد چیست؟', options: ['تحلیل', 'فید زنده', 'تنظیمات'], answer: 'فید زنده' },
-            { question: 'کدام ویژگی به شما کمک می‌کند کامیون‌های پسماند را روی نقشه ببینید؟', options: ['نمای لیست', 'نمای نقشه', 'تحلیل‌ها'], answer: 'نمای نقشه' },
-            { question: 'ابزار پیش‌بینی هوش مصنوعی چه کاری انجام می‌دهد؟', options: ['تفکیک پسماند', 'پیش‌بینی حجم پسماند', 'یافتن کمک‌های مالی'], answer: 'پیش‌بینی حجم پسماند' }
-        ],
-        sidebarTitle: 'جزئیات درس',
-        sidebar: {
-            duration: 'مدت زمان: ۱۵ دقیقه',
-            audience: 'مخاطب: مدیران، اپراتورها',
-            level: 'سطح: مبتدی',
-            type: 'نوع: نمایشی',
-            version: 'نسخه: ۲.۰.۰'
-        }
     },
     smartWasteDashboard: {
         title: 'مدیریت پسماند هوشمند',
@@ -862,6 +978,7 @@ export const translations = {
         tabAnalytics: 'آنالیز و آمار',
         tabTuning: 'تنظیم دقیق مدل',
         tabSpecialGrants: 'گرنت‌های ویژه',
+        tabRecycleChain: 'ری‌سایکل‌چین',
         liveFeed: {
             title: 'درخواست‌های جمع‌آوری زنده',
             subtitle: 'نظارت و اعزام درخواست‌های جمع‌آوری ورودی.',
@@ -911,6 +1028,57 @@ export const translations = {
             },
             modelId: 'شناسه مدل جدید'
         },
+        recycleChain: {
+            title: 'پروتکل ری‌سایکل‌چین',
+            subtitle: 'دفتر کل غیرمتمرکز مدیریت پسماند (اثبات بازیافت)',
+            connectWallet: 'اتصال کیف پول',
+            walletConnected: 'کیف پول متصل شد',
+            balance: 'موجودی ECO',
+            stats: {
+                marketCap: 'ارزش بازار',
+                circulatingSupply: 'عرضه در گردش',
+                blocks: 'بلوک‌های تایید شده'
+            },
+            transactions: 'تراکنش‌های اخیر',
+            headers: {
+                hash: 'هش تراکنش',
+                block: 'بلوک',
+                type: 'نوع',
+                amount: 'مقدار'
+            },
+            rcDashboard: {
+                title: "RecycleChain Protocol | Dashboard",
+                networkStatus: "وضعیت شبکه: Sync شده",
+                blockHeight: "ارتفاع بلاک",
+                mempool: "تراکنش ممپول",
+                hashrate: "هش‌ریت شبکه",
+                price: "قیمت PSC",
+                distribution: "توزیع توکن PSC",
+                minersReward: "پاداش ماینرها",
+                liquidity: "استخر نقدینگی",
+                team: "تیم توسعه",
+                burn: "سوزاندن توکن",
+                dao: "خزانه‌داری DAO",
+                nodeStatus: "وضعیت نودها",
+                mining: "Mining (فعال)",
+                syncing: "Syncing (توقف)",
+                offline: "Offline (خراب)",
+                recentTxs: "تراکنش‌های اخیر",
+                walletTitle: "کیف پول PSC",
+                yourBalance: "موجودی شما",
+                walletAddress: "آدرس کیف پول",
+                sendTx: "ارسال تراکنش",
+                recipient: "آدرس گیرنده",
+                amount: "مقدار (PSC)",
+                wasteType: "نوع پسماند (اختیاری)",
+                weight: "وزن (kg) (اختیاری)",
+                sendBtn: "ارسال تراکنش",
+                sender: "فرستنده",
+                receiver: "گیرنده",
+                type: "نوع",
+                sidebar: { dashboard: "داشبورد", wallet: "کیف پول", mining: "استخراج", classification: "طبقه‌بندی", chat: "چت AI" }
+            }
+        },
         specialGrants: {
             title: 'فرصت‌های گرنت استراتژیک',
             subtitle: 'لیست منتخب بودجه‌های فدرال همسو با فناوری‌های تبدیل پسماند به حذف کربن.',
@@ -926,11 +1094,24 @@ export const translations = {
                 amount: '۲۰,۰۰۰,۰۰۰ دلار',
                 deadline: '۲۳ ژانویه ۲۰۲۶',
                 desc: 'بودجه برای سیستم‌های مدیریت پسماند و زیرساخت بازیافت با تمرکز بر اقتصاد چرخشی.'
-            }
+            },
+            viewDetails: 'مشاهده جزئیات'
         }
     },
-    grantOpportunitiesPage: {
+    grantDetailPage: {
+        title: 'جزئیات گرنت',
         back: 'بازگشت به داشبورد',
+        grantNumber: 'شماره گرنت',
+        agency: 'آژانس',
+        funding: 'بودجه موجود',
+        deadline: 'مهلت درخواست',
+        status: 'وضعیت',
+        overview: 'مرور کلی برنامه',
+        features: 'ویژگی‌های کلیدی',
+        eligibility: 'واجد شرایط بودن',
+        whyThisFits: 'چرا این مناسب است',
+        contact: 'اطلاعات تماس',
+        materials: 'مواد درخواست',
     },
     grantAnalyzer: {
         title: 'تحلیل گرنت',
@@ -1021,363 +1202,76 @@ export const translations = {
             keywordBased: '{common} {maxResults} گرنت منطبق با این جستجوها پیدا کنید: {queries}.'
         }
     },
-    realTimeDashboard: {
-        title: 'مرکز عملیات زنده یادگیری ماشین',
-        subtitle: 'نظارت در لحظه بر داده‌های سنسور و پیش‌بینی‌های هوش مصنوعی، با قدرت Apache Kafka، RisingWave و Grafana.',
-        stat1: 'نرخ دریافت داده',
-        stat2: 'تاخیر میانگین',
-        stat3: 'سنسورهای فعال',
-        stat4: 'ناهمجاری‌ها',
-        chart1: 'نوسانات متریک (کندل‌استیک)',
-        chart2: 'اطمینان پیش‌بینی مدل ML',
-        log: 'لاگ‌های پایپ‌لاین (Kafka/RisingWave)',
-        back: 'بازگشت به خانه'
-    },
-    wasteCollectorPage: {
-        title: 'تحلیل پسماند و درخواست جمع‌آوری با هوش مصنوعی',
-        subtitle: 'از دوربین خود برای شناسایی پسماند، یادگیری نحوه تفکیک و ثبت درخواست جمع‌آوری فوری استفاده کنید.',
-        startCamera: 'شروع دوربین',
-        stopCamera: 'توقف دوربین',
-        capture: 'عکس گرفتن',
-        upload: 'آپلود عکس',
-        analyzing: 'در حال تحلیل پسماند...',
-        analysisResults: 'نتایج تحلیل',
-        instructions: 'برای شروع، پسماند خود را اسکن کنید.',
-        identifiedItems: 'موارد شناسایی‌شده',
-        category: 'دسته‌بندی',
-        recycling: 'بازیافت',
-        landfill: 'دفن',
-        compost: 'کمپوست',
-        special: 'ویژه',
-        pickupQuote: 'هزینه جمع‌آوری',
-        estimatedWeight: 'وزن تخمینی',
-        recyclingPotential: 'پتانسیل بازیافت',
-        requestPickup: 'درخواست جمع‌آوری با هزینه {price}',
-        cameraError: 'دسترسی به دوربین ممکن نیست. لطفاً مجوزها را بررسی کنید.',
-    },
-    wasteSiteAnalysisPage: {
-      title: 'تحلیل سایت پسماند با هوش مصنوعی',
-      formTitle: 'مکان خود را تحلیل کنید',
-      locationLabel: 'مکان (آدرس یا مختصات)',
-      locationPlaceholder: 'مثال: "خیابان اصلی ۱۲۳، تهران"',
-      descriptionLabel: 'اهداف پروژه یا مشخصات سایت را توصیف کنید (اختیاری)',
-      descriptionPlaceholder: 'مثال: «یک مجتمع آپارتمانی ۵۰ واحدی که به دنبال بهینه‌سازی برنامه بازیافت است.»',
-      uploadPhoto: 'آپلود تصویر مکان (اختیاری)',
-      photoUploaded: 'تصویر با موفقیت آپلود شد!',
-      removePhoto: 'حذف تصویر',
-      buttonText: 'اجرای تحلیل',
-      generating: 'در حال تحلیل...',
-      validationError: 'لطفا برای شروع تحلیل، یک مکان ارائه دهید.',
-      resultsTitle: 'نتایج تحلیل',
-      placeholder: 'تحلیل مدیریت پسماند شما در اینجا ظاهر می‌شود.',
-      siteSuitability: 'مناسب بودن سایت برای مدیریت پسماند',
-      estimatedDiversion: 'تخمین انحراف ماهانه پسماند از دفن',
-      potentialSavings: 'صرفه‌جویی بالقوه سالانه (از انحراف)',
-      recommendations: 'توصیه‌های سطل و تجهیزات',
-      logistics: 'ملاحظات لجستیکی',
-    },
-    grantFinderPage: {
-      title: 'یابنده کمک هزینه و بودجه بازیافت',
-      subtitle: 'هوش مصنوعی ما آخرین کمک‌های مالی بازیافت، کمپوست و کاهش پسماند را برای حمایت از پروژه شما جستجو می‌کند.',
-      searchPlaceholder: 'مثال: «کمک‌های مالی برای کمپوست اجتماعی در تهران»',
-      searchButton: 'جستجوی کمک‌های مالی',
-      searching: 'در حال جستجو...',
-      error: 'خطایی غیرمنتظره هنگام جستجو رخ داد.',
-      placeholder: 'فرصت‌های کمک مالی در اینجا نمایش داده خواهد شد.',
-      resultsTitle: 'فرصت‌های کمک مالی یافت‌شده',
-      issuingAgency: 'آژانس صادرکننده',
-      eligibility: 'شرایط لازم',
-      applyNow: 'اطلاعات بیشتر / درخواست',
-      prepareApplication: 'آماده‌سازی درخواست',
-      applicationAssistant: 'دستیار درخواست برای: {grantName}',
-      backToResults: 'بازگشت به نتایج',
-      projectDescriptionLabel: 'پروژه، اهداف و تیم خود را توصیف کنید.',
-      projectDescriptionPlaceholder: 'مثال: «پروژه ما قصد دارد سرویس جمع‌آوری کمپوست خانگی را برای ۵۰۰ خانه راه‌اندازی کند...»',
-      generateDraftButton: 'تولید پیش‌نویس درخواست',
-      generatingDraft: 'در حال تولید پیش‌نویس...',
-      draftResultsTitle: 'پیش‌نویس درخواست شما',
-      businessPlanOutline: 'طرح کلی کسب‌وکار',
-      applicationSections: 'بخش‌های پیش‌نویس شده درخواست',
-      nextSteps: 'مراحل بعدی پیشنهادی',
-    },
-    supplierFinderPage: {
-      title: 'جستجوگر تامین‌کنندگان تجهیزات',
-      subtitle: 'تامین‌کنندگان سطل‌های بازیافت، کمپوسترها، فشرده‌سازها و سایر تجهیزات مدیریت پسماند را پیدا کنید.',
-      searchPlaceholder: 'مثال: «تامین‌کننده سطل بازیافت تجاری در تهران»',
-      searchButton: 'جستجوی تامین‌کنندگان',
-      searching: 'در حال جستجو...',
-      error: 'خطایی غیرمنتظره هنگام جستجو برای تامین‌کنندگان رخ داد.',
-      placeholder: 'اطلاعات تامین‌کنندگان در اینجا نمایش داده خواهد شد.',
-      resultsTitle: 'تامین‌کنندگان تجهیزات یافت‌شده',
-      visitWebsite: 'بازدید از وب‌سایت',
-    },
-    impactReporterPage: {
-      title: 'گزارشگر اثرات جریان پسماند',
-      subtitle: 'گزارش‌های دقیق اثرات زیست‌محیطی برای جریان پسماند سازمان خود را در چند دقیقه تولید کنید.',
-      descriptionLabel: 'پسماند پروژه یا سازمان خود را برای تحلیل اثرات توصیف کنید.',
-      descriptionPlaceholder: 'مثال: «یک رستوران متوسط با تولید ۵ تن پسماند غذایی در ماه.»',
-      buttonText: 'تولید گزارش اثرات',
-      generating: 'در حال تولید گزارش...',
-      validationError: 'لطفاً توضیحات را ارائه دهید.',
-      placeholder: 'گزارش اثرات زیست‌محیطی شما در اینجا نمایش داده خواهد شد.',
-      resultsTitle: 'گزارش اثرات زیست‌محیطی',
-      executiveSummary: 'خلاصه اجرایی',
-      positiveImpacts: 'اثرات مثبت',
-      potentialRisks: 'ریسک‌ها و نگرانی‌های بالقوه',
-      mitigationStrategies: 'راهبردهای کاهش ریسک',
-      sustainabilityScore: 'امتیاز کلی پایداری',
-    },
-    wasteNewsPage: {
-        title: 'اخبار پسماند و بازیافت',
-        subtitle: 'هر موضوعی را برای دریافت خلاصه‌ای هوشمند از روندهای فعلی در اقتصاد چرخشی و مدیریت پسماند، با پشتیبانی جستجوی گوگل، تحقیق کنید.',
-        searchPlaceholder: 'مثال: «پیشرفت‌ها در بازیافت شیمیایی»',
-        searchButton: 'تحقیق',
-        searching: 'در حال تحقیق...',
-        error: 'خطایی در حین تحقیق رخ داد. لطفاً دوباره تلاش کنید.',
-        placeholder: 'خلاصه تحقیق شما در اینجا نمایش داده خواهد شد.',
-        sources: 'منابع',
-        relatedTopics: 'موضوعات مرتبط',
-    },
-    aiResearcherPage: {
-      title: 'دستیار پژوهش عمیق',
-      subtitle: 'از هوش مصنوعی برای انجام تحقیقات عمیق در مورد هر موضوعی و ترکیب اطلاعات از سراسر وب در یک گزارش ساختاریافته استفاده کنید.',
-      searchPlaceholder: 'مثال: «میکروپلاستیک‌ها در اقیانوس»',
-      searchButton: 'انجام تحقیق',
-      searching: 'در حال تحقیق...',
-      error: 'خطایی در حین تحقیق عمیق رخ داد. لطفاً دوباره تلاش کنید.',
-      placeholder: 'گزارش تحقیق دقیق شما در اینجا ظاهر می‌شود.',
-      resultsTitle: 'گزارش تحقیق عمیق',
-      keyFindings: 'یافته‌های کلیدی',
-      detailedSummary: 'خلاصه تفصیلی',
-      keyConcepts: 'مفاهیم و موجودیت‌های کلیدی',
-      futureOutlook: 'چشم‌انداز آینده',
-      sources: 'منابع',
-    },
-    recyclingCalculatorPage: {
-        title: 'محاسبه‌گر ارزش بازیافت',
-        subtitle: 'یک تخمین سریع و هوشمند از مزایای مالی بازیافت برای کسب‌وکار خود دریافت کنید.',
-        billLabel: 'میانگین حجم ماهانه پسماند (تن)',
-        billPlaceholder: 'مثال: ۵',
-        buttonText: 'محاسبه صرفه‌جویی',
-        calculating: 'در حال محاسبه...',
-        validationError: 'لطفاً حجم معتبر پسماند ماهانه را وارد کنید.',
-        resultsTitle: 'سود سالانه تخمینی شما',
-        annualSavings: 'صرفه‌جویی سالانه در هزینه دفن',
-        annualRevenue: 'درآمد سالانه از بازیافت',
-        totalBenefit: 'کل سود سالانه',
-        notes: 'یادداشت‌ها و مفروضات',
-        placeholder: 'نتایج محاسبه شما در اینجا نمایش داده می‌شود.',
-    },
-    zeroWastePage: {
-        title: 'مربی پسماند صفر و استودیوی خلاق',
-        subtitle: 'عادات سازگار با محیط زیست را از یک مربی متخصص بیاموزید و سفر خود را به محتوای پولساز (ویدیو یا کتاب) تبدیل کنید تا خودتان را توانمند سازید.',
-        tabCoach: 'سوال از مربی',
-        tabCreator: 'استودیوی خلاقیت سبز',
-        tabToolkit: 'کیت‌های پسماند صفر',
-        coach: {
-            title: 'مربی پسماند صفر',
-            description: 'با الهام از آیه حمداوی. توصیه‌های عملی و متناسب با فرهنگ برای به حداقل رساندن پسماند در خانه دریافت کنید.',
-            placeholder: 'مثال: «چطور می‌توانم زباله‌ها را در آشپزخانه کاهش دهم؟» یا «با لباس‌های کهنه چه کار کنم؟»',
-            button: 'دریافت مشاوره',
-            difficulty: 'سختی',
-            cost: 'هزینه',
-            findKit: 'جستجوی محصول',
-        },
-        creator: {
-            title: 'تبدیل عادات سبز به درآمد و اثرگذاری',
-            intro: 'حتی کارهای کوچک مانند خشک کردن زباله تر، پر کردن مجدد شوینده‌ها یا استفاده مجدد از پارچه‌ها مهم هستند. اکنون می‌توانید این تجربیات واقعی را به محتوایی تبدیل کنید که الهام‌بخش دیگران باشد و درآمدزایی کند.',
-            howItWorksTitle: 'چگونه کار می‌کند',
-            steps: [
-                { title: 'داستان خود را بگویید', desc: 'عادات پسماند صفر خود را به اشتراک بگذارید: کاهش زباله، خرید، یا تعمیر.' },
-                { title: 'مسیر خود را انتخاب کنید', desc: 'انتخاب کنید: ویدیوی یوتیوب، کتاب الکترونیکی، یا کمیک کودکان.' },
-                { title: 'هوش مصنوعی برنامه را می‌سازد', desc: 'هوش مصنوعی فیلمنامه، فصل‌ها یا استوری‌برد را با نکات درآمدزایی تولید می‌کند.' }
-            ],
-            optionsTitle: 'گزینه‌های تولید محتوا',
-            options: [
-                { title: 'کانال یوتیوب', desc: 'عنوان‌های جذاب، فیلمنامه کامل و ایده‌های تامنیل برای آموزش یا ولاگ دریافت کنید.' },
-                { title: 'کتاب / راهنما', desc: 'فصل‌بندی ساختاریافته و نکات گام‌به‌گام برای انتشار در آمازون KDP بسازید.' },
-                { title: 'کمیک کودکان', desc: 'داستان و پرامپت‌های تصویرسازی برای کتاب‌های کودک (مانند پروژه‌های کمیک HuggingFace).' }
-            ],
-            whyTitle: 'چرا این مهم است',
-            benefits: [
-                'اثر زیست‌محیطی: به دیگران آموزش دهید زباله را کاهش دهند.',
-                'توانمندسازی اقتصادی: از محتوای خود درآمد کسب کنید.',
-                'تغییر اجتماعی: پسماند صفر را به یک فرهنگ مشترک تبدیل کنید.',
-                'الهام‌بخشی: نمونه‌های واقعی از یک خانه واقعی را نشان دهید.'
-            ],
-            ctaTitle: 'سفر خلاقانه پسماند صفر خود را شروع کنید',
-            topicLabel: 'نکته سبز یا ایده داستان شما چیست؟',
-            topicPlaceholder: 'مثال: «چگونه از روغن مانده صابون درست کنیم» یا «داستان یک بطری پلاستیکی که می‌خواست گلدان شود»',
-            formatLabel: 'فرمت محتوا',
-            formatYouTube: 'فیلمنامه ویدیوی یوتیوب',
-            formatBook: 'کتاب کودک / داستان کمیک',
-            button: 'تولید برنامه محتوا',
-            monetizationTitle: 'نکات درآمدزایی',
-        },
-        toolkit: {
-            title: 'جعبه ابزار مدیریت پسماند صفر',
-            subtitle: 'کیت‌های شروع و پکیج‌های ضروری برای تکمیل هر بخش از پروژه مدیریت پسماند صفر شما.',
-            findOnAmazon: 'خرید از دیجی‌کالا و ترب',
-            products: [
-                {
-                    part: 'بخش ۱: پوساندن (پسماند آلی)',
-                    category: 'سیستم کمپوست',
-                    name: 'سطل کمپوست رومیزی استیل ضد زنگ با فیلتر ذغال',
-                    description: 'یک سطل ۱.۳ گالنی برای ضایعات آشپزخانه. شامل فیلتر ذغال برای جلوگیری از بو. ضروری برای مدیریت پسماند غذا بدون دور ریختن.',
-                    price: '$22.00 - $30.00',
-                    goal: 'پسماند غذایی را از دفن منحرف می‌کند و خاک مغذی می‌سازد.',
-                    searchTerm: 'سطل کمپوست خانگی'
-                },
-                {
-                    part: 'بخش ۲: کاهش (آشپزخانه)',
-                    category: 'جایگزین سلفون پلاستیکی',
-                    name: 'پک ۳ تایی پارچه مومی (Beeswax Wrap)',
-                    description: 'مجموعه‌ای از پارچه‌های نخی پوشیده شده با موم زنبور عسل، روغن جوجوبا و رزین. برای پوشاندن کاسه‌ها یا بسته بندی غذا به جای سلفون پلاستیکی یکبار مصرف استفاده می‌شود.',
-                    price: '$14.00 - $18.00',
-                    goal: 'حذف پلاستیک یکبار مصرف آشپزخانه.',
-                    searchTerm: 'پارچه مومی نگهداری غذا'
-                },
-                {
-                    part: 'بخش ۳: امتناع (خرید)',
-                    category: 'مدیریت خرید',
-                    name: 'کیسه‌های توری خرید قابل شستشو (ست ۹ تایی)',
-                    description: 'کیسه‌های توری نخی با بند کشی در اندازه‌های مختلف (کوچک، متوسط، بزرگ). برای میوه و سبزیجات در فروشگاه استفاده می‌شود تا از کیسه‌های پلاستیکی رولی اجتناب شود.',
-                    price: '$10.00 - $15.00',
-                    goal: 'توقف پسماند پلاستیکی در مبدا (فروشگاه).',
-                    searchTerm: 'کیسه توری میوه و سبزیجات'
-                },
-                {
-                    part: 'بخش ۴: استفاده مجدد (حمام)',
-                    category: 'کیت بهداشت شخصی',
-                    name: 'کیت شروع پسماند صفر حمام',
-                    description: 'معمولاً شامل: ۴ مسواک بامبو، نخ دندان زیست‌تخریب‌پذیر (ابریشم/ذرت) و پدهای نخی قابل شستشو برای پاک کردن آرایش.',
-                    price: '$18.00 - $25.00',
-                    goal: 'جایگزینی برس‌های پلاستیکی غیرقابل بازیافت و پنبه‌های یکبار مصرف.',
-                    searchTerm: 'مسواک بامبو'
-                },
-                {
-                    part: 'بخش ۵: نظافت',
-                    category: 'پکیج نظافت سبز',
-                    name: 'ست اسفنج و برس آشپزخانه تجزیه‌پذیر',
-                    description: 'شامل اسفنج‌های گیاهی (لوفا) و برس‌های بطری الیاف نارگیل. این‌ها برخلاف اسفنج‌های پلاستیکی زرد/سبز به طور طبیعی تجزیه می‌شوند.',
-                    price: '$15.00 - $20.00',
-                    goal: 'کاهش ورود میکروپلاستیک‌ها به سیستم آب.',
-                    searchTerm: 'اسکاچ گیاهی لوفا'
-                },
-                {
-                    part: 'بخش ۶: تفکیک',
-                    category: 'سازماندهی پسماند',
-                    name: 'برچسب‌های سطل بازیافت (ست ۶ تایی)',
-                    description: 'برچسب‌های بزرگ و ضد آب برای سطل‌ها با عناوین: "زباله"، "بازیافت"، "کمپوست". نشانه‌های بصری برای مدیریت موثر پسماند حیاتی هستند.',
-                    price: '$8.00 - $12.00',
-                    goal: 'تضمین تفکیک صحیح جریان‌های پسماند.',
-                    searchTerm: 'برچسب تفکیک زباله'
-                }
-            ],
-            implementation: {
-                title: 'نحوه اجرا (گام به گام)',
-                steps: [
-                    { phase: 'فاز ۱: ممیزی', desc: 'خرید برچسب‌های تفکیک (بخش ۶). سطل‌های فعلی را برچسب بزنید تا فوراً پسماند را سازماندهی کنید.' },
-                    { phase: 'فاز ۲: تغییر بزرگ', desc: 'خرید سطل کمپوست (بخش ۱). پسماند غذایی معمولاً سنگین‌ترین بخش زباله است. تفکیک آن بیشترین تاثیر را دارد.' },
-                    { phase: 'فاز ۳: بهینه‌سازی', desc: 'خرید کیسه‌های خرید (بخش ۳) و پارچه‌های مومی (بخش ۲). این‌ها عادات روزانه‌ای هستند که ورود پلاستیک را کاهش می‌دهند.' },
-                    { phase: 'فاز ۴: سبک زندگی', desc: 'معرفی کیت‌های حمام (بخش ۴) و نظافت (بخش ۵) زمانی که نسخه‌های پلاستیکی قدیمی فرسوده شدند.' }
-                ]
-            },
-            searchTips: {
-                title: 'نکات جستجو',
-                description: 'برای یافتن بهترین قیمت‌ها، از این عبارات دقیق در نوار جستجو استفاده کنید:',
-                tips: [
-                    'سطل کمپوست خانگی',
-                    'کیسه خرید پارچه‌ای',
-                    'مسواک بامبو',
-                    'سطل زباله تفکیک'
-                ]
-            }
-        }
-    },
-    aiAssistantPage: {
-      title: 'دستیار هوش مصنوعی EcoRide',
-      subtitle: 'کارشناس شخصی هوش مصنوعی شما برای مدیریت پسماند. در مورد تفکیک، بازیافت یا پایداری سوال بپرسید.',
-      placeholder: 'یک سوال بپرسید...',
-      welcomeMessage: 'سلام! من دستیار هوش مصنوعی EcoRide هستم. چطور می‌توانم امروز به شما کمک کنم؟',
-    },
-    footer: {
-      description: 'EcoRide راهکارهای هوشمند برای مدیریت پسماند درخواستی در شهرهای مدرن ارائه می‌دهد.',
-      quickLinks: 'لینک‌های سریع',
-      contact: 'تماس با ما',
-      address: 'خیابان شهر هوشمند ۱۲۳، تهران، ۱۲۳۴۵',
-      copyright: '© ۲۰۲۴ EcoRide. تمامی حقوق محفوظ است.',
-    },
     quotaErrorModal: {
-      title: 'محدودیت API تمام شد',
-      body: 'شما از محدودیت روزانه خود برای API جمنای فراتر رفته‌اید. لطفاً تنظیمات صورتحساب خود را بررسی کنید یا فردا دوباره تلاش کنید.',
+      title: 'محدودیت API',
+      body: 'شما از حد مجاز روزانه خود برای API جمنای فراتر رفته‌اید. لطفاً تنظیمات صورتحساب خود را بررسی کنید یا فردا دوباره تلاش کنید.',
       cta: 'بررسی صورتحساب',
       close: 'بستن',
     },
     confirmationModal: {
       title: 'تایید جمع‌آوری',
       estimatedWeight: 'وزن تخمینی:',
-      pickupQuote: 'هزینه جمع‌آوری:',
+      pickupQuote: 'هزینه تخمینی:',
       cancel: 'لغو',
-      confirm: 'تایید جمع‌آوری',
-      successTitle: 'جمع‌آوری‌کننده اعزام شد!',
-      successBody: 'یک خودروی جمع‌آوری اعزام شده است. در یک برنامه واقعی می‌توانید ورود آن را پیگیری کنید.',
+      confirm: 'تایید درخواست',
+      successTitle: 'خودرو اعزام شد!',
+      successBody: 'یک خودرو جمع‌آوری اعزام شد. شما می‌توانید ورود آن را در اپلیکیشن واقعی پیگیری کنید.',
       done: 'انجام شد',
     },
     examplePrompts: {
         try: 'امتحان کنید:',
-        smartPrediction: ['تهران، منطقه نارمک', 'شهرک صنعتی اراک', 'اصفهان، محله جلفا'],
-        wasteSiteAnalysisLocation: ['خیابان اصلی ۱۲۳، تهران', 'شهرک صنعتی نزدیک فرودگاه', 'بازار بزرگ تهران'],
+        smartPrediction: ['تهران، نارمک', 'شهرک صنعتی اراک', 'اصفهان، جلفا'],
+        wasteSiteAnalysisLocation: ['تهران، خیابان ولیعصر', 'شهرک صنعتی شمس‌آباد', 'مجتمع مسکونی اکباتان'],
         wasteSiteAnalysisDescription: [
-            'یک مجتمع آپارتمانی ۵۰ واحدی که به دنبال بهینه‌سازی برنامه بازیافت است.',
-            'یک انبار تجاری با خروجی بالای مقوا.',
-            'رستوران جدیدی که در مرکز شهر افتتاح می‌شود و برای کمپوست زباله‌های غذایی برنامه‌ریزی می‌کند.'
+            'یک مجتمع مسکونی ۵۰ واحدی که به دنبال بهینه‌سازی بازیافت است.',
+            'یک انبار تجاری با خروجی کارتن بالا.',
+            'رستوران جدید در مرکز شهر با برنامه کمپوست پسماند غذا.'
         ],
         grantFinder: [
-            'کمک‌های مالی برای کمپوست اجتماعی',
-            'تأمین مالی برای نوآوری در بازیافت پلاستیک',
-            'کمک‌های مالی استارتاپی برای اقتصاد چرخشی'
+            'گرنت‌های کمپوست اجتماعی',
+            'بودجه برای نوآوری بازیافت پلاستیک',
+            'گرنت استارتاپی اقتصاد چرخشی'
         ],
         grantApplication: [
-          'پروژه ما قصد دارد سرویس جمع‌آوری کمپوست خانگی را برای ۵۰۰ خانه راه‌اندازی کند.',
-          'ما در حال توسعه فناوری جدیدی برای تفکیک کارآمدتر پلاستیک‌های مخلوط هستیم.',
-          'این یک پروژه باغ اجتماعی است که برای سطل‌های کمپوست نیاز به بودجه دارد.'
+          'پروژه ما راه‌اندازی سرویس جمع‌آوری کمپوست برای ۵۰۰ خانه است.',
+          'ما در حال توسعه فناوری جدیدی برای جداسازی پلاستیک‌های مخلوط هستیم.',
+          'این پروژه باغ اجتماعی برای سطل‌های کمپوست نیاز به بودجه دارد.'
         ],
         supplierFinder: [
             'تامین‌کننده سطل بازیافت تجاری',
-            'فشرده‌سازهای مقوای صنعتی',
+            'تراکم‌ساز کارتن صنعتی',
             'سنسورهای هوشمند پسماند برای مخازن'
         ],
         impactReporter: [
-            'یک رستوران متوسط با تولید ۵ تن پسماند غذایی در ماه.',
-            'یک ساختمان اداری با ۲۰۰ کارمند با هدف پسماند صفر.',
-            'یک کارخانه تولیدی کوچک که ضایعات پلاستیکی تولید می‌کند.'
+            'رستورانی با تولید ۵ تن پسماند غذا در ماه.',
+            'ساختمان اداری با ۲۰۰ کارمند با هدف پسماند صفر.',
+            'کارخانه تولیدی کوچک با ضایعات پلاستیک.'
         ],
         wasteNews: [
-            'پیشرفت‌ها در بازیافت شیمیایی',
-            'قوانین مسئولیت توسعه‌یافته تولیدکننده',
-            'تأثیر ممنوعیت پلاستیک‌های یکبار مصرف'
+            'پیشرفت‌های بازیافت شیمیایی',
+            'قوانین مسئولیت تولیدکننده',
+            'تاثیر ممنوعیت پلاستیک‌های یکبار مصرف'
         ],
         aiResearcher: [
             'میکروپلاستیک‌ها در اقیانوس',
             'اقتصاد بازیافت آلومینیوم',
-            'بیوپلاستیک‌ها و اثرات زیست‌محیطی آن‌ها'
+            'بیوپلاستیک‌ها و اثرات زیست‌محیطی آنها'
         ],
-        recyclingCalculator: ['۵', '۲۰', '۱۵۰'],
+        recyclingCalculator: ['5', '20', '150'],
         aiAssistant: [
             'چطور جعبه پیتزا را بازیافت کنم؟',
             'مزایای کمپوست چیست؟',
-            'درباره اقتصاد چرخشی به من بگو.'
+            'درباره اقتصاد چرخشی بگو.'
         ],
         zeroWaste: [
-            'چطور زباله مواد غذایی را در آشپزخانه کاهش دهم؟',
-            'ایده‌هایی برای استفاده مجدد از شیشه‌های قدیمی',
-            'محصولات تمیزکننده بدون پسماند'
+            'چطور پسماند غذا را در آشپزخانه کاهش دهم؟',
+            'ایده‌هایی برای استفاده مجدد از شیشه‌های مربا',
+            'محصولات نظافت بدون پسماند'
         ],
         ecoCreator: [
-            'سناریوی ویدیو: ۵ روش برای استفاده مجدد از پوست لیمو',
-            'داستان: یک کیسه پلاستیکی تنها که هدف جدیدی پیدا می‌کند',
-            'سناریوی ویدیو: چطور در خانه سطل کمپوست بسازیم'
+            'سناریو ویدیو: ۵ روش استفاده از پوست لیمو',
+            'داستان: کیسه پلاستیکی که می‌خواست گلدان شود',
+            'سناریو ویدیو: ساخت سطل کمپوست در خانه'
         ]
     }
   },

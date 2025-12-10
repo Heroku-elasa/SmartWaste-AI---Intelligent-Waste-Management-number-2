@@ -3,7 +3,7 @@ import React, { createContext, useState, useContext, ReactNode } from 'react';
 import { translations } from './constants';
 
 export type Language = 'en' | 'fa';
-export type Page = 'home' | 'waste_collection' | 'smart_dashboard' | 'waste_site_analysis' | 'grant_finder' | 'impact_reporter' | 'waste_news' | 'ai_assistant' | 'recycling_calculator' | 'supplier_finder' | 'ai_researcher' | 'zero_waste' | 'real_time_dashboard' | 'dashboard_lesson' | 'wordpress_dashboard' | 'grant_opportunities';
+export type Page = 'home' | 'waste_collection' | 'smart_dashboard' | 'waste_site_analysis' | 'grant_finder' | 'impact_reporter' | 'waste_news' | 'ai_assistant' | 'recycling_calculator' | 'supplier_finder' | 'ai_researcher' | 'zero_waste' | 'real_time_dashboard' | 'dashboard_lesson' | 'wordpress_dashboard' | 'grant_opportunities' | 'grant_detail' | 'blockchain';
 
 
 export interface LanguageContextType {
@@ -79,6 +79,24 @@ export interface TuningLog {
   timestamp: string;
   message: string;
   type: 'info' | 'success' | 'error';
+}
+
+// Blockchain Types
+export interface Transaction {
+    hash: string;
+    block: number;
+    from: string;
+    to: string;
+    amount: string;
+    timestamp: string;
+    type: 'Reward' | 'Transfer' | 'Burn';
+}
+
+export interface BlockchainState {
+    isConnected: boolean;
+    walletAddress: string | null;
+    balance: number;
+    networkStatus: 'Active' | 'Congested' | 'Maintenance';
 }
 
 
@@ -187,9 +205,12 @@ export interface Grant {
   geography?: string;
   deadline?: string;
   notes?: string;
-  // Additional fields for Special Grants (Dashboard)
+  
+  // Extended fields for Detailed Page
   grantNumber?: string;
+  agency?: string;
   fundingAvailable?: string;
+  applicationDeadline?: string;
   status?: string;
   programOverview?: string;
   keyFeatures?: string[];

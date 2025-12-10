@@ -1,5 +1,4 @@
 
-
 import React, { useState, useRef, useEffect } from 'react';
 import { useLanguage, Page } from '../types';
 
@@ -71,6 +70,7 @@ const SiteHeader: React.FC<SiteHeaderProps> = ({ currentPage, setPage }) => {
     { key: 'waste_news', text: t('header.wasteNews'), action: () => handlePageChange('waste_news') },
     { key: 'ai_researcher', text: t('header.aiResearcher'), action: () => handlePageChange('ai_researcher') },
     { key: 'zero_waste', text: t('header.zeroWaste'), action: () => handlePageChange('zero_waste') },
+    { key: 'blockchain', text: t('header.blockchain'), action: () => handlePageChange('blockchain') },
     { key: 'ai_assistant', text: t('header.aiAssistant'), action: () => handlePageChange('ai_assistant') },
   ];
 
@@ -107,7 +107,7 @@ const SiteHeader: React.FC<SiteHeaderProps> = ({ currentPage, setPage }) => {
                  </button>
                  {isSuiteMenuOpen && (
                     <div className={`absolute mt-2 w-56 bg-white border border-gray-200 rounded-lg shadow-xl z-20 ${language === 'fa' ? 'right-0' : 'left-0'}`}>
-                        <ul className="py-1">
+                        <ul className="py-1 max-h-[80vh] overflow-y-auto">
                             {suiteNavLinks.map(link => (
                                 <li key={link.key}>
                                     <button onClick={() => handlePageChange(link.key as Page)} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-primary-50">

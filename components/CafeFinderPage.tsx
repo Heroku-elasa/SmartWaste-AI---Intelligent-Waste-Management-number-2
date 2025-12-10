@@ -445,7 +445,7 @@ const GrantFinderPage: React.FC<GrantFinderPageProps> = ({
                                 <div>
                                     <h3 className="text-lg font-semibold text-primary mb-4">{t('grantFinderPage.businessPlanOutline')}</h3>
                                     <div className="space-y-4">
-                                    {applicationDraft.businessPlanOutline.map((item, i) => (
+                                    {applicationDraft.businessPlanOutline?.map((item, i) => (
                                         <div key={i} className="p-4 bg-gray-50 border-l-4 border-secondary rounded-r-lg">
                                             <h4 className="font-bold text-dark">{item.section}</h4>
                                             <p className="text-sm text-gray-700 mt-1">{item.content}</p>
@@ -457,7 +457,7 @@ const GrantFinderPage: React.FC<GrantFinderPageProps> = ({
                                 <div>
                                     <h3 className="text-lg font-semibold text-primary mb-4">{t('grantFinderPage.applicationSections')}</h3>
                                     <div className="space-y-4">
-                                    {applicationDraft.applicationSections.map((item, i) => (
+                                    {applicationDraft.applicationSections?.map((item, i) => (
                                         <div key={i} className="p-4 bg-gray-50 rounded-lg border border-gray-200">
                                             <h4 className="font-bold text-dark">{item.sectionTitle}</h4>
                                             <p className="text-sm text-gray-700 mt-2 whitespace-pre-wrap leading-relaxed">{item.draftedContent}</p>
@@ -469,7 +469,7 @@ const GrantFinderPage: React.FC<GrantFinderPageProps> = ({
                                 <div>
                                     <h3 className="text-lg font-semibold text-primary mb-4">{t('grantFinderPage.nextSteps')}</h3>
                                     <ul className="list-disc list-inside space-y-2 text-gray-700">
-                                        {applicationDraft.nextSteps.map((step, i) => <li key={i}>{step}</li>)}
+                                        {applicationDraft.nextSteps?.map((step, i) => <li key={i}>{step}</li>)}
                                     </ul>
                                 </div>
                             </div>

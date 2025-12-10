@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useLanguage, EnvironmentalReport } from '../types';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
@@ -177,19 +178,19 @@ const ImpactReporterPage: React.FC<ImpactReporterPageProps> = ({
                         
                         <ReportSection title={t('impactReporterPage.positiveImpacts')} icon="🌱">
                           <ul className="list-disc list-inside space-y-2">
-                            {report.positiveImpacts.map((item, i) => <li key={i}>{item}</li>)}
+                            {report.positiveImpacts?.map((item, i) => <li key={i}>{item}</li>)}
                           </ul>
                         </ReportSection>
 
                         <ReportSection title={t('impactReporterPage.potentialRisks')} icon="⚠️">
                           <ul className="list-disc list-inside space-y-2">
-                            {report.potentialRisks.map((item, i) => <li key={i}>{item}</li>)}
+                            {report.potentialRisks?.map((item, i) => <li key={i}>{item}</li>)}
                           </ul>
                         </ReportSection>
                         
                         <ReportSection title={t('impactReporterPage.mitigationStrategies')} icon="🛡️">
                           <ul className="list-disc list-inside space-y-2">
-                            {report.mitigationStrategies.map((item, i) => <li key={i}>{item}</li>)}
+                            {report.mitigationStrategies?.map((item, i) => <li key={i}>{item}</li>)}
                           </ul>
                         </ReportSection>
                     </div>

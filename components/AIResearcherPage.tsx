@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useLanguage, ResearchReport } from '../types';
 
@@ -97,7 +98,7 @@ const AIResearcherPage: React.FC<AIResearcherPageProps> = ({ onSearch, isLoading
                             <div>
                                 <h3 className="text-xl font-semibold text-primary mb-4">{t('aiResearcherPage.keyFindings')}</h3>
                                 <div className="space-y-4">
-                                {report.keyFindings.map((item, i) => (
+                                {report.keyFindings?.map((item, i) => (
                                     <div key={i} className="p-4 bg-dark/40 border-l-4 border-secondary rounded-r-lg">
                                         <h4 className="font-bold text-light">{item.finding}</h4>
                                         <p className="text-sm text-gray-300 mt-1">{item.explanation}</p>
@@ -118,7 +119,7 @@ const AIResearcherPage: React.FC<AIResearcherPageProps> = ({ onSearch, isLoading
                             <div>
                                 <h3 className="text-xl font-semibold text-primary mb-4">{t('aiResearcherPage.keyConcepts')}</h3>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                {report.keyConcepts.map((item, i) => (
+                                {report.keyConcepts?.map((item, i) => (
                                     <div key={i} className="p-4 bg-dark/40 rounded-lg border border-secondary/20">
                                         <h4 className="font-bold text-light">{item.concept}</h4>
                                         <p className="text-sm text-gray-300 mt-1">{item.definition}</p>
@@ -140,7 +141,7 @@ const AIResearcherPage: React.FC<AIResearcherPageProps> = ({ onSearch, isLoading
                                 <div className="pt-6 border-t border-secondary/20">
                                     <h3 className="text-xl font-semibold text-primary mb-4">{t('aiResearcherPage.sources')}</h3>
                                     <ul className="space-y-2">
-                                        {report.sources.map((source, index) => (
+                                        {report.sources?.map((source, index) => (
                                             <li key={index} className="flex items-start">
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-500 mr-3 rtl:ml-3 rtl:mr-0 mt-1 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
                                                   <path fillRule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l-1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clipRule="evenodd" />

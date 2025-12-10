@@ -184,7 +184,7 @@ const WasteSiteAnalysisPage: React.FC<WasteSiteAnalysisPageProps> = ({
                   <p className="text-2xl font-bold text-dark mt-1 text-center">{result.estimatedMonthlyDiversion.total}</p>
                   <div className="h-64 w-full mt-4">
                       <ResponsiveContainer width="100%" height="100%">
-                          <BarChart data={result.estimatedMonthlyDiversion.monthlyBreakdown} margin={{ top: 5, right: 20, left: -20, bottom: 5 }}>
+                          <BarChart data={result.estimatedMonthlyDiversion?.monthlyBreakdown || []} margin={{ top: 5, right: 20, left: -20, bottom: 5 }}>
                               <XAxis dataKey="month" stroke="#4b5563" fontSize={12} tickLine={false} axisLine={false} />
                               <YAxis stroke="#4b5563" fontSize={12} tickLine={false} axisLine={false} />
                               <Tooltip content={<CustomTooltip unit="kg" />} cursor={{fill: 'rgba(20, 184, 166, 0.1)'}} />
@@ -199,7 +199,7 @@ const WasteSiteAnalysisPage: React.FC<WasteSiteAnalysisPageProps> = ({
                     <p className="text-2xl font-bold text-dark mt-1 text-center">{result.potentialAnnualSavings.total}</p>
                     <div className="h-64 w-full mt-4">
                       <ResponsiveContainer width="100%" height="100%">
-                          <BarChart data={result.potentialAnnualSavings.monthlyBreakdown} margin={{ top: 5, right: 20, left: -20, bottom: 5 }}>
+                          <BarChart data={result.potentialAnnualSavings?.monthlyBreakdown || []} margin={{ top: 5, right: 20, left: -20, bottom: 5 }}>
                               <XAxis dataKey="month" stroke="#4b5563" fontSize={12} tickLine={false} axisLine={false} />
                               <YAxis stroke="#4b5563" fontSize={12} tickLine={false} axisLine={false} />
                               <Tooltip content={<CustomTooltip unit={language === 'fa' ? 'تومان' : '$'} />} cursor={{fill: 'rgba(107, 114, 128, 0.1)'}} />
@@ -212,7 +212,7 @@ const WasteSiteAnalysisPage: React.FC<WasteSiteAnalysisPageProps> = ({
                 <div>
                     <h4 className="font-semibold text-primary mb-2">{t('wasteSiteAnalysisPage.recommendations')}</h4>
                     <div className="space-y-3">
-                        {result.recommendations.map((rec, i) => (
+                        {result.recommendations?.map((rec, i) => (
                             <div key={i} className="p-3 bg-white border border-gray-200 rounded-lg text-sm shadow-sm">
                                 <p className="font-bold text-dark">{rec.binCount} x {rec.binType}</p>
                                 <p className="text-gray-600 text-xs mt-1">{rec.reasoning}</p>
@@ -224,7 +224,7 @@ const WasteSiteAnalysisPage: React.FC<WasteSiteAnalysisPageProps> = ({
                     <h4 className="font-semibold text-primary mb-2">{t('wasteSiteAnalysisPage.logistics')}</h4>
                     <div className="p-4 bg-white border-l-4 border-gray-300 rounded-r-lg shadow-sm">
                         <ul className="list-disc list-inside space-y-2 text-gray-700 text-sm">
-                            {result.logisticsConsiderations.map((item, i) => <li key={i}>{item}</li>)}
+                            {result.logisticsConsiderations?.map((item, i) => <li key={i}>{item}</li>)}
                         </ul>
                     </div>
                  </div>

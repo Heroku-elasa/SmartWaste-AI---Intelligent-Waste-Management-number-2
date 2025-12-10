@@ -22,6 +22,8 @@ import SiteFooter from './components/Footer';
 import QuotaErrorModal from './components/QuotaErrorModal';
 import ConfirmationModal from './components/ConfirmationModal';
 import GrantAdopter from './components/GrantAdopter';
+import GrantDetailPage from './components/GrantDetailPage';
+import BlockchainPage from './components/BlockchainPage';
 
 import { useLanguage, Page, Message, WasteSiteAnalysisInput, WasteSiteAnalysisResult, Grant, GrantSummary, EnvironmentalReport, RecyclingCalculatorResult, NewsSummaryResult, ApplicationDraft, Supplier, ResearchReport, WasteAnalysisResult, WasteReport, WastePrediction, DashboardAnalytics, ZeroWasteAdviceOutput, ContentGenerationResult } from './types';
 import * as geminiService from './services/geminiService';
@@ -48,6 +50,9 @@ const App: React.FC = () => {
   const [grantAnalysisResult, setGrantAnalysisResult] = useState<GrantSummary | null>(null);
   const [isAnalyzingGrant, setIsAnalyzingGrant] = useState(false);
   const [grantAnalysisError, setGrantAnalysisError] = useState<string | null>(null);
+  
+  // State for Grant Details
+  const [selectedGrantDetail, setSelectedGrantDetail] = useState<Grant | null>(null);
 
   // State for Supplier Finder
   const [supplierFinderResults, setSupplierFinderResults] = useState<Supplier[] | null>(null);
@@ -188,6 +193,11 @@ const App: React.FC = () => {
       setIsFetchingAnalytics(false);
     }
   }, [language, t]);
+  
+  const handleViewGrantDetail = (grant: Grant) => {
+      setSelectedGrantDetail(grant);
+      setPage('grant_detail');
+  };
 
 
   // --- AI Assistant Logic ---
@@ -457,6 +467,7 @@ const App: React.FC = () => {
                   isFetchingAnalytics={isFetchingAnalytics}
                   analyticsResult={analyticsResult}
                   error={dashboardError}
+                  onViewGrant={handleViewGrantDetail}
                 />;
       case 'real_time_dashboard':
         return <RealTimeDashboard setPage={handlePageChange} />;
@@ -466,6 +477,26 @@ const App: React.FC = () => {
         return <DashboardLessonPage setPage={handlePageChange} />;
       case 'grant_opportunities':
         return <GrantOpportunitiesPage setPage={handlePageChange} />;
+      case 'blockchain':
+        return <BlockchainPage setPage={handlePageChange} />;
+      case 'grant_detail':
+        if (selectedGrantDetail) {
+            return <GrantDetailPage grant={selectedGrantDetail} onBack={() => setPage('smart_dashboard')} />;
+        }
+        return <SmartWasteDashboard
+                  setPage={handlePageChange}
+                  onReportSubmit={handleWasteReportSubmit}
+                  isSubmittingReport={isSubmittingReport}
+                  reportSubmissionResult={reportSubmissionResult}
+                  onPredict={handleWastePrediction}
+                  isPredicting={isPredicting}
+                  predictionResult={predictionResult}
+                  onFetchAnalytics={handleFetchAnalytics}
+                  isFetchingAnalytics={isFetchingAnalytics}
+                  analyticsResult={analyticsResult}
+                  error={dashboardError}
+                  onViewGrant={handleViewGrantDetail}
+                />;
       case 'waste_collection':
         return <WasteCollectorPage
                   onAnalyze={handleAnalyzeWaste}
@@ -511,13 +542,6 @@ const App: React.FC = () => {
                                 onClear={() => setAnalyzingGrant(null)}
                                 onPrepareProposal={(grant) => {
                                     setAnalyzingGrant(null);
-                                    // Trigger preparation in GrantFinderPage via state/callback if needed, 
-                                    // but GrantFinderPage handles generation via internal state + props.
-                                    // We can just close this and let user click 'Prepare' there, or we can handle it.
-                                    // Since handleGenerateApplication requires project desc, we just close this.
-                                    // Ideally, we'd open the draft view with this grant pre-selected.
-                                    // For now, we'll just close it as the 'Use for Proposal' in Adopter 
-                                    // is primarily for triggering the next step which happens in the parent page context.
                                 }}
                             />
                         </div>
