@@ -1204,6 +1204,13 @@ export const translations = {
             keywordBased: '{common} {maxResults} گرنت منطبق با این جستجوها پیدا کنید: {queries}.'
         }
     },
+    footer: {
+      description: 'EcoRide راه‌حل‌های هوشمند برای مدیریت پسماند درخواستی در شهرهای مدرن ارائه می‌دهد.',
+      quickLinks: 'لینک‌های سریع',
+      contact: 'تماس با ما',
+      address: 'تهران، خیابان ولیعصر، پلاک ۱۲۳',
+      copyright: '© ۲۰۲۴ EcoRide. تمامی حقوق محفوظ است.',
+    },
     quotaErrorModal: {
       title: 'محدودیت API',
       body: 'شما از حد مجاز روزانه خود برای API جمنای فراتر رفته‌اید. لطفاً تنظیمات صورتحساب خود را بررسی کنید یا فردا دوباره تلاش کنید.',
