@@ -27,6 +27,7 @@ import BlockchainPage from './components/BlockchainPage';
 
 import { useLanguage, Page, Message, WasteSiteAnalysisInput, WasteSiteAnalysisResult, Grant, GrantSummary, EnvironmentalReport, RecyclingCalculatorResult, NewsSummaryResult, ApplicationDraft, Supplier, ResearchReport, WasteAnalysisResult, WasteReport, WastePrediction, DashboardAnalytics, ZeroWasteAdviceOutput, ContentGenerationResult } from './types';
 import * as geminiService from './services/geminiService';
+import * as openRouterService from './services/openRouterService';
 
 const initialWasteSiteInputs: WasteSiteAnalysisInput = {
   description: '',
@@ -38,6 +39,13 @@ const App: React.FC = () => {
   const { language, t } = useLanguage();
   const [page, setPage] = useState<Page>('home');
   
+  // Provider state
+  const [useOpenRouter, setUseOpenRouter] = useState(false);
+  
+  const getService = () => {
+      return useOpenRouter ? openRouterService : geminiService;
+  };
+
   // State for Waste Site Analysis
   const [wasteSiteAnalysisInputs, setWasteSiteAnalysisInputs] = useState<WasteSiteAnalysisInput>(initialWasteSiteInputs);
   const [wasteSiteAnalysisResult, setWasteSiteAnalysisResult] = useState<WasteSiteAnalysisResult | null>(null);
@@ -75,7 +83,7 @@ const App: React.FC = () => {
   const [recyclingCalculatorError, setRecyclingCalculatorError] = useState<string | null>(null);
 
   // State for AI Assistant
-  const [chat, setChat] = useState<Chat | null>(null);
+  const [chat, setChat] = useState<any | null>(null); // Relaxed type for compatibility
   const [chatHistory, setChatHistory] = useState<Message[]>([]);
   const [isChatStreaming, setIsChatStreaming] = useState(false);
   const [chatError, setChatError] = useState<string | null>(null);
@@ -145,13 +153,20 @@ const App: React.FC = () => {
     return 'An unexpected error occurred. Please try again.';
   };
 
+  const handleSwitchToOpenRouter = (apiKey: string) => {
+      openRouterService.setApiKey(apiKey);
+      setUseOpenRouter(true);
+      setIsQuotaExhausted(false);
+      alert("Switched to OpenRouter API.");
+  };
+
   // --- Smart Waste Dashboard Logic ---
   const handleWasteReportSubmit = async (report: WasteReport) => {
     setIsSubmittingReport(true);
     setDashboardError(null);
     setReportSubmissionResult(null);
     try {
-      const result = await geminiService.submitWasteReport(report, language);
+      const result = await getService().submitWasteReport(report, language);
       setReportSubmissionResult(result);
     } catch (err) {
       setDashboardError(handleApiError(err));
@@ -165,7 +180,7 @@ const App: React.FC = () => {
     setDashboardError(null);
     setPredictionResult(null);
     try {
-      const result = await geminiService.predictWasteVolume(location, language);
+      const result = await getService().predictWasteVolume(location, language);
       setPredictionResult(result);
     } catch (err) {
       setDashboardError(handleApiError(err));
@@ -185,14 +200,14 @@ const App: React.FC = () => {
           todayReports: 24,
           routingImprovement: 92,
       };
-      const result = await geminiService.getDashboardAnalytics(mockMetrics, language);
+      const result = await getService().getDashboardAnalytics(mockMetrics, language);
       setAnalyticsResult(result);
     } catch (err) {
       setDashboardError(handleApiError(err));
     } finally {
       setIsFetchingAnalytics(false);
     }
-  }, [language, t]);
+  }, [language, t, useOpenRouter]);
   
   const handleViewGrantDetail = (grant: Grant) => {
       setSelectedGrantDetail(grant);
@@ -203,7 +218,7 @@ const App: React.FC = () => {
   // --- AI Assistant Logic ---
   useEffect(() => {
     if (page === 'ai_assistant') {
-      const newChat = geminiService.startChat(language);
+      const newChat = getService().startChat(language);
       setChat(newChat);
       setChatHistory([{
         role: 'model',
@@ -213,7 +228,7 @@ const App: React.FC = () => {
       setChat(null);
       setChatHistory([]);
     }
-  }, [page, language, t]);
+  }, [page, language, t, useOpenRouter]);
 
   const handleSendMessage = async (message: string) => {
     if (!chat) return;
@@ -248,17 +263,16 @@ const App: React.FC = () => {
     setWasteSiteAnalysisError(null);
     setWasteSiteAnalysisResult(null);
     try {
-      const result = await geminiService.generateWasteSiteAnalysis(wasteSiteAnalysisInputs, language);
+      const result = await getService().generateWasteSiteAnalysis(wasteSiteAnalysisInputs, language);
       setWasteSiteAnalysisResult(result);
     } catch (err) {
       setWasteSiteAnalysisError(handleApiError(err));
     } finally {
       setIsAnalyzingWasteSite(false);
     }
-  }, [wasteSiteAnalysisInputs, language]);
+  }, [wasteSiteAnalysisInputs, language, useOpenRouter]);
 
   // --- Grant Finder Logic ---
-  // Note: Searching is now handled locally in the component state for found grants
   
   const handleSaveGrant = (grant: Grant) => {
       if (!savedGrants.some(g => g.grantTitle === grant.grantTitle && g.link === grant.link)) {
@@ -284,7 +298,7 @@ const App: React.FC = () => {
       setGrantAnalysisError(null);
       setGrantAnalysisResult(null);
       try {
-          const result = await geminiService.analyzeGrant(grant, '', language);
+          const result = await getService().analyzeGrant(grant, '', language);
           setGrantAnalysisResult(result);
       } catch (err) {
           setGrantAnalysisError(handleApiError(err));
@@ -299,7 +313,7 @@ const App: React.FC = () => {
     setSupplierFinderError(null);
     setSupplierFinderResults(null);
     try {
-      const results = await geminiService.findSuppliers(query, language);
+      const results = await getService().findSuppliers(query, language);
       setSupplierFinderResults(results);
     } catch (err) {
       setSupplierFinderError(handleApiError(err));
@@ -313,11 +327,10 @@ const App: React.FC = () => {
     setIsGeneratingApplication(true);
     setApplicationError(null);
     setApplicationDraft(null);
-    // If analysis was open, close it to show the generator
     if (analyzingGrant) setAnalyzingGrant(null); 
     
     try {
-      const result = await geminiService.generateApplicationDraft(projectDescription, grant, language);
+      const result = await getService().generateApplicationDraft(projectDescription, grant, language);
       setApplicationDraft(result);
     } catch (err) {
       setApplicationError(handleApiError(err));
@@ -332,7 +345,7 @@ const App: React.FC = () => {
     setReportError(null);
     setImpactReport(null);
     try {
-      const result = await geminiService.generateImpactReport(description, language);
+      const result = await getService().generateImpactReport(description, language);
       setImpactReport(result);
     } catch (err) {
       setReportError(handleApiError(err));
@@ -347,7 +360,7 @@ const App: React.FC = () => {
       setRecyclingCalculatorError(null);
       setRecyclingCalculatorResult(null);
       try {
-          const result = await geminiService.calculateRecyclingValue(monthlyWasteTonnes, language);
+          const result = await getService().calculateRecyclingValue(monthlyWasteTonnes, language);
           setRecyclingCalculatorResult(result);
       } catch (err) {
           setRecyclingCalculatorError(handleApiError(err));
@@ -362,7 +375,7 @@ const App: React.FC = () => {
     setNewsError(null);
     setNewsResult(null);
     try {
-        const result = await geminiService.summarizeNews(query, language);
+        const result = await getService().summarizeNews(query, language);
         setNewsResult(result);
     } catch (err) {
         setNewsError(handleApiError(err));
@@ -377,7 +390,7 @@ const App: React.FC = () => {
     setResearchError(null);
     setResearchReport(null);
     try {
-        const result = await geminiService.conductDeepResearch(query, language);
+        const result = await getService().conductDeepResearch(query, language);
         setResearchReport(result);
     } catch (err) {
         setResearchError(handleApiError(err));
@@ -392,7 +405,7 @@ const App: React.FC = () => {
     setWasteAnalysisError(null);
     setWasteAnalysisResult(null);
     try {
-        const result = await geminiService.analyzeWasteImage(image, language);
+        const result = await getService().analyzeWasteImage(image, language);
         setWasteAnalysisResult(result);
     } catch (err) {
         setWasteAnalysisError(handleApiError(err));
@@ -410,14 +423,11 @@ const App: React.FC = () => {
   };
   
   const handleConfirmPickup = () => {
-    // In a real app, this would trigger a backend API call.
-    // Here, we just update the UI state to show a success message.
     setIsPickupConfirmed(true);
   };
 
   const handleCloseConfirmationModal = () => {
     setIsConfirmationModalOpen(false);
-    // After a successful pickup is confirmed and the modal is closed, reset the state.
     if (isPickupConfirmed) {
       setWasteAnalysisResult(null);
     }
@@ -429,7 +439,7 @@ const App: React.FC = () => {
     setAdviceError(null);
     setAdviceResult(null);
     try {
-      const result = await geminiService.getZeroWasteAdvice(question, language);
+      const result = await getService().getZeroWasteAdvice(question, language);
       setAdviceResult(result);
     } catch (err) {
       setAdviceError(handleApiError(err));
@@ -443,7 +453,7 @@ const App: React.FC = () => {
     setContentError(null);
     setContentResult(null);
     try {
-      const result = await geminiService.generateEcoContent(topic, format, language);
+      const result = await getService().generateEcoContent(topic, format, language);
       setContentResult(result);
     } catch (err) {
       setContentError(handleApiError(err));
@@ -617,6 +627,12 @@ const App: React.FC = () => {
       {/* Hide standard header on specific dashboards for full screen experience if desired, or keep consistent */}
       {page !== 'real_time_dashboard' && page !== 'wordpress_dashboard' && <SiteHeader currentPage={page} setPage={handlePageChange} />}
       
+      {useOpenRouter && (
+          <div className="bg-blue-600 text-white text-xs text-center py-1">
+              Using OpenRouter API
+          </div>
+      )}
+
       <main>
         {renderPage()}
       </main>
@@ -626,6 +642,7 @@ const App: React.FC = () => {
       <QuotaErrorModal 
         isOpen={isQuotaExhausted} 
         onClose={() => setIsQuotaExhausted(false)}
+        onSwitchToOpenRouter={handleSwitchToOpenRouter}
       />
       <ConfirmationModal
         isOpen={isConfirmationModalOpen}

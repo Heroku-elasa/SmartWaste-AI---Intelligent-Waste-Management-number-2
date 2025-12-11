@@ -1,20 +1,23 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
 
-# Run and deploy your AI Studio app
+# EcoRide Smart Waste Management Platform
 
-This contains everything you need to run your app locally.
+This is a comprehensive AI-powered waste management application.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1w6QFIv038lChM-NMtE5iaoFI_DuBTsHx
+## API Configuration
 
-## Run Locally
+This application primarily uses the **Google Gemini API** (`@google/genai`).
+However, if the API quota is exceeded or you prefer another provider, it supports **OpenRouter** as a fallback.
 
-**Prerequisites:**  Node.js
+### Using Google Gemini
+1. Ensure your `API_KEY` is set in the environment variables (e.g., via `process.env.API_KEY` in the build tool or `.env` file).
+2. The app defaults to using this key.
 
+### Using OpenRouter (Fallback)
+If the Google API fails (e.g., 429 Too Many Requests), a modal will appear.
+1. Sign up at [OpenRouter.ai](https://openrouter.ai/).
+2. Create an API Key.
+3. Enter the key in the "Quota Exceeded" modal within the app.
+4. Click "Use OpenRouter".
+5. The app will switch to using OpenRouter (defaulting to `google/gemini-2.0-flash-001` or `openai/gpt-4o-mini`) for subsequent requests.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+**Note:** Some advanced features like direct Google Search grounding are simulated or simplified when using the OpenRouter fallback.

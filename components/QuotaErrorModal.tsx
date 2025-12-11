@@ -1,13 +1,17 @@
-import React from 'react';
+
+import React, { useState } from 'react';
 import { useLanguage } from '../types';
 
 interface QuotaErrorModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onSwitchToOpenRouter: (apiKey: string) => void;
 }
 
-const QuotaErrorModal: React.FC<QuotaErrorModalProps> = ({ isOpen, onClose }) => {
+const QuotaErrorModal: React.FC<QuotaErrorModalProps> = ({ isOpen, onClose, onSwitchToOpenRouter }) => {
   const { t } = useLanguage();
+  const [apiKey, setApiKey] = useState('');
+
   if (!isOpen) return null;
 
   return (
@@ -24,24 +28,49 @@ const QuotaErrorModal: React.FC<QuotaErrorModalProps> = ({ isOpen, onClose }) =>
             <p className="text-sm text-gray-300">
               {t('quotaErrorModal.body')}
             </p>
+            <p className="text-sm text-gray-400 mt-2">
+              Alternatively, you can use OpenRouter as a fallback.
+            </p>
           </div>
         </div>
-        <div className="mt-5 sm:mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <a
-            href="https://aistudio.google.com/billing"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:text-sm text-center"
-          >
-            {t('quotaErrorModal.cta')}
-          </a>
+
+        <div className="mt-4">
+            <label className="block text-xs font-medium text-gray-400 mb-1">OpenRouter API Key</label>
+            <input 
+                type="password" 
+                value={apiKey}
+                onChange={(e) => setApiKey(e.target.value)}
+                placeholder="sk-or-..."
+                className="w-full bg-secondary/20 border border-secondary/40 rounded px-3 py-2 text-light text-sm focus:outline-none focus:border-primary"
+            />
+        </div>
+
+        <div className="mt-5 sm:mt-6 grid grid-cols-1 gap-3">
           <button
-            type="button"
-            onClick={onClose}
-            className="w-full inline-flex justify-center rounded-md border border-secondary/40 shadow-sm px-4 py-2 bg-secondary/30 text-base font-medium text-light hover:bg-secondary/50 focus:outline-none sm:text-sm"
+            onClick={() => onSwitchToOpenRouter(apiKey)}
+            disabled={!apiKey.trim()}
+            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-primary-700 focus:outline-none disabled:bg-gray-600 disabled:cursor-not-allowed sm:text-sm"
           >
-            {t('quotaErrorModal.close')}
+            Use OpenRouter
           </button>
+          
+          <div className="grid grid-cols-2 gap-3">
+              <a
+                href="https://aistudio.google.com/billing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex justify-center rounded-md border border-gray-600 shadow-sm px-4 py-2 bg-transparent text-base font-medium text-gray-300 hover:bg-white/5 focus:outline-none sm:text-sm text-center"
+              >
+                {t('quotaErrorModal.cta')}
+              </a>
+              <button
+                type="button"
+                onClick={onClose}
+                className="w-full inline-flex justify-center rounded-md border border-secondary/40 shadow-sm px-4 py-2 bg-secondary/30 text-base font-medium text-light hover:bg-secondary/50 focus:outline-none sm:text-sm"
+              >
+                {t('quotaErrorModal.close')}
+              </button>
+          </div>
         </div>
       </div>
     </div>

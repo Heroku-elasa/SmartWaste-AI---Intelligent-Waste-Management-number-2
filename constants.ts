@@ -325,6 +325,7 @@ export const translations = {
                 sender: "Sender",
                 receiver: "Receiver",
                 type: "Type",
+                timestamp: "Timestamp",
                 sidebar: { dashboard: "Dashboard", wallet: "Wallet", mining: "Mining", classification: "Classification", chat: "AI Chat" }
             }
         },
@@ -1076,6 +1077,7 @@ export const translations = {
                 sender: "فرستنده",
                 receiver: "گیرنده",
                 type: "نوع",
+                timestamp: "زمان",
                 sidebar: { dashboard: "داشبورد", wallet: "کیف پول", mining: "استخراج", classification: "طبقه‌بندی", chat: "چت AI" }
             }
         },

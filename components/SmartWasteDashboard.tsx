@@ -863,7 +863,8 @@ const SmartWasteDashboard: React.FC<SmartWasteDashboardProps> = (props) => {
                                                 <th className="px-6 py-3">{rc.sender}</th>
                                                 <th className="px-6 py-3">{rc.receiver}</th>
                                                 <th className="px-6 py-3">{rc.amount}</th>
-                                                <th className="px-6 py-3 text-right">{rc.type}</th>
+                                                <th className="px-6 py-3">{rc.type}</th>
+                                                <th className="px-6 py-3 text-right">{rc.timestamp}</th>
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-gray-700">
@@ -874,10 +875,13 @@ const SmartWasteDashboard: React.FC<SmartWasteDashboardProps> = (props) => {
                                                     <td className={`px-6 py-4 font-mono font-bold ${tx.amount.startsWith('+') ? 'text-green-400' : 'text-red-400'}`}>
                                                         {tx.amount}
                                                     </td>
-                                                    <td className="px-6 py-4 text-right">
+                                                    <td className="px-6 py-4">
                                                         <span className={`px-2 py-1 rounded text-xs font-bold ${tx.type === 'Reward' ? 'bg-green-900/30 text-green-400 border border-green-500/30' : tx.type === 'Transfer' ? 'bg-blue-900/30 text-blue-400 border border-blue-500/30' : 'bg-red-900/30 text-red-400 border border-red-500/30'}`}>
                                                             {tx.type}
                                                         </span>
+                                                    </td>
+                                                    <td className="px-6 py-4 text-right text-gray-400 text-xs">
+                                                        {tx.timestamp}
                                                     </td>
                                                 </tr>
                                             ))}
