@@ -3,7 +3,7 @@ import React, { createContext, useState, useContext, ReactNode } from 'react';
 import { translations } from './constants';
 
 export type Language = 'en' | 'fa';
-export type Page = 'home' | 'waste_collection' | 'smart_dashboard' | 'waste_site_analysis' | 'grant_finder' | 'impact_reporter' | 'waste_news' | 'ai_assistant' | 'recycling_calculator' | 'supplier_finder' | 'ai_researcher' | 'zero_waste' | 'real_time_dashboard' | 'dashboard_lesson' | 'wordpress_dashboard' | 'grant_opportunities' | 'grant_detail' | 'blockchain';
+export type Page = 'home' | 'waste_collection' | 'smart_dashboard' | 'waste_site_analysis' | 'grant_finder' | 'impact_reporter' | 'waste_news' | 'ai_assistant' | 'recycling_calculator' | 'supplier_finder' | 'ai_researcher' | 'zero_waste' | 'real_time_dashboard' | 'dashboard_lesson' | 'wordpress_dashboard' | 'grant_opportunities' | 'grant_detail' | 'blockchain' | 'ai_dashboard';
 
 
 export interface LanguageContextType {

@@ -4,18 +4,31 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently \"vite\" \"tsx server/index.ts\"",
+    "dev:frontend": "vite",
+    "dev:server": "tsx server/index.ts",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "db:push": "drizzle-kit push"
   },
   "dependencies": {
-    "react-dom": "^19.1.1",
-    "react": "^19.1.1",
     "@google/genai": "^1.17.0",
-    "marked": "^14.0.0",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/pg": "^8.16.0",
+    "concurrently": "^9.2.1",
+    "cors": "^2.8.5",
+    "drizzle-kit": "^0.31.8",
+    "drizzle-orm": "^0.45.1",
+    "express": "^5.2.1",
     "html-to-docx": "^1.8.0",
     "mammoth": "^1.7.2",
-    "recharts": "^2.12.7"
+    "marked": "^14.0.0",
+    "pg": "^8.16.3",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "recharts": "^2.12.7",
+    "tsx": "^4.21.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

@@ -24,6 +24,7 @@ import ConfirmationModal from './components/ConfirmationModal';
 import GrantAdopter from './components/GrantAdopter';
 import GrantDetailPage from './components/GrantDetailPage';
 import BlockchainPage from './components/BlockchainPage';
+import AIAdminDashboard from './components/AIAdminDashboard';
 
 import { useLanguage, Page, Message, WasteSiteAnalysisInput, WasteSiteAnalysisResult, Grant, GrantSummary, EnvironmentalReport, RecyclingCalculatorResult, NewsSummaryResult, ApplicationDraft, Supplier, ResearchReport, WasteAnalysisResult, WasteReport, WastePrediction, DashboardAnalytics, ZeroWasteAdviceOutput, ContentGenerationResult } from './types';
 import * as geminiService from './services/geminiService';
@@ -616,6 +617,8 @@ const App: React.FC = () => {
                   result={recyclingCalculatorResult}
                   isQuotaExhausted={isQuotaExhausted}
                 />;
+      case 'ai_dashboard':
+        return <AIAdminDashboard setPage={handlePageChange} />;
       case 'home':
       default:
         return <HomePage setPage={handlePageChange} />;
@@ -625,7 +628,7 @@ const App: React.FC = () => {
   return (
     <div className="bg-light text-dark min-h-screen">
       {/* Hide standard header on specific dashboards for full screen experience if desired, or keep consistent */}
-      {page !== 'real_time_dashboard' && page !== 'wordpress_dashboard' && <SiteHeader currentPage={page} setPage={handlePageChange} />}
+      {page !== 'real_time_dashboard' && page !== 'wordpress_dashboard' && page !== 'ai_dashboard' && <SiteHeader currentPage={page} setPage={handlePageChange} />}
       
       {useOpenRouter && (
           <div className="bg-blue-600 text-white text-xs text-center py-1">
@@ -637,7 +640,7 @@ const App: React.FC = () => {
         {renderPage()}
       </main>
       
-      {page !== 'real_time_dashboard' && page !== 'wordpress_dashboard' && <SiteFooter setPage={handlePageChange} />}
+      {page !== 'real_time_dashboard' && page !== 'wordpress_dashboard' && page !== 'ai_dashboard' && <SiteFooter setPage={handlePageChange} />}
       
       <QuotaErrorModal 
         isOpen={isQuotaExhausted} 
