@@ -166,7 +166,7 @@ export const translations = {
     // ... rest of translations
     hero: {
       title: 'The Future of Urban Waste, <br/> <span class="text-primary-500">On-Demand.</span>',
-      subtitle: 'EcoRide combines smart technology with on-demand service to make waste collection efficient, clean, and simple. Like Uber, but for your recycling.',
+      subtitle: 'Satlineh combines smart technology with on-demand service to make waste collection efficient, clean, and simple. Like Uber, but for your recycling.',
       button1: 'Request Pickup',
       button2: 'View Dashboard',
     },
@@ -731,17 +731,17 @@ export const translations = {
         }
     },
     aiAssistantPage: {
-      title: 'EcoRide AI Assistant',
+      title: 'Satlineh AI Assistant',
       subtitle: 'Your personal AI expert for waste management. Ask about sorting, recycling, or sustainability.',
       placeholder: 'Ask a question...',
-      welcomeMessage: 'Hello! I am the EcoRide AI Assistant. How can I help you today?',
+      welcomeMessage: 'Hello! I am the Satlineh AI Assistant. How can I help you today?',
     },
     footer: {
-      description: 'EcoRide provides intelligent solutions for on-demand waste management in modern cities.',
+      description: 'Satlineh provides intelligent solutions for on-demand waste management in modern cities.',
       quickLinks: 'Quick Links',
       contact: 'Contact Us',
       address: '123 Smart City Ave, Tehran, 12345',
-      copyright: '© 2024 EcoRide. All Rights Reserved.',
+      copyright: '© 2024 Satlineh. All Rights Reserved.',
     },
     quotaErrorModal: {
       title: 'API Quota Exceeded',
@@ -918,7 +918,7 @@ export const translations = {
     // ... rest of translations
     hero: {
       title: 'آینده پسماند شهری، <br/> <span class="text-primary-500">در لحظه.</span>',
-      subtitle: 'EcoRide تکنولوژی هوشمند را با خدمات درخواستی ترکیب می‌کند تا جمع‌آوری پسماند را کارآمد، پاک و ساده سازد. مانند اسنپ، اما برای بازیافت شما.',
+      subtitle: 'Satlineh تکنولوژی هوشمند را با خدمات درخواستی ترکیب می‌کند تا جمع‌آوری پسماند را کارآمد، پاک و ساده سازد. مانند اسنپ، اما برای بازیافت شما.',
       button1: 'درخواست جمع‌آوری',
       button2: 'مشاهده داشبورد',
     },
@@ -1205,11 +1205,11 @@ export const translations = {
         }
     },
     footer: {
-      description: 'EcoRide راه‌حل‌های هوشمند برای مدیریت پسماند درخواستی در شهرهای مدرن ارائه می‌دهد.',
+      description: 'Satlineh راه‌حل‌های هوشمند برای مدیریت پسماند درخواستی در شهرهای مدرن ارائه می‌دهد.',
       quickLinks: 'لینک‌های سریع',
       contact: 'تماس با ما',
       address: 'تهران، خیابان ولیعصر، پلاک ۱۲۳',
-      copyright: '© ۲۰۲۴ EcoRide. تمامی حقوق محفوظ است.',
+      copyright: '© ۲۰۲۴ Satlineh. تمامی حقوق محفوظ است.',
     },
     quotaErrorModal: {
       title: 'محدودیت API',

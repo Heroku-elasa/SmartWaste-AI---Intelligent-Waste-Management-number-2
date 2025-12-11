@@ -157,7 +157,7 @@ const SiteHeader: React.FC<SiteHeaderProps> = ({ currentPage, setPage }) => {
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
               </div>
-              <span className="font-bold text-xl text-gray-900 tracking-tight">EcoRide</span>
+              <span className="font-bold text-xl text-gray-900 tracking-tight">Satlineh</span>
             </button>
             <nav className="hidden lg:flex lg:ml-10 lg:space-x-1 rtl:lg:space-x-reverse rtl:lg:mr-10 rtl:lg:ml-0">
               {mainNavLinks.map(link => (

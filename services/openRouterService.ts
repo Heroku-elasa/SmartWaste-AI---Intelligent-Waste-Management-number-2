@@ -23,7 +23,7 @@ import { PROMPTS } from '../constants';
 
 let openRouterApiKey: string | null = null;
 const SITE_URL = window.location.origin;
-const SITE_NAME = "EcoRide Smart Waste";
+const SITE_NAME = "Satlineh Smart Waste";
 
 export const setApiKey = (key: string) => {
     openRouterApiKey = key;
