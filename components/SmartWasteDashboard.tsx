@@ -360,131 +360,186 @@ const SmartWasteDashboard: React.FC<SmartWasteDashboardProps> = (props) => {
     switch (activeTab) {
       case 'report':
         return (
-          <div className="p-6 bg-white rounded-lg animate-fade-in border border-gray-200 shadow-sm">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
+          <div className="bg-white rounded-2xl animate-fade-in border border-gray-100 shadow-sm overflow-hidden">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-6 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
                 <div>
-                    <h3 className="text-lg font-semibold text-dark">{t('smartWasteDashboard.liveFeed.title')}</h3>
-                    <p className="text-sm text-gray-600">{t('smartWasteDashboard.liveFeed.subtitle')}</p>
+                    <div className="flex items-center gap-2 mb-1">
+                        <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                        <span className="text-xs font-semibold text-green-600 uppercase tracking-wider">{language === 'fa' ? 'زنده' : 'Live'}</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900">{t('smartWasteDashboard.liveFeed.title')}</h3>
+                    <p className="text-sm text-gray-500 mt-1">{t('smartWasteDashboard.liveFeed.subtitle')}</p>
                 </div>
-                <div className="flex bg-gray-100 p-1 rounded-lg">
+                <div className="flex bg-gray-100 p-1 rounded-xl mt-4 sm:mt-0">
                     <button 
                         onClick={() => setViewMode('list')}
-                        className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${viewMode === 'list' ? 'bg-white text-primary shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
+                        className={`px-4 py-2 text-sm font-medium rounded-lg transition-all flex items-center gap-2 ${viewMode === 'list' ? 'bg-white text-primary shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
                     >
-                        List View
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" /></svg>
+                        {language === 'fa' ? 'لیست' : 'List'}
                     </button>
                     <button 
                          onClick={() => setViewMode('map')}
-                         className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all flex items-center gap-1 ${viewMode === 'map' ? 'bg-white text-primary shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
+                         className={`px-4 py-2 text-sm font-medium rounded-lg transition-all flex items-center gap-2 ${viewMode === 'map' ? 'bg-white text-primary shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
                     >
-                        Map View
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" /></svg>
+                        {language === 'fa' ? 'نقشه' : 'Map'}
                     </button>
                 </div>
             </div>
 
-            {viewMode === 'list' ? (
-                <div className="space-y-3">
-                {requests.map((req) => (
-                    <div key={req.id} className="bg-white p-4 rounded-lg flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border border-gray-200 hover:border-primary/30 transition-colors">
-                        <div className="flex-1">
-                            <p className="font-bold text-dark">{req.location}</p>
-                            <p className="text-xs text-gray-500">{req.wasteType} &bull; {req.volume}</p>
+            <div className="p-6">
+                {viewMode === 'list' ? (
+                    <div className="space-y-3">
+                    {requests.map((req, index) => (
+                        <div key={req.id} className="bg-gray-50 hover:bg-gray-100 p-4 rounded-xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border border-gray-200 hover:border-primary/40 transition-all group">
+                            <div className="flex items-start gap-4">
+                                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center border border-gray-200 text-gray-400 group-hover:border-primary/30 group-hover:text-primary transition-colors">
+                                    <span className="text-lg font-bold">#{index + 1}</span>
+                                </div>
+                                <div className="flex-1">
+                                    <p className="font-semibold text-gray-900">{req.location}</p>
+                                    <div className="flex items-center gap-2 mt-1">
+                                        <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium bg-white border border-gray-200 rounded-md text-gray-600">{req.wasteType}</span>
+                                        <span className="text-gray-300">|</span>
+                                        <span className="text-xs text-gray-500">{req.volume}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <span className={`px-3 py-1.5 text-xs font-semibold rounded-lg border ${statusColors[req.status]}`}>
+                                    {t(`smartWasteDashboard.liveFeed.statuses.${req.status.toLowerCase().replace(' ', '')}`)}
+                                </span>
+                                <button 
+                                    onClick={() => handleDispatch(req.id)}
+                                    disabled={req.status !== 'Pending'}
+                                    className="px-4 py-2 text-xs font-semibold text-white bg-primary rounded-lg hover:bg-primary-600 transition-all shadow-sm hover:shadow disabled:bg-gray-300 disabled:cursor-not-allowed disabled:shadow-none"
+                                >
+                                    {t('smartWasteDashboard.liveFeed.dispatch')}
+                                </button>
+                            </div>
                         </div>
-                        <div className="flex items-center gap-4">
-                            <span className={`px-3 py-1 text-xs font-medium rounded-full border ${statusColors[req.status]}`}>{t(`smartWasteDashboard.liveFeed.statuses.${req.status.toLowerCase().replace(' ', '')}`)}</span>
-                            <button 
-                                onClick={() => handleDispatch(req.id)}
-                                disabled={req.status !== 'Pending'}
-                                className="px-4 py-1.5 text-xs font-semibold text-white bg-primary rounded-md hover:bg-primary-600 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
-                            >
-                                {t('smartWasteDashboard.liveFeed.dispatch')}
-                            </button>
-                        </div>
+                    ))}
                     </div>
-                ))}
-                </div>
-            ) : (
-                <div className="animate-fade-in">
-                    {renderMap()}
-                </div>
-            )}
+                ) : (
+                    <div className="animate-fade-in">
+                        {renderMap()}
+                    </div>
+                )}
+            </div>
           </div>
         );
       case 'predict':
         return (
-            <div className="p-6 bg-white rounded-lg animate-fade-in border border-gray-200 shadow-sm">
-                <div className="text-center">
-                    <div className="flex items-center justify-center text-blue-600 bg-blue-100 rounded-full w-12 h-12 mx-auto">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+            <div className="bg-white rounded-2xl animate-fade-in border border-gray-100 shadow-sm overflow-hidden">
+                <div className="p-6 border-b border-gray-100 bg-gradient-to-r from-blue-50 to-white">
+                    <div className="flex items-start gap-4">
+                        <div className="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+                        </div>
+                        <div>
+                            <h3 className="text-xl font-bold text-gray-900">{t('smartWasteDashboard.prediction.title')}</h3>
+                            <p className="text-sm text-gray-500 mt-1">{t('smartWasteDashboard.prediction.subtitle')}</p>
+                        </div>
                     </div>
-                    <h3 className="text-lg font-semibold text-dark mt-4">{t('smartWasteDashboard.prediction.title')}</h3>
-                    <p className="text-sm text-gray-600 mt-1">{t('smartWasteDashboard.prediction.subtitle')}</p>
                 </div>
                 
-                <form onSubmit={(e) => { e.preventDefault(); handlePredictClick(); }} className="mt-6 space-y-2">
-                    <div>
-                        <label htmlFor="prediction-location" className="sr-only">
-                            {t('smartWasteDashboard.prediction.locationLabel')}
-                        </label>
-                        <input
-                            id="prediction-location"
-                            type="text"
-                            value={predictionLocation}
-                            onChange={(e) => setPredictionLocation(e.target.value)}
-                            placeholder={t('smartWasteDashboard.prediction.locationPlaceholder')}
-                            className="block w-full bg-gray-50 border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm text-dark placeholder-gray-500"
-                        />
-                        <ExamplePrompts 
-                            prompts={t('examplePrompts.smartPrediction')} 
-                            onPromptClick={setPredictionLocation} 
-                            t={t} 
-                        />
-                    </div>
-                    
-                    <button type="submit" disabled={isPredicting || !predictionLocation.trim()} className="w-full py-2 px-4 bg-primary text-white font-semibold rounded-md hover:bg-primary-600 disabled:bg-gray-400 transition-colors !mt-4">
-                        {isPredicting ? t('smartWasteDashboard.prediction.predicting') : t('smartWasteDashboard.prediction.button')}
-                    </button>
-                </form>
-
-                <div className="mt-4 p-4 border border-dashed border-gray-300 rounded-md min-h-[100px] flex items-center justify-center text-center">
-                    {isPredicting && (
+                <div className="p-6">
+                    <form onSubmit={(e) => { e.preventDefault(); handlePredictClick(); }} className="space-y-4">
                         <div>
-                            <div className="w-8 h-8 border-4 border-dashed rounded-full animate-spin border-primary mx-auto"></div>
-                            <p className="mt-3 text-sm text-gray-600">{t('smartWasteDashboard.prediction.predicting')}</p>
+                            <label htmlFor="prediction-location" className="block text-sm font-medium text-gray-700 mb-2">
+                                {t('smartWasteDashboard.prediction.locationLabel')}
+                            </label>
+                            <input
+                                id="prediction-location"
+                                type="text"
+                                value={predictionLocation}
+                                onChange={(e) => setPredictionLocation(e.target.value)}
+                                placeholder={t('smartWasteDashboard.prediction.locationPlaceholder')}
+                                className="block w-full bg-gray-50 border border-gray-200 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-gray-900 placeholder-gray-400 transition-all"
+                            />
+                            <ExamplePrompts 
+                                prompts={t('examplePrompts.smartPrediction')} 
+                                onPromptClick={setPredictionLocation} 
+                                t={t} 
+                            />
                         </div>
-                    )}
-                    {predictionResult && !isPredicting && <p className="text-gray-800">{predictionResult.predictionText}</p>}
-                    {!isPredicting && !predictionResult && <p className="text-gray-500">{t('smartWasteDashboard.prediction.placeholder')}</p>}
+                        
+                        <button type="submit" disabled={isPredicting || !predictionLocation.trim()} className="w-full py-3 px-4 bg-primary text-white font-semibold rounded-xl hover:bg-primary-600 disabled:bg-gray-300 transition-all shadow-sm hover:shadow-md disabled:shadow-none">
+                            {isPredicting ? t('smartWasteDashboard.prediction.predicting') : t('smartWasteDashboard.prediction.button')}
+                        </button>
+                    </form>
+
+                    <div className="mt-6 p-6 bg-gray-50 border border-gray-200 rounded-xl min-h-[120px] flex items-center justify-center text-center">
+                        {isPredicting && (
+                            <div>
+                                <div className="w-10 h-10 border-4 border-gray-200 border-t-primary rounded-full animate-spin mx-auto"></div>
+                                <p className="mt-4 text-sm text-gray-600 font-medium">{t('smartWasteDashboard.prediction.predicting')}</p>
+                            </div>
+                        )}
+                        {predictionResult && !isPredicting && <p className="text-gray-800 leading-relaxed">{predictionResult.predictionText}</p>}
+                        {!isPredicting && !predictionResult && <p className="text-gray-400">{t('smartWasteDashboard.prediction.placeholder')}</p>}
+                    </div>
                 </div>
             </div>
         );
       case 'analytics':
         return (
-            <div className="p-6 bg-white rounded-lg animate-fade-in border border-gray-200 shadow-sm">
-                 <h3 className="text-lg font-semibold text-dark text-center">{t('smartWasteDashboard.analytics.title')}</h3>
-                 {isFetchingAnalytics && <p className="text-center text-gray-500 mt-4">{t('smartWasteDashboard.analytics.summaryPlaceholder')}</p>}
-                 {analyticsResult && (
-                     <div className="mt-6 space-y-4">
-                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-                            <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
-                                <p className="text-sm font-medium text-gray-500">{t('smartWasteDashboard.analytics.aiAccuracy')}</p>
-                                <p className="text-3xl font-bold text-primary">{analyticsResult.aiAccuracy}%</p>
+            <div className="bg-white rounded-2xl animate-fade-in border border-gray-100 shadow-sm overflow-hidden">
+                <div className="p-6 border-b border-gray-100 bg-gradient-to-r from-purple-50 to-white">
+                    <div className="flex items-start gap-4">
+                        <div className="w-12 h-12 bg-purple-100 rounded-2xl flex items-center justify-center text-purple-600 flex-shrink-0">
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                        </div>
+                        <div>
+                            <h3 className="text-xl font-bold text-gray-900">{t('smartWasteDashboard.analytics.title')}</h3>
+                            <p className="text-sm text-gray-500 mt-1">{language === 'fa' ? 'بررسی شاخص‌های کلیدی عملکرد سیستم' : 'Review key performance indicators and system metrics'}</p>
+                        </div>
+                    </div>
+                </div>
+                 
+                <div className="p-6">
+                    {isFetchingAnalytics && (
+                        <div className="text-center py-8">
+                            <div className="w-10 h-10 border-4 border-gray-200 border-t-primary rounded-full animate-spin mx-auto"></div>
+                            <p className="mt-4 text-sm text-gray-500">{t('smartWasteDashboard.analytics.summaryPlaceholder')}</p>
+                        </div>
+                    )}
+                    {analyticsResult && (
+                        <div className="space-y-6">
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <div className="p-5 bg-gradient-to-br from-green-50 to-white rounded-xl border border-green-100 text-center group hover:shadow-md transition-shadow">
+                                    <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center text-green-600 mx-auto mb-3">
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                    </div>
+                                    <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">{t('smartWasteDashboard.analytics.aiAccuracy')}</p>
+                                    <p className="text-3xl font-bold text-green-600">{analyticsResult.aiAccuracy}%</p>
+                                </div>
+                                <div className="p-5 bg-gradient-to-br from-blue-50 to-white rounded-xl border border-blue-100 text-center group hover:shadow-md transition-shadow">
+                                    <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 mx-auto mb-3">
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>
+                                    </div>
+                                    <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">{t('smartWasteDashboard.analytics.todayReports')}</p>
+                                    <p className="text-3xl font-bold text-blue-600">{analyticsResult.todayReports}</p>
+                                </div>
+                                <div className="p-5 bg-gradient-to-br from-orange-50 to-white rounded-xl border border-orange-100 text-center group hover:shadow-md transition-shadow">
+                                    <div className="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center text-orange-600 mx-auto mb-3">
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+                                    </div>
+                                    <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">{t('smartWasteDashboard.analytics.routingImprovement')}</p>
+                                    <p className="text-3xl font-bold text-orange-600">{analyticsResult.routingImprovement}%</p>
+                                </div>
                             </div>
-                            <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
-                                <p className="text-sm font-medium text-gray-500">{t('smartWasteDashboard.analytics.todayReports')}</p>
-                                <p className="text-3xl font-bold text-primary">{analyticsResult.todayReports}</p>
+                            <div className="p-5 bg-gray-50 rounded-xl border border-gray-200">
+                                <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
+                                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                                    {t('smartWasteDashboard.analytics.performanceReport')}
+                                </h4>
+                                <p className="text-sm text-gray-600 leading-relaxed">{analyticsResult.summary}</p>
                             </div>
-                            <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
-                                <p className="text-sm font-medium text-gray-500">{t('smartWasteDashboard.analytics.routingImprovement')}</p>
-                                <p className="text-3xl font-bold text-primary">{analyticsResult.routingImprovement}%</p>
-                            </div>
-                         </div>
-                         <div className="pt-4">
-                             <h4 className="font-semibold text-dark">{t('smartWasteDashboard.analytics.performanceReport')}</h4>
-                             <p className="text-sm text-gray-700 mt-2">{analyticsResult.summary}</p>
-                         </div>
-                     </div>
-                 )}
+                        </div>
+                    )}
+                </div>
             </div>
         );
       case 'tuning':
@@ -969,43 +1024,75 @@ const SmartWasteDashboard: React.FC<SmartWasteDashboardProps> = (props) => {
     }
   };
 
+  const tabIcons: { [key in Tab]: React.ReactNode } = {
+    report: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>,
+    predict: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>,
+    analytics: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>,
+    tuning: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>,
+    special_grants: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>,
+    recycle_chain: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>,
+  };
+
   const TabButton: React.FC<{ tab: Tab, label: string }> = ({ tab, label }) => (
     <button
       onClick={() => setActiveTab(tab)}
-      className={`flex-1 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === tab ? 'bg-primary text-white shadow' : 'text-gray-600 hover:bg-gray-100'}`}
+      className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 whitespace-nowrap ${
+        activeTab === tab 
+          ? 'bg-primary text-white shadow-md shadow-primary/25' 
+          : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+      }`}
     >
-      {label}
+      <span className={activeTab === tab ? 'opacity-100' : 'opacity-60'}>{tabIcons[tab]}</span>
+      <span className="hidden sm:inline">{label}</span>
     </button>
   );
 
   return (
-    <section id="smart-dashboard" className="py-12 sm:py-16 animate-fade-in">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-        <header className="flex items-center justify-between mb-6">
-            <h1 className="text-2xl sm:text-3xl font-bold text-dark">{t('smartWasteDashboard.title')}</h1>
-            <div className="flex gap-2">
-                 <button onClick={() => setPage('dashboard_lesson')} className="text-sm font-medium text-primary-600 hover:text-primary-500 flex items-center gap-1 bg-primary-50 px-3 py-1.5 rounded-lg border border-primary-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                    {t('smartWasteDashboard.tutorial')}
-                </button>
-                <button onClick={() => setPage('home')} className="text-sm font-medium text-gray-600 hover:text-gray-900 border border-gray-300 px-3 py-1.5 rounded-lg">
-                    &larr; {t('smartWasteDashboard.backButton')}
-                </button>
+    <section id="smart-dashboard" className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 py-8 sm:py-12 animate-fade-in">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+        <header className="mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+                <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary-600 rounded-2xl flex items-center justify-center shadow-lg shadow-primary/30">
+                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">{t('smartWasteDashboard.title')}</h1>
+                        <p className="text-sm text-gray-500 mt-0.5">{language === 'fa' ? 'مدیریت و نظارت یکپارچه بر عملیات پسماند' : 'Unified waste operations management & monitoring'}</p>
+                    </div>
+                </div>
+                <div className="flex gap-2">
+                    <button onClick={() => setPage('dashboard_lesson')} className="inline-flex items-center gap-2 text-sm font-medium text-primary-700 hover:text-primary-800 bg-primary-50 hover:bg-primary-100 px-4 py-2 rounded-xl border border-primary-200 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        {t('smartWasteDashboard.tutorial')}
+                    </button>
+                    <button onClick={() => setPage('home')} className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-gray-900 bg-white hover:bg-gray-50 border border-gray-200 px-4 py-2 rounded-xl transition-colors shadow-sm">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+                        {t('smartWasteDashboard.backButton')}
+                    </button>
+                </div>
+            </div>
+
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-1.5 flex flex-wrap gap-1 overflow-x-auto">
+                <TabButton tab="report" label={t('smartWasteDashboard.tabReport')} />
+                <TabButton tab="predict" label={t('smartWasteDashboard.tabPredict')} />
+                <TabButton tab="analytics" label={t('smartWasteDashboard.tabAnalytics')} />
+                <TabButton tab="tuning" label={t('smartWasteDashboard.tabTuning')} />
+                <TabButton tab="special_grants" label={t('smartWasteDashboard.tabSpecialGrants')} />
+                <TabButton tab="recycle_chain" label={t('smartWasteDashboard.tabRecycleChain')} />
             </div>
         </header>
-
-        <div className="p-1 bg-gray-200/70 rounded-lg flex flex-wrap gap-1 sm:space-x-1 sm:flex-nowrap rtl:space-x-reverse mb-4 overflow-x-auto">
-          <TabButton tab="report" label={t('smartWasteDashboard.tabReport')} />
-          <TabButton tab="predict" label={t('smartWasteDashboard.tabPredict')} />
-          <TabButton tab="analytics" label={t('smartWasteDashboard.tabAnalytics')} />
-          <TabButton tab="tuning" label={t('smartWasteDashboard.tabTuning')} />
-          <TabButton tab="special_grants" label={t('smartWasteDashboard.tabSpecialGrants')} />
-          <TabButton tab="recycle_chain" label={t('smartWasteDashboard.tabRecycleChain')} />
-        </div>
         
-        {error && <div className="my-4 text-red-700 p-3 bg-red-100 border border-red-300 rounded-md text-sm">{error}</div>}
+        {error && (
+            <div className="mb-6 flex items-center gap-3 text-red-700 p-4 bg-red-50 border border-red-200 rounded-xl text-sm">
+                <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>{error}</span>
+            </div>
+        )}
 
-        <div>{renderTabContent()}</div>
+        <div className="mt-6">{renderTabContent()}</div>
       </div>
     </section>
   );

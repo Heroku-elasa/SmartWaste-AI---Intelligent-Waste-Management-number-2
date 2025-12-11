@@ -219,63 +219,63 @@ export const translations = {
         ]
     },
     smartWasteDashboard: {
-        title: 'Smart Waste Management',
+        title: 'Operations Center',
         backButton: 'Back',
-        tutorial: 'Tutorial / Help',
-        tabReport: 'Live Feed',
-        tabPredict: 'Smart Prediction',
-        tabAnalytics: 'Analysis & Stats',
-        tabTuning: 'Fine Tuning',
-        tabSpecialGrants: 'Special Grants',
-        tabRecycleChain: 'RecycleChain',
+        tutorial: 'Help Center',
+        tabReport: 'Collection Queue',
+        tabPredict: 'AI Forecasting',
+        tabAnalytics: 'Performance Analytics',
+        tabTuning: 'Model Configuration',
+        tabSpecialGrants: 'Funding Opportunities',
+        tabRecycleChain: 'Blockchain Ledger',
         liveFeed: {
-            title: 'Live Collection Requests',
-            subtitle: 'Monitor and dispatch incoming waste collection requests.',
-            location: 'Location',
-            wasteType: 'Type',
-            volume: 'Volume',
+            title: 'Active Collection Requests',
+            subtitle: 'Real-time monitoring and fleet dispatch for incoming service requests.',
+            location: 'Service Location',
+            wasteType: 'Category',
+            volume: 'Size',
             status: 'Status',
             actions: 'Actions',
-            statuses: { pending: 'Pending', enRoute: 'En Route', completed: 'Completed'},
-            dispatch: 'Dispatch',
-            details: 'Details'
+            statuses: { pending: 'Awaiting Dispatch', enroute: 'In Transit', completed: 'Completed'},
+            dispatch: 'Assign Vehicle',
+            details: 'View Details'
         },
         prediction: {
-            title: 'Smart Prediction',
-            subtitle: 'Predict waste volume and plan with AI.',
-            locationLabel: 'Location',
-            locationPlaceholder: 'e.g., "Tehran, Narmak District"',
-            button: 'Predict Waste Volume',
-            predicting: 'Predicting...',
-            placeholder: 'Enter a location and click predict to get an AI-powered waste volume prediction.',
+            title: 'AI Volume Forecasting',
+            subtitle: 'Leverage machine learning to predict waste accumulation and optimize route planning.',
+            locationLabel: 'Target Area',
+            locationPlaceholder: 'Enter district or neighborhood (e.g., Tehran, Narmak)',
+            button: 'Generate Forecast',
+            predicting: 'Analyzing...',
+            placeholder: 'Enter a target area above to receive an AI-powered volume prediction and collection recommendations.',
         },
         analytics: {
-            title: 'System Analysis & Stats',
-            aiAccuracy: 'AI Accuracy',
-            todayReports: 'Today\'s Reports',
-            routingImprovement: 'Routing Improvement',
-            performanceReport: 'Performance Report',
-            summaryPlaceholder: 'Generating AI analysis of system performance...',
+            title: 'System Performance Overview',
+            aiAccuracy: 'Model Accuracy',
+            todayReports: 'Requests Today',
+            routingImprovement: 'Route Efficiency',
+            performanceReport: 'Weekly Performance Summary',
+            summaryPlaceholder: 'Generating comprehensive performance analysis...',
         },
         tuning: {
-            title: 'Model Fine Tuning',
-            subtitle: 'Upload a dataset to train a custom Gemini model for improved waste classification.',
-            uploadTitle: 'Upload Dataset',
-            uploadPlaceholder: 'Drag & Drop CSV or JSONL file here',
-            paramsTitle: 'Hyperparameters',
-            epochs: 'Epochs',
+            title: 'Custom Model Training',
+            subtitle: 'Upload training data to fine-tune the classification model for your specific waste categories.',
+            uploadTitle: 'Training Dataset',
+            uploadPlaceholder: 'Drop your CSV or JSONL file here, or click to browse',
+            paramsTitle: 'Training Configuration',
+            epochs: 'Training Iterations',
             batchSize: 'Batch Size',
             learningRate: 'Learning Rate',
-            startTraining: 'Start Tuning',
-            training: 'Training...',
-            logsTitle: 'Training Logs',
+            startTraining: 'Begin Training',
+            training: 'Training in Progress...',
+            logsTitle: 'Training Console',
             status: {
-                idle: 'Idle',
+                idle: 'Ready',
                 uploading: 'Uploading dataset...',
-                training: 'Training model...',
-                completed: 'Training Completed Successfully'
+                training: 'Model training in progress...',
+                completed: 'Training Complete - Model Deployed'
             },
-            modelId: 'New Model ID'
+            modelId: 'Deployed Model ID'
         },
         recycleChain: {
             title: 'RecycleChain Protocol',
@@ -330,22 +330,22 @@ export const translations = {
             }
         },
         specialGrants: {
-            title: 'Strategic Grant Opportunities',
-            subtitle: 'Curated list of federal funding aligned with waste-to-carbon removal technologies.',
-            viewFullReport: 'Read Full Strategic Report',
+            title: 'Featured Funding Programs',
+            subtitle: 'Curated federal and state grants aligned with sustainable waste management initiatives.',
+            viewFullReport: 'View Complete Grant Report',
             cifia: {
-                title: 'Carbon Dioxide Transportation (CIFIA)',
+                title: 'CO2 Transport Infrastructure (CIFIA)',
                 amount: '$500,000,000',
                 deadline: 'Jan 2, 2026',
-                desc: 'Supports infrastructure for CO2 transport systems, critical for scaling waste-to-carbon removal.'
+                desc: 'Federal infrastructure funding for carbon dioxide transport systems supporting waste-to-carbon technologies.'
             },
             swifr: {
-                title: 'Solid Waste Infrastructure (SWIFR)',
+                title: 'Recycling Infrastructure (SWIFR)',
                 amount: '$20,000,000',
                 deadline: 'Jan 23, 2026',
-                desc: 'Funding for waste management systems and recycling infrastructure with circular economy focus.'
+                desc: 'EPA funding for municipal recycling systems and circular economy infrastructure development.'
             },
-            viewDetails: 'View Details'
+            viewDetails: 'View Program Details'
         }
     },
     grantDetailPage: {
@@ -971,63 +971,63 @@ export const translations = {
         ]
     },
     smartWasteDashboard: {
-        title: 'مدیریت پسماند هوشمند',
+        title: 'مرکز عملیات',
         backButton: 'بازگشت',
-        tutorial: 'آموزش / راهنما',
-        tabReport: 'فید زنده',
+        tutorial: 'مرکز راهنما',
+        tabReport: 'صف جمع‌آوری',
         tabPredict: 'پیش‌بینی هوشمند',
-        tabAnalytics: 'آنالیز و آمار',
-        tabTuning: 'تنظیم دقیق مدل',
-        tabSpecialGrants: 'گرنت‌های ویژه',
-        tabRecycleChain: 'ری‌سایکل‌چین',
+        tabAnalytics: 'تحلیل عملکرد',
+        tabTuning: 'پیکربندی مدل',
+        tabSpecialGrants: 'فرصت‌های تامین مالی',
+        tabRecycleChain: 'دفتر کل بلاکچین',
         liveFeed: {
-            title: 'درخواست‌های جمع‌آوری زنده',
-            subtitle: 'نظارت و اعزام درخواست‌های جمع‌آوری ورودی.',
-            location: 'موقعیت',
-            wasteType: 'نوع',
-            volume: 'حجم',
+            title: 'درخواست‌های جمع‌آوری فعال',
+            subtitle: 'نظارت لحظه‌ای و اعزام ناوگان برای درخواست‌های خدمات ورودی.',
+            location: 'محل خدمت',
+            wasteType: 'دسته‌بندی',
+            volume: 'اندازه',
             status: 'وضعیت',
-            actions: 'عملیات',
-            statuses: { pending: 'در انتظار', enRoute: 'در مسیر', completed: 'تکمیل شده'},
-            dispatch: 'اعزام',
-            details: 'جزئیات'
+            actions: 'اقدامات',
+            statuses: { pending: 'در انتظار اعزام', enroute: 'در حال انتقال', completed: 'تکمیل شده'},
+            dispatch: 'اعزام خودرو',
+            details: 'مشاهده جزئیات'
         },
         prediction: {
-            title: 'پیش‌بینی هوشمند',
-            subtitle: 'حجم زباله را پیش‌بینی کرده و با هوش مصنوعی برنامه‌ریزی کنید.',
-            locationLabel: 'موقعیت',
-            locationPlaceholder: 'مثال: "تهران، محله نارمک"',
-            button: 'پیش‌بینی حجم زباله',
-            predicting: 'در حال پیش‌بینی...',
-            placeholder: 'یک مکان را وارد کرده و برای دریافت پیش‌بینی حجم زباله کلیک کنید.',
+            title: 'پیش‌بینی حجم با هوش مصنوعی',
+            subtitle: 'استفاده از یادگیری ماشین برای پیش‌بینی تجمع پسماند و بهینه‌سازی برنامه‌ریزی مسیر.',
+            locationLabel: 'منطقه هدف',
+            locationPlaceholder: 'محله یا منطقه را وارد کنید (مثال: تهران، نارمک)',
+            button: 'تولید پیش‌بینی',
+            predicting: 'در حال تحلیل...',
+            placeholder: 'منطقه هدف را وارد کنید تا پیش‌بینی حجم و توصیه‌های جمع‌آوری دریافت نمایید.',
         },
         analytics: {
-            title: 'آنالیز و آمار سیستم',
-            aiAccuracy: 'دقت هوش مصنوعی',
-            todayReports: 'گزارش امروز',
-            routingImprovement: 'بهبود مسیریابی',
-            performanceReport: 'گزارش عملکرد',
-            summaryPlaceholder: 'در حال تولید تحلیل هوش مصنوعی از عملکرد سیستم...',
+            title: 'نمای کلی عملکرد سیستم',
+            aiAccuracy: 'دقت مدل',
+            todayReports: 'درخواست‌های امروز',
+            routingImprovement: 'بهره‌وری مسیر',
+            performanceReport: 'خلاصه عملکرد هفتگی',
+            summaryPlaceholder: 'در حال تولید تحلیل جامع عملکرد...',
         },
         tuning: {
-            title: 'تنظیم دقیق مدل',
-            subtitle: 'آپلود دیتاست برای آموزش مدل جمنای سفارشی جهت بهبود طبقه‌بندی پسماند.',
-            uploadTitle: 'آپلود دیتاست',
-            uploadPlaceholder: 'فایل CSV یا JSONL را اینجا بکشید و رها کنید',
-            paramsTitle: 'هایپرپارامترها',
-            epochs: 'تعداد Epoch',
-            batchSize: 'اندازه دسته (Batch Size)',
+            title: 'آموزش مدل سفارشی',
+            subtitle: 'آپلود داده آموزشی برای تنظیم دقیق مدل طبقه‌بندی مطابق با دسته‌های پسماند شما.',
+            uploadTitle: 'مجموعه داده آموزشی',
+            uploadPlaceholder: 'فایل CSV یا JSONL را اینجا رها کنید یا کلیک کنید',
+            paramsTitle: 'پیکربندی آموزش',
+            epochs: 'تعداد دوره آموزش',
+            batchSize: 'اندازه دسته',
             learningRate: 'نرخ یادگیری',
-            startTraining: 'شروع تنظیم',
-            training: 'در حال آموزش...',
-            logsTitle: 'لاگ‌های آموزش',
+            startTraining: 'شروع آموزش',
+            training: 'آموزش در حال اجرا...',
+            logsTitle: 'کنسول آموزش',
             status: {
                 idle: 'آماده',
-                uploading: 'در حال آپلود دیتاست...',
-                training: 'در حال آموزش مدل...',
-                completed: 'آموزش با موفقیت تکمیل شد'
+                uploading: 'در حال آپلود مجموعه داده...',
+                training: 'آموزش مدل در حال اجرا...',
+                completed: 'آموزش کامل شد - مدل مستقر شد'
             },
-            modelId: 'شناسه مدل جدید'
+            modelId: 'شناسه مدل مستقر شده'
         },
         recycleChain: {
             title: 'پروتکل ری‌سایکل‌چین',
@@ -1082,22 +1082,22 @@ export const translations = {
             }
         },
         specialGrants: {
-            title: 'فرصت‌های گرنت استراتژیک',
-            subtitle: 'لیست منتخب بودجه‌های فدرال همسو با فناوری‌های تبدیل پسماند به حذف کربن.',
-            viewFullReport: 'مشاهده گزارش کامل استراتژیک',
+            title: 'برنامه‌های تامین مالی ویژه',
+            subtitle: 'گرنت‌های منتخب فدرال و ایالتی همسو با ابتکارات مدیریت پایدار پسماند.',
+            viewFullReport: 'مشاهده گزارش کامل گرنت‌ها',
             cifia: {
-                title: 'تامین مالی زیرساخت حمل و نقل دی‌اکسید کربن (CIFIA)',
+                title: 'زیرساخت حمل CO2 (CIFIA)',
                 amount: '۵۰۰,۰۰۰,۰۰۰ دلار',
                 deadline: '۲ ژانویه ۲۰۲۶',
-                desc: 'حمایت از زیرساخت‌های سیستم‌های حمل و نقل CO2، حیاتی برای مقیاس‌دهی حذف کربن از پسماند.'
+                desc: 'بودجه زیرساخت فدرال برای سیستم‌های حمل دی‌اکسیدکربن پشتیبان فناوری‌های تبدیل پسماند.'
             },
             swifr: {
-                title: 'زیرساخت پسماند جامد برای بازیافت (SWIFR)',
+                title: 'زیرساخت بازیافت (SWIFR)',
                 amount: '۲۰,۰۰۰,۰۰۰ دلار',
                 deadline: '۲۳ ژانویه ۲۰۲۶',
-                desc: 'بودجه برای سیستم‌های مدیریت پسماند و زیرساخت بازیافت با تمرکز بر اقتصاد چرخشی.'
+                desc: 'بودجه EPA برای سیستم‌های بازیافت شهری و توسعه زیرساخت اقتصاد چرخشی.'
             },
-            viewDetails: 'مشاهده جزئیات'
+            viewDetails: 'مشاهده جزئیات برنامه'
         }
     },
     grantDetailPage: {
