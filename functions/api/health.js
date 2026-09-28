@@ -1,0 +1,1 @@
+export const onRequestGet = ({ env }) => new Response(JSON.stringify({ ai: !!(env.HF_TOKEN || env.AI_API_KEY), rag: true }), { headers: { 'content-type': 'application/json', 'access-control-allow-origin': '*' } });

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://greenpars-smartwaste.pages.dev/sitemap.xml
