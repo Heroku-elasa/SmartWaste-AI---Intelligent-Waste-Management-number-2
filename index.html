@@ -1,79 +1,43 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="fa" dir="rtl">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Satlineh | Smart Waste Management</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-      body {
-        font-family: 'Vazirmatn', 'Inter', sans-serif;
-        scroll-behavior: smooth;
-        background-color: #F0FDFA; /* Teal-50 */
-      }
-      .font-inter {
-         font-family: 'Inter', sans-serif;
-      }
-      .animate-fade-in {
-        animation: fadeIn 0.5s ease-in-out;
-      }
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-    </style>
-     <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Vazirmatn', 'Inter', 'sans-serif'],
-            },
-            colors: {
-              primary: { // Teal
-                DEFAULT: '#14B8A6',
-                '50': '#F0FDFA',
-                '100': '#CCFBF1',
-                '200': '#99F6E4',
-                '300': '#5EEAD4',
-                '400': '#2DD4BF',
-                '500': '#14B8A6',
-                '600': '#0D9488',
-                '700': '#0F766E',
-                '800': '#115E59',
-                '900': '#134E4A',
-                '950': '#042F2E',
-              },
-              light: '#F0FDFA', // teal-50
-              dark: '#134E4A',  // teal-900 for text
-            }
-          },
-        },
-      }
+    <title>پارس گرانول سبز | بازیافت پلاستیک به گرانول و پسماند به انرژی — GreenPars SmartWaste</title>
+    <meta name="description" content="پارس گرانول سبز: طرح کارخانه بازیافت ضایعات پلاستیک به گرانول در ایران با ماشین‌حساب سود، سناریوهای سرمایه‌گذاری، تأمین مالی، نیروگاه پسماند (RDF) و دستیار هوش مصنوعی. Plastic recycling to granule & waste-to-energy investment dashboard (FA/EN/TR)." />
+    <meta name="keywords" content="بازیافت پلاستیک, گرانول بازیافتی, کارخانه گرانول, تبدیل پسماند به انرژی, سرمایه گذاری سبز, طرح توجیهی بازیافت, plastic recycling Iran, recycled granule, waste to energy, RDF, geri dönüşüm granül, atıktan enerji, İran yatırım" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://greenpars-smartwaste.pages.dev/" />
+    <link rel="alternate" hreflang="fa" href="https://greenpars-smartwaste.pages.dev/?lang=fa" />
+    <link rel="alternate" hreflang="en" href="https://greenpars-smartwaste.pages.dev/?lang=en" />
+    <link rel="alternate" hreflang="tr" href="https://greenpars-smartwaste.pages.dev/?lang=tr" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="GreenPars — پارس گرانول سبز" />
+    <meta property="og:description" content="Plastic waste → recycled granule, rejects → energy. Pilot 31 bn Toman (~$132k), target payback 2.1 yrs." />
+    <meta property="og:image" content="https://greenpars-smartwaste.pages.dev/og.png" />
+    <meta property="og:video" content="https://greenpars-smartwaste.pages.dev/GreenPars_Promo_30s_FA.mp4" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#14532d" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♻️</text></svg>" />
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@graph":[
+      {"@type":"Organization","name":"GreenPars — Pars Granule Sabz","alternateName":["پارس گرانول سبز","GreenPars Granül"],"url":"https://greenpars-smartwaste.pages.dev/","description":"Plastic-waste-to-recycled-granule plants in Iran with a waste-to-energy (RDF) extension.","areaServed":["IR","TR"],"knowsAbout":["plastic recycling","recycled PP/PE granule","waste-to-energy","RDF"]},
+      {"@type":"WebApplication","name":"GreenPars SmartWaste Dashboard","applicationCategory":"BusinessApplication","operatingSystem":"Web","inLanguage":["fa","en","tr"],"offers":{"@type":"Offer","price":"0"}},
+      {"@type":"FAQPage","mainEntity":[
+        {"@type":"Question","name":"سرمایه لازم برای کارخانه بازیافت پلاستیک به گرانول چقدر است؟","acceptedAnswer":{"@type":"Answer","text":"پایلوت ۴۰۰ کیلوگرم در ساعت حدود ۳۱ میلیارد تومان (حدود ۱۳۲ هزار دلار با نرخ ۲۳۵ هزار تومان) است."}},
+        {"@type":"Question","name":"دوره بازگشت سرمایه کارخانه گرانول چند سال است؟","acceptedAnswer":{"@type":"Answer","text":"در سناریوی پایه ۵٫۳ سال و در سناریوی هدف (گرانول ۱۱۰ هزار، ضایعات ۳۵ هزار تومان) ۲٫۱ سال."}},
+        {"@type":"Question","name":"Is a waste-to-energy plant profitable in Iran?","acceptedAnswer":{"@type":"Answer","text":"At the SATBA tariff of 55,500 rial/kWh (~$0.024) a stand-alone plant pays back in 30–55 years without a gate fee; an RDF line for cement kilns is the recommended first step."}}
+      ]}
+    ]}
     </script>
-  <script type="importmap">
-{
-  "imports": {
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
-    "react/": "https://aistudiocdn.com/react@^19.1.1/",
-    "react": "https://aistudiocdn.com/react@^19.1.1",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.17.0",
-    "marked": "https://aistudiocdn.com/marked@^14.0.0",
-    "html-to-docx": "https://aistudiocdn.com/html-to-docx@^1.8.0",
-    "mammoth": "https://aistudiocdn.com/mammoth@^1.7.2",
-    "recharts": "https://aistudiocdn.com/recharts@^2.12.7",
-    "recharts/": "https://aistudiocdn.com/recharts@^2.12.7/"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
-</head>
+  </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <noscript>
+        <h1>پارس گرانول سبز — بازیافت ضایعات پلاستیک به گرانول و تبدیل پسماند به انرژی</h1>
+        <p>GreenPars: plastic waste to recycled granule in Iran. Pilot 400 kg/h, capex 31 bn Toman (~$132k), payback 2.1–5.3 years. Profit calculator, scopes, funding, waste-to-energy and AI assistant in Persian, English and Turkish.</p>
+      </noscript>
+    </div>
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>
