@@ -2,6 +2,7 @@ export type Lang = 'fa' | 'en' | 'tr';
 type Dict = Record<string, string>;
 
 const fa: Dict = {
+  nav_invest: 'سرمایه‌گذاری', nav_blog: 'مقالات', downloads: 'فایل‌های قابل دانلود', faq: 'پرسش‌های متداول', contact_note: 'برای دریافت اطلاعات بیشتر و جلسه با تیم:',
   brand: 'پارس گرانول سبز', tagline: 'بازیافت ضایعات پلاستیک به گرانول + تبدیل پسماند به انرژی',
   nav_home: 'خانه', nav_calc: 'ماشین‌حساب سود', nav_scopes: 'سه دامنه اجرا', nav_funding: 'تأمین مالی', nav_wte: 'پسماند به انرژی و اسپانسر', nav_docs: 'گزارش‌ها و پادکست',
   rate_note: 'نرخ دلار آزاد: ۲۳۵٬۰۰۰ تومان (۶ مهر ۱۴۰۵)', bn: 'میلیارد تومان',
@@ -23,6 +24,7 @@ const fa: Dict = {
 };
 
 const en: Dict = {
+  nav_invest: 'Invest', nav_blog: 'Articles', downloads: 'Downloads', faq: 'FAQ', contact_note: 'For the data room and a meeting with the team:',
   brand: 'GreenPars Granule', tagline: 'Plastic waste to recycled granule + waste-to-energy',
   nav_home: 'Home', nav_calc: 'Profit calculator', nav_scopes: 'Three scopes', nav_funding: 'Funding', nav_wte: 'WtE & sponsor', nav_docs: 'Reports & podcast',
   rate_note: 'Free-market rate: 235,000 Toman / USD (28 Sep 2026)', bn: 'bn Toman',
@@ -44,6 +46,7 @@ const en: Dict = {
 };
 
 const tr: Dict = {
+  nav_invest: 'Yatırım', nav_blog: 'Makaleler', downloads: 'İndirilebilir dosyalar', faq: 'Sık sorulan sorular', contact_note: 'Veri odası ve ekiple görüşme için:',
   brand: 'GreenPars Granül', tagline: 'Plastik atıktan geri dönüştürülmüş granül + atıktan enerji',
   nav_home: 'Ana sayfa', nav_calc: 'Kâr hesaplayıcı', nav_scopes: 'Üç kapsam', nav_funding: 'Finansman', nav_wte: 'Atıktan enerji & sponsor', nav_docs: 'Raporlar & podcast',
   rate_note: 'Serbest piyasa kuru: 1 USD = 235.000 Tomen (28 Eylül 2026)', bn: 'milyar Tomen',

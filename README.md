@@ -61,3 +61,13 @@ Deploy: `npm run build && npx wrangler pages deploy dist --project-name greenpar
 | cloudflare/workers-sdk (wrangler) | Pages Functions deployment |
 | recharts/recharts | charts |
 See `knowledge/github_lessons_fa.md` for the lessons applied to the plan.
+
+## 🤖 Telegram bot
+`functions/api/telegram.js` is a Cloudflare webhook with a trilingual menu (invest, calculator, reports and pitch decks as files, video, WtE), `/calc 110000 35000`, and RAG AI answers.
+Setup:
+1. Create a bot with @BotFather.
+2. Run `npx wrangler pages secret put TELEGRAM_BOT_TOKEN`.
+3. Open `https://greenpars-smartwaste.pages.dev/api/telegram?setup=<TELEGRAM_SECRET>`.
+
+## 🎬 Videos
+There are FA/EN/TR 30-second promos in `public/video/`, as MP4 (faststart) and WebM. `functions/video/[[path]].js` adds HTTP Range (206) support, which Safari/iOS needs.

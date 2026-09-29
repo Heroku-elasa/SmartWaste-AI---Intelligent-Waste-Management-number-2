@@ -1,0 +1,100 @@
+import { Lang } from './i18n';
+type T3 = [string, string, string];
+const pick = (l: Lang, v: T3) => v[l === 'fa' ? 0 : l === 'en' ? 1 : 2];
+export { pick };
+
+export const DOCS: Record<Lang, { file: string; title: string; kind: string }[]> = {
+  fa: [
+    { file: 'Pitch_Deck_v6_FA.pdf', title: 'پیچ دک نسخه ۶ (PDF)', kind: 'deck' },
+    { file: 'Pitch_Deck_v6_FA.pptx', title: 'پیچ دک نسخه ۶ (پاورپوینت)', kind: 'deck' },
+    { file: 'Pitch_Deck_v5_FA.pdf', title: 'پیچ دک نسخه ۵', kind: 'deck' },
+    { file: 'Master_Plan_FA.pdf', title: 'طرح جامع نهایی (PDF)', kind: 'plan' },
+    { file: 'Master_Plan_FA.docx', title: 'طرح جامع نهایی (Word)', kind: 'plan' },
+    { file: '16_Turkish_Trader_Sanctions_Critique_FA.pdf', title: 'گزارش ۱۶: نقد از نگاه تاجر ترک و تحریم‌ها', kind: 'report' },
+    { file: '17_New_Business_Models_FA.pdf', title: 'گزارش ۱۷: مدل‌های کسب‌وکار جدید', kind: 'report' },
+    { file: '18_Investor_Cover_Email_One_Pager_FA.pdf', title: 'گزارش ۱۸: ایمیل و خلاصه یک‌صفحه‌ای سرمایه‌گذار', kind: 'report' },
+  ],
+  en: [
+    { file: 'Pitch_Deck_v6_EN.pdf', title: 'Pitch deck v6 (PDF)', kind: 'deck' },
+    { file: 'Pitch_Deck_v6_EN.pptx', title: 'Pitch deck v6 (PowerPoint)', kind: 'deck' },
+    { file: 'Pitch_Deck_v5_EN.pdf', title: 'Pitch deck v5', kind: 'deck' },
+    { file: '16_Turkish_Trader_Sanctions_Critique_EN.pdf', title: 'Report 16: Turkish trader & sanctions critique', kind: 'report' },
+    { file: '17_New_Business_Models_EN.pdf', title: 'Report 17: New business models', kind: 'report' },
+    { file: '18_Investor_Cover_Email_One_Pager_EN.pdf', title: 'Report 18: Investor email & one-pager', kind: 'report' },
+    { file: '18_Investor_Cover_Email_One_Pager_EN.docx', title: 'Report 18 (Word)', kind: 'report' },
+  ],
+  tr: [
+    { file: 'Pitch_Deck_v6_TR.pdf', title: 'Yatırımcı sunumu v6 (PDF)', kind: 'deck' },
+    { file: 'Pitch_Deck_v6_TR.pptx', title: 'Yatırımcı sunumu v6 (PowerPoint)', kind: 'deck' },
+    { file: 'Pitch_Deck_v5_TR.pdf', title: 'Yatırımcı sunumu v5', kind: 'deck' },
+    { file: 'GreenPars_Kapsamli_Plan_TR.pdf', title: 'Kapsamlı iş planı (PDF)', kind: 'plan' },
+    { file: 'Istanbul_Isbirligi_Sunumu_TR.pdf', title: 'İstanbul işbirliği sunumu (PDF)', kind: 'deck' },
+    { file: 'Istanbul_Isbirligi_Sunumu_TR.pptx', title: 'İstanbul işbirliği sunumu (PowerPoint)', kind: 'deck' },
+    { file: '16_Turkish_Trader_Sanctions_Critique_TR.pdf', title: 'Rapor 16: Türk tüccar ve yaptırım eleştirisi', kind: 'report' },
+    { file: '17_New_Business_Models_TR.pdf', title: 'Rapor 17: Yeni iş modelleri', kind: 'report' },
+    { file: '18_Investor_Cover_Email_One_Pager_TR.pdf', title: 'Rapor 18: Yatırımcı e-postası ve tek sayfa özet', kind: 'report' },
+  ],
+};
+
+export const INVEST = {
+  title: ['فرصت سرمایه‌گذاری پارس گرانول سبز', 'Invest in GreenPars', 'GreenPars’a yatırım yapın'] as T3,
+  lead: ['ایران روزانه حدود ۲۰ هزار تن پسماند پلاستیکی تولید می‌کند و بخش کوچکی از آن بازیافت می‌شود. ما ضایعات PE/PP را به گرانول شسته و فیلترشده تبدیل می‌کنیم و به تولیدکنندگان لوله، کیسه و فیلم می‌فروشیم.',
+    'Iran generates ~20,000 t of plastic waste a day and recycles only a small share. We turn PE/PP waste into washed, melt-filtered granule sold to pipe, bag and film makers.',
+    'İran günde ~20.000 ton plastik atık üretiyor ve yalnızca küçük bir kısmını geri dönüştürüyor. PE/PP atığını yıkanmış, filtrelenmiş granüle dönüştürüp boru, poşet ve film üreticilerine satıyoruz.'] as T3,
+  facts: [
+    { v: ['۳۱ میلیارد تومان', '31 bn Toman', '31 milyar Tomen'] as T3, s: ['≈ ۱۳۲ هزار دلار؛ سرمایه پایلوت', '≈ $132k pilot capex', '≈ 132 bin $ pilot yatırımı'] as T3 },
+    { v: ['۲٫۱ تا ۵٫۳ سال', '2.1–5.3 yrs', '2,1–5,3 yıl'] as T3, s: ['بازگشت سرمایه (هدف تا پایه)', 'payback (target to base)', 'geri dönüş (hedef–baz)'] as T3 },
+    { v: ['۱٬۰۷۵ تن', '1,075 t', '1.075 t'] as T3, s: ['تولید سالانه گرانول در ظرفیت پایدار', 'granule/yr at steady state', 'istikrarlı yıllık granül'] as T3 },
+    { v: ['۲۱۱ شغل', '211 jobs', '211 iş'] as T3, s: ['در فاز ۱۰ شهر', 'in the 10-city phase', '10 şehir aşamasında'] as T3 },
+  ],
+  sections: [
+    { img: '/img/collection.jpg', h: ['مسئله و فرصت', 'Problem & opportunity', 'Sorun ve fırsat'] as T3,
+      p: ['پلاستیک یا دفن می‌شود یا به‌صورت غیررسمی جمع‌آوری می‌شود. تقاضا برای گرانول بازیافتی ارزان‌تر از گرانول نو بالاست، ولی کیفیت ثابت کم پیدا می‌شود. پارس گرانول سبز با شستشو، فیلتر مذاب و کنترل کیفیت، گرانول یکنواخت تحویل می‌دهد.',
+        'Plastic is landfilled or collected informally. Demand for recycled granule, cheaper than virgin, is strong but consistent quality is scarce. GreenPars delivers uniform granule through washing, melt filtration and QC.',
+        'Plastik ya depolanıyor ya da kayıt dışı toplanıyor. Ham granülden ucuz geri dönüştürülmüş granüle talep güçlü, ancak tutarlı kalite az. GreenPars yıkama, eriyik filtreleme ve kalite kontrolle homojen granül sunar.'] as T3 },
+    { img: '/img/pilot.jpg', h: ['مدل کسب‌وکار', 'Business model', 'İş modeli'] as T3,
+      p: ['خرید ضایعات از ایستگاه‌ها و پیمانکاران (۳۵ تا ۴۵ هزار تومان/کیلو)، فروش گرانول (۱۰۰ تا ۱۱۵ هزار تومان/کیلو). ماشین‌آلات ایرانی پندار پلیمر با پرداخت اقساطی و تحویل ۲۰ روزه. بعد از پایلوت، رشد مرحله‌ای به ۱۰ شهر فقط پس از عبور از دروازه رشد.',
+        'Buy waste from stations and contractors (35–45k Toman/kg), sell granule (100–115k Toman/kg). Iranian Pendar Polymer machinery on instalments with 20-day delivery. After the pilot, gated growth to 10 cities.',
+        'Atığı istasyon ve yüklenicilerden alıyoruz (35–45 bin Tomen/kg), granülü satıyoruz (100–115 bin Tomen/kg). Taksitli, 20 günde teslim İran yapımı Pendar Polymer makineleri. Pilot sonrası büyüme kapısıyla 10 şehre.'] as T3 },
+    { img: '/img/granules.jpg', h: ['آنچه به دنبالش هستیم', 'The ask', 'Talebimiz'] as T3,
+      p: ['۵ تا ۸ میلیارد تومان سرمایه سهامی در ازای ۱۵ تا ۲۰ درصد شرکت پایلوت (بدون کنترل، با حق تقدم در دورهای بعد)، یا تجهیزات/مشاوره فنی معادل حدود ۶۰ هزار دلار برای شرکای ترک. بقیه از صندوق ملی محیط زیست، اقساط پندار و تأمین مالی جمعی.',
+        '5–8 bn Toman equity for 15–20% of the pilot company (non-controlling, ROFR on later rounds), or ~$60k equipment/technical support from Turkish partners. The rest comes from the Environment Fund, Pendar instalments and crowdfunding.',
+        'Pilot şirketin %15–20’si karşılığında 5–8 milyar Tomen sermaye (kontrolsüz, sonraki turlarda önalım hakkı) veya Türk ortaklardan ~60 bin $ ekipman/teknik destek. Kalanı Çevre Fonu, Pendar taksitleri ve kitle fonlamasından.'] as T3 },
+    { img: '/img/exterior.jpg', h: ['ریسک‌ها و کنترل آن‌ها', 'Risks & mitigation', 'Riskler ve önlemler'] as T3,
+      p: ['قیمت ضایعات، با قرارداد ۱۰ تأمین‌کننده و ایستگاه‌های خرید اختصاصی. قیمت گرانول، با ۳ تعهد خرید و کنترل کیفیت. ارز، چون درآمد و هزینه هر دو ریالی است. تحریم، با پرداخت ریالی/کالایی و عدم نیاز به LC. بدترین سناریو (گرانول ۸۵ هزار) زیان‌ده است؛ برای همین دروازه رشد داریم.',
+        'Feedstock price: 10 supplier contracts and own buying stations. Granule price: 3 offtake LOIs and QC. FX: revenue and cost both in rials. Sanctions: rial/in-kind payments, no LC needed. The worst case (granule 85k) loses money, which is why we use a growth gate.',
+        'Hammadde fiyatı: 10 tedarikçi sözleşmesi ve kendi alım istasyonlarımız. Granül fiyatı: 3 alım niyet mektubu ve kalite kontrol. Kur: gelir ve gider riyal. Yaptırım: riyal/ayni ödeme, LC gerekmez. En kötü senaryo (granül 85 bin) zarar ettirir; bu yüzden büyüme kapısı var.'] as T3 },
+    { img: '/img/invest.jpg', h: ['نقشه راه', 'Roadmap', 'Yol haritası'] as T3,
+      p: ['۹۰ روز: پیش‌فاکتور کتبی پندار، ۱۰ تأمین‌کننده، ۳ تعهد خرید، تفاهم‌نامه مشهد. ماه ۴ تا ۹: نصب و راه‌اندازی پایلوت. سال ۲: ۶ ماه سودده و عبور از دروازه رشد. سال ۳ تا ۵: ۱۰ شهر و خط RDF برای کارخانه‌های سیمان.',
+        '90 days: written Pendar quote, 10 suppliers, 3 offtake LOIs, Mashhad MoU. Months 4–9: install and commission the pilot. Year 2: 6 profitable months and pass the growth gate. Years 3–5: 10 cities and an RDF line for cement kilns.',
+        '90 gün: yazılı Pendar teklifi, 10 tedarikçi, 3 alım niyet mektubu, Meşhed mutabakatı. 4–9. aylar: pilot kurulum ve devreye alma. 2. yıl: 6 kârlı ay ve büyüme kapısı. 3–5. yıllar: 10 şehir ve çimento fabrikaları için RDF hattı.'] as T3 },
+  ],
+  faq: [
+    [['حداقل مبلغ مشارکت چقدر است؟', 'What is the minimum ticket?', 'Asgari yatırım tutarı nedir?'] as T3, ['از طریق تأمین مالی جمعی از مبالغ کوچک؛ سهام مستقیم از ۱ میلیارد تومان.', 'Small amounts via crowdfunding; direct equity from 1 bn Toman (~$4.3k).', 'Kitle fonlamasıyla küçük tutarlar; doğrudan pay 1 milyar Tomen’den (~4,3 bin $).'] as T3],
+    [['سود چطور پرداخت می‌شود؟', 'How are returns paid?', 'Getiri nasıl ödenir?'] as T3, ['سود سهام سالانه پس از سال دوم، یا فروش سهم به مؤسسان با فرمول از پیش توافق‌شده.', 'Annual dividends after year 2, or a buy-back by founders at a pre-agreed formula.', '2. yıldan sonra yıllık temettü veya kurucuların önceden belirlenmiş formülle geri alımı.'] as T3],
+    [['سرمایه‌گذار خارجی چطور وارد شود؟', 'How can a foreign investor join?', 'Yabancı yatırımcı nasıl katılabilir?'] as T3, ['از مسیر قانون تشویق سرمایه‌گذاری خارجی (FIPPA) یا آورده غیرنقدی (تجهیزات/دانش فنی)؛ قبل از هر اقدام، مشاوره حقوقی تحریم لازم است.', 'Through FIPPA registration or in-kind contribution (equipment/know-how). Get sanctions legal advice before any step.', 'FIPPA kaydı veya ayni katkı (ekipman/know-how) ile. Her adımdan önce yaptırım hukuku danışmanlığı alın.'] as T3],
+  ],
+};
+
+export const POSTS: { id: string; img: string; date: string; h: T3; p: T3 }[] = [
+  { id: 'granule-price', img: '/img/granules.jpg', date: '1405-07-06',
+    h: ['قیمت گرانول بازیافتی ۱۴۰۵: چرا ۱۰۵ هزار تومان مرز سود است؟', 'Recycled granule prices 2026: why 105k Toman is the profit line', 'Geri dönüştürülmüş granül fiyatları 2026: neden 105 bin Tomen kâr sınırı?'],
+    p: ['قیمت گرانول بازیافتی در بازار آزاد بین ۱۰۵ تا ۱۳۵ هزار تومان است. با ضایعات ۴۵ هزار تومانی، سود کارخانه ۴۰۰ کیلویی حدود ۱۰۵ هزار تومان مثبت می‌شود. زیر ۸۵ هزار تومان، کارخانه حتی با ظرفیت کامل زیان می‌دهد. برای همین، شرط ورود به فاز بعدی، ثبات قیمت بالای ۱۰۵ هزار تومان است.',
+      'Free-market recycled granule trades at 105–135k Toman/kg. With waste at 45k, a 400 kg/h plant turns clearly profitable around 105k. Below 85k it loses money even at full capacity, so our growth gate requires prices to hold above 105k.',
+      'Serbest piyasada geri dönüştürülmüş granül 105–135 bin Tomen/kg. Atık 45 bin iken 400 kg/saat tesis ~105 binde net kâra geçer. 85 binin altında tam kapasitede bile zarar eder; bu yüzden büyüme kapısı 105 bin üstü fiyat şartı koyar.'] },
+  { id: 'wte', img: '/img/exterior.jpg', date: '1405-07-06',
+    h: ['نیروگاه زباله‌سوز در ایران سودآور است؟', 'Is a waste-to-energy plant profitable in Iran?', 'İran’da atıktan enerji tesisi kârlı mı?'],
+    p: ['تعرفه تضمینی ساتبا برای زباله‌سوزی ۵۵٬۵۰۰ ریال بر کیلووات‌ساعت (حدود ۰٫۰۲۴ دلار) است. با سرمایه ۵ تا ۸ میلیون دلار برای هر مگاوات، بازگشت سرمایه بدون حق پذیرش زباله از شهرداری ۳۰ تا ۵۵ سال می‌شود. راه عملی‌تر، تولید سوخت RDF از پسماند غیرقابل‌بازیافت برای کارخانه‌های سیمان است که سرمایه آن تقریباً یک‌دهم است.',
+      'SATBA’s guaranteed tariff for incineration is 55,500 rial/kWh (~$0.024). With $5–8M/MW capex, payback without a municipal gate fee is 30–55 years. The practical route is RDF fuel for cement kilns from non-recyclable rejects, at roughly a tenth of the capex.',
+      'SATBA’nın yakma için garantili tarifesi 55.500 riyal/kWh (~0,024 $). MW başına 5–8 milyon $ yatırımla, belediye kabul ücreti olmadan geri dönüş 30–55 yıl. Pratik yol, geri dönüştürülemeyen atıktan çimento fabrikaları için RDF yakıtı; yatırımı yaklaşık onda bir.'] },
+  { id: 'turkey', img: '/img/invest.jpg', date: '1405-07-06',
+    h: ['همکاری با ترکیه بدون درگیری با تحریم', 'Working with Turkey without sanctions exposure', 'Yaptırıma takılmadan Türkiye ile işbirliği'],
+    p: ['بانک‌های ترکیه تراکنش‌های مرتبط با ایران را گزارش یا متوقف می‌کنند. به‌جای انتقال پول، مدل پیشنهادی آورده غیرنقدی است: تجهیزات شستشو، دانش فنی یا خرید گرانول صادراتی در ازای سهم. پیش از هر قرارداد، استعلام فهرست تحریم و مشاوره حقوقی ضروری است.',
+      'Turkish banks report or block Iran-linked transfers. Instead of cash, the proposed model is in-kind: washing equipment, know-how, or export granule offtake in exchange for equity. Screen sanctions lists and get legal advice before any contract.',
+      'Türk bankaları İran bağlantılı transferleri bildiriyor veya durduruyor. Nakit yerine önerilen model ayni katkı: pay karşılığında yıkama ekipmanı, know-how veya ihracat granülü alımı. Her sözleşmeden önce yaptırım listesi taraması ve hukuki danışmanlık şart.'] },
+  { id: 'pilot', img: '/img/pilot.jpg', date: '1405-07-06',
+    h: ['پایلوت ۴۰۰ کیلوگرمی: از ضایعات تا گرانول در ۶ مرحله', 'The 400 kg/h pilot: from waste to granule in 6 steps', '400 kg/saat pilot: atıktan granüle 6 adım'],
+    p: ['۱) جداسازی دستی، ۲) خردکن، ۳) شستشوی داغ و اصطکاکی، ۴) خشک‌کن سانتریفیوژ، ۵) اکسترودر با فیلتر مذاب، ۶) برش و بسته‌بندی. ۲۰ درصد ورودی دورریز است که در فاز بعد به سوخت RDF تبدیل می‌شود.',
+      '1) Manual sorting, 2) shredder, 3) hot and friction washing, 4) centrifugal dryer, 5) extruder with melt filter, 6) pelletising and bagging. The 20% reject stream becomes RDF fuel in the next phase.',
+      '1) Elle ayıklama, 2) kırıcı, 3) sıcak ve sürtünmeli yıkama, 4) santrifüj kurutucu, 5) eriyik filtreli ekstrüder, 6) granül kesme ve paketleme. %20’lik ıskarta sonraki aşamada RDF yakıtına dönüşür.'] },
+];

@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import Chat from './Chat';
+import { DOCS, INVEST, POSTS, pick } from './content';
 import { DICTS, Lang, WTE_TEXT } from './i18n';
 import { PLANTS, RATE, SCENARIOS, SCOPES, USE_OF_FUNDS, WTE_TARIFF_RIAL, payback, projection, usd, wte } from './model';
 
-type Page = 'home' | 'calc' | 'scopes' | 'funding' | 'wte' | 'docs';
-const PAGES: Page[] = ['home', 'calc', 'scopes', 'funding', 'wte', 'docs'];
+type Page = 'home' | 'invest' | 'blog' | 'calc' | 'scopes' | 'funding' | 'wte' | 'docs';
+const PAGES: Page[] = ['home', 'invest', 'blog', 'calc', 'scopes', 'funding', 'wte', 'docs'];
 const COLORS = ['#16a34a', '#0ea5e9', '#f59e0b', '#8b5cf6', '#ef4444'];
 
 const REPORTS = [
@@ -16,24 +17,30 @@ const REPORTS = [
 
 export default function App() {
   const [lang, setLang] = useState<Lang>(() => { const l = new URLSearchParams(location.search).get('lang'); return (l === 'en' || l === 'tr' ? l : 'fa') as Lang; });
-  const [page, setPage] = useState<Page>('home');
+  const [page, setPageRaw] = useState<Page>(() => { const h = location.hash.slice(1) as Page; return PAGES.includes(h) ? h : 'home'; });
+  const [menu, setMenu] = useState(false);
+  useEffect(() => { const f = () => { const h = location.hash.slice(1) as Page; if (PAGES.includes(h)) setPageRaw(h); const l = new URLSearchParams(location.search).get('lang'); if (l === 'fa' || l === 'en' || l === 'tr') setLang(l); }; window.addEventListener('hashchange', f); window.addEventListener('popstate', f); return () => { window.removeEventListener('hashchange', f); window.removeEventListener('popstate', f); }; }, []);
+  const setPage = (p: Page) => { setPageRaw(p); setMenu(false); history.replaceState(null, '', `?lang=${lang}#${p}`); window.scrollTo(0, 0); };
   useEffect(() => { document.documentElement.lang = lang; document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr'; document.title = `${DICTS[lang].brand} | ${DICTS[lang].tagline}`; }, [lang]);
   const t = (k: string) => DICTS[lang][k] ?? k;
   const loc = lang === 'fa' ? 'fa-IR' : lang === 'tr' ? 'tr-TR' : 'en-US';
   const n = (v: number, d = 0) => v.toLocaleString(loc, { maximumFractionDigits: d, minimumFractionDigits: d });
   const money = (bn: number, d = 1) => `${n(bn, d)} ${t('bn')} ≈ $${n(usd(bn) / 1e6, 2)}M`;
-  const navKey: Record<Page, string> = { home: 'nav_home', calc: 'nav_calc', scopes: 'nav_scopes', funding: 'nav_funding', wte: 'nav_wte', docs: 'nav_docs' };
+  const navKey: Record<Page, string> = { home: 'nav_home', invest: 'nav_invest', blog: 'nav_blog', calc: 'nav_calc', scopes: 'nav_scopes', funding: 'nav_funding', wte: 'nav_wte', docs: 'nav_docs' };
 
   return (
     <div dir={lang === 'fa' ? 'rtl' : 'ltr'} lang={lang} className="app">
       <header>
         <div className="brand" onClick={() => setPage('home')}>♻ {t('brand')}<small>{t('tagline')}</small></div>
-        <nav>{PAGES.map((p) => <button key={p} className={p === page ? 'on' : ''} onClick={() => setPage(p)}>{t(navKey[p])}</button>)}</nav>
-        <div className="langs">{(['fa', 'en', 'tr'] as Lang[]).map((l) => <button key={l} className={l === lang ? 'on' : ''} onClick={() => setLang(l)}>{l.toUpperCase()}</button>)}</div>
+        <button className="burger" aria-label="menu" onClick={() => setMenu(!menu)}>{menu ? '✕' : '☰'}</button>
+        <nav className={menu ? 'open' : ''}>{PAGES.map((p) => <button key={p} className={p === page ? 'on' : ''} onClick={() => setPage(p)}>{t(navKey[p])}</button>)}</nav>
+        <div className="langs">{(['fa', 'en', 'tr'] as Lang[]).map((l) => <button key={l} className={l === lang ? 'on' : ''} onClick={() => { setLang(l); history.replaceState(null, '', `?lang=${l}#${page}`); }}>{l.toUpperCase()}</button>)}</div>
       </header>
       <div className="rate">{t('rate_note')}</div>
       <main>
-        {page === 'home' && <Home t={t} n={n} money={money} go={setPage} />}
+        {page === 'home' && <Home t={t} n={n} money={money} go={setPage} lang={lang} />}
+        {page === 'invest' && <Invest t={t} lang={lang} go={setPage} />}
+        {page === 'blog' && <Blog lang={lang} />}
         {page === 'calc' && <Calc t={t} n={n} money={money} />}
         {page === 'scopes' && <Scopes t={t} n={n} money={money} />}
         {page === 'funding' && <Funding t={t} n={n} money={money} />}
@@ -48,7 +55,7 @@ export default function App() {
 
 type P = { t: (k: string) => string; n: (v: number, d?: number) => string; money: (bn: number, d?: number) => string };
 
-function Home({ t, n, money, go }: P & { go: (p: Page) => void }) {
+function Home({ t, n, money, go, lang }: P & { go: (p: Page) => void; lang: Lang }) {
   const s = PLANTS.small;
   const y4 = projection(s, 100_000, 45_000)[3];
   const pb = payback(s, 100_000, 45_000)!;
@@ -65,7 +72,7 @@ function Home({ t, n, money, go }: P & { go: (p: Page) => void }) {
         <Kpi label={t('k_jobs')} value={n(SCOPES[0].jobs)} />
       </div>
       <div className="card"><b>⚠ </b>{t('gate')}</div>
-      <div className="card"><video controls preload="none" poster="/og.png" src="/GreenPars_Promo_30s_FA.mp4" style={{ width: '100%', borderRadius: 10 }} /></div>
+      <div className="card"><Video lang={lang} /></div>
     </>
   );
 }
@@ -189,17 +196,67 @@ function Wte({ t, n, money, lang }: P & { lang: Lang }) {
   );
 }
 
-function Docs({ t, lang }: { t: (k: string) => string; lang: Lang }) {
+function Video({ lang }: { lang: Lang }) {
   const L = lang.toUpperCase();
+  return (
+    <video key={lang} controls playsInline preload="metadata" poster={`/video/poster_${lang}.jpg`} style={{ width: '100%', borderRadius: 10, background: '#000' }}>
+      <source src={`/video/GreenPars_Promo_${L}.mp4`} type="video/mp4" />
+      <source src={`/video/GreenPars_Promo_${L}.webm`} type="video/webm" />
+    </video>
+  );
+}
+
+function Invest({ t, lang, go }: { t: (k: string) => string; lang: Lang; go: (p: Page) => void }) {
+  const d = DOCS[lang];
+  return (
+    <>
+      <section className="hero" style={{ backgroundImage: 'linear-gradient(90deg,#052e16ee,#052e1666),url(/img/invest.jpg)' }}>
+        <h1>{pick(lang, INVEST.title)}</h1><p>{pick(lang, INVEST.lead)}</p>
+        <div className="row"><a className="btn" href={`/docs/${lang}/${d[0].file}`} download>⬇ {d[0].title}</a><button className="ghost" onClick={() => go('calc')}>{t('nav_calc')}</button></div>
+      </section>
+      <div className="kpis">{INVEST.facts.map((f, i) => <div className="kpi" key={i}><b>{pick(lang, f.v)}</b><span>{pick(lang, f.s)}</span></div>)}</div>
+      {INVEST.sections.map((s, i) => (
+        <article className={`feature ${i % 2 ? 'rev' : ''}`} key={i}>
+          <img src={s.img} alt={pick(lang, s.h)} loading="lazy" />
+          <div><h2>{pick(lang, s.h)}</h2><p>{pick(lang, s.p)}</p></div>
+        </article>
+      ))}
+      <div className="card"><Video lang={lang} /></div>
+      <h2>{t('downloads')}</h2>
+      <div className="dl">{d.map((x) => <a key={x.file} href={`/docs/${lang}/${x.file}`} download className={`dlc ${x.kind}`}><span>{x.file.endsWith('pptx') ? '📊' : x.file.endsWith('docx') ? '📝' : '📄'}</span>{x.title}</a>)}</div>
+      <h2>{t('faq')}</h2>
+      {INVEST.faq.map(([q, a], i) => <details className="card" key={i}><summary><b>{pick(lang, q)}</b></summary><p>{pick(lang, a)}</p></details>)}
+      <div className="card ok">{t('contact_note')} <a href="mailto:info@greenpars.ir?subject=GreenPars%20investment">info@greenpars.ir</a></div>
+    </>
+  );
+}
+
+function Blog({ lang }: { lang: Lang }) {
+  const [open, setOpen] = useState<string | null>(null);
+  return (
+    <div className="posts">
+      {POSTS.map((p) => (
+        <article className="card post" key={p.id} id={p.id}>
+          <img src={p.img} alt={pick(lang, p.h)} loading="lazy" />
+          <small>{p.date}</small>
+          <h2>{pick(lang, p.h)}</h2>
+          <p className={open === p.id ? '' : 'clamp'}>{pick(lang, p.p)}</p>
+          <button onClick={() => setOpen(open === p.id ? null : p.id)}>{open === p.id ? '−' : '+'}</button>
+        </article>
+      ))}
+    </div>
+  );
+}
+
+function Docs({ t, lang }: { t: (k: string) => string; lang: Lang }) {
   return (
     <>
       <h2>{t('pod_title')}</h2>
-      <div className="card"><audio controls src={`/audio/podcast_${lang}.mp3`} style={{ width: '100%' }} /></div>
+      <div className="card"><audio controls preload="none" src={`/audio/podcast_${lang}.mp3`} style={{ width: '100%' }} /></div>
       <h2>{t('docs_title')}</h2>
-      <div className="card"><ul>
-        {REPORTS.map((r) => <li key={r.n}><a href={`/docs/${r.n}_${r.f}_${L}.pdf`} target="_blank">{r.n} · {r.f.replace(/_/g, ' ')} (PDF)</a></li>)}
-        <li><a href={`https://github.com/Heroku-elasa/SmartWaste-AI---Intelligent-Waste-Management-number-2/blob/main/docs/20_WtE_Sponsor_Assessment.md`} target="_blank">20 · WtE & Sponsor Equity Assessment</a></li>
-      </ul></div>
+      <div className="dl">{DOCS[lang].map((x) => <a key={x.file} href={`/docs/${lang}/${x.file}`} target="_blank" className={`dlc ${x.kind}`}><span>{x.file.endsWith('pptx') ? '📊' : x.file.endsWith('docx') ? '📝' : '📄'}</span>{x.title}</a>)}
+        <a className="dlc" href="https://github.com/SBZ-EDU/GreenPars-SmartWaste/blob/main/docs/20_WtE_Sponsor_Assessment.md" target="_blank"><span>⚡</span>20 · WtE & Sponsor (FA/EN/TR)</a>
+      </div>
     </>
   );
 }
